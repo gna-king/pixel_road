@@ -1,0 +1,24 @@
+#game-container {
+    width: 300px;
+    height: 500px;
+    border: 2px solid #000;
+    position: relative;
+    overflow: hidden; /* 화면 밖으로 나가는 건 안보이게 */
+    background-color: #87CEEB; /* 하늘색 배경 */
+}
+
+#character {
+    width: 50px;
+    height: 50px;
+    background-color: pink; /* 임시로 분홍색 네모 (나중에 그림으로 바꿀 거예요) */
+    position: absolute;
+    bottom: 50px;
+    left: 20px;
+}
+
+#choices {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+}
