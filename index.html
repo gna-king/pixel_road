@@ -1,5 +1,20 @@
-<div id="game-container">
-  <canvas id="gameCanvas"></canvas>
-  <div id="ui-layer">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>우리의 결혼식</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="background"></div>
+        <div id="character"></div>
+        
+        <div id="choices" style="display:none;">
+            <p id="question">우리가 처음 만난 계절은?</p>
+            <button onclick="answer('spring')">봄</button>
+            <button onclick="answer('winter')">겨울</button>
+        </div>
     </div>
-</div>
+    <script src="script.js"></script>
+</body>
+</html>
