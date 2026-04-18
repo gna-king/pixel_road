@@ -141,3 +141,33 @@ body, html {
 .fade-out {
     opacity: 1 !important; /* 화면을 까맣게 만듦 */
 }
+
+/* 우측 상단 이동 버튼 스타일 */
+#nav-buttons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 50; /* 대화창과 캐릭터보다 항상 위에 오도록 설정 */
+}
+
+#nav-buttons button {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 3px solid black;
+    padding: 8px 15px;
+    margin-left: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px #000;
+}
+
+#nav-buttons button:active {
+    box-shadow: none; /* 클릭할 때 눌리는 느낌 */
+    transform: translate(2px, 2px);
+}
+
+/* 첫 화면이나 마지막 화면에서 필요 없는 버튼 숨기기용 */
+.hidden {
+    display: none !important;
+}
