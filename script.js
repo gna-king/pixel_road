@@ -86,30 +86,41 @@ function goPrev() {
     }
 }
 
-// 장면 전환 함수 (검은 커튼 효과)
+// 장면 전환 함수 (오른쪽 퇴장 -> 검은 커튼 효과 -> 배경 교체)
 function changeScene(targetStep) {
     isTransitioning = true;
     hideBubble();
     choices.style.display = "none";
     
-    fade.classList.add('fade-out'); // 검은 커튼 치기
+    // 1. 캐릭터에게 퇴장 클래스를 붙여서 오른쪽 밖으로 걷게 합니다.
+    char.classList.add('walk-off');
 
+    // 2. 캐릭터가 화면 밖으로 다 나갈 때까지(2초) 기다린 후 검은 커튼 치기
     setTimeout(() => {
-        currentStep = targetStep;
-        
-        // 배경 이미지 교체
-        bg.style.backgroundImage = `url('${story[currentStep].bg}')`;
-        bgPosX = 0; 
-        bg.style.left = "0px";
-        
-        updateStory(); // 바뀐 장면의 대사 띄우기
-        
-        fade.classList.remove('fade-out'); // 검은 커튼 걷기
-        
+        fade.classList.add('fade-out'); 
+
+        // 3. 화면이 완전히 까매지면(1초 뒤) 배경을 교체합니다.
         setTimeout(() => {
-            isTransitioning = false;
-        }, 1000);
-    }, 1000);
+            currentStep = targetStep;
+            
+            // 배경 이미지 교체
+            bg.style.backgroundImage = `url('${story[currentStep].bg}')`;
+            bgPosX = 0; 
+            bg.style.left = "0px";
+            
+            // ⭐️ 다음 장면을 위해 캐릭터 위치를 다시 원래 자리(왼쪽)로 몰래 되돌려놓습니다.
+            char.classList.remove('walk-off');
+            
+            updateStory(); 
+            
+            // 4. 다시 밝아짐 (검은 커튼 걷기)
+            fade.classList.remove('fade-out'); 
+            
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 1000);
+        }, 1000); // 커튼 쳐지는 시간 대기
+    }, 2000); // 캐릭터 퇴장 시간 대기
 }
 
 // 게임 내내 배경이 천천히 뒤로 흘러가게 만들기
