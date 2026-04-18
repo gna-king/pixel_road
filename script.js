@@ -92,37 +92,36 @@ function changeScene(targetStep) {
     hideBubble();
     choices.style.display = "none";
     
-    // 1. 캐릭터에게 퇴장 클래스를 붙여서 오른쪽 밖으로 걷게 합니다.
+    // 1. 캐릭터에게 'walk-off' 클래스를 추가해 오른쪽으로 걷게 합니다.
     char.classList.add('walk-off');
 
-    // 2. 캐릭터가 화면 밖으로 다 나갈 때까지(2초) 기다린 후 검은 커튼 치기
+    // 2. 캐릭터가 이동하는 시간(1.5초)을 기다린 후 화면을 어둡게(Fade-out) 만듭니다.
     setTimeout(() => {
         fade.classList.add('fade-out'); 
 
-        // 3. 화면이 완전히 까매지면(1초 뒤) 배경을 교체합니다.
+        // 3. 화면이 완전히 까매지면(1초 뒤) 배경을 교체하고 캐릭터를 제자리로 돌려놓습니다.
         setTimeout(() => {
             currentStep = targetStep;
             
-            // 배경 이미지 교체
+            // 배경 교체 및 위치 초기화
             bg.style.backgroundImage = `url('${story[currentStep].bg}')`;
             bgPosX = 0; 
             bg.style.left = "0px";
             
-            // ⭐️ 다음 장면을 위해 캐릭터 위치를 다시 원래 자리(왼쪽)로 몰래 되돌려놓습니다.
+            // 다음 장면을 위해 캐릭터의 'walk-off' 클래스를 제거 (몰래 왼쪽 15%로 복귀)
             char.classList.remove('walk-off');
             
             updateStory(); 
             
-            // 4. 다시 밝아짐 (검은 커튼 걷기)
+            // 4. 다시 화면을 밝게(Fade-in) 만듭니다.
             fade.classList.remove('fade-out'); 
             
             setTimeout(() => {
                 isTransitioning = false;
             }, 1000);
-        }, 1000); // 커튼 쳐지는 시간 대기
-    }, 2000); // 캐릭터 퇴장 시간 대기
+        }, 1000); 
+    }, 2800); // 1.5초는 CSS의 transition 시간과 맞춥니다.
 }
-
 // 게임 내내 배경이 천천히 뒤로 흘러가게 만들기
 function gameLoop() {
     // ⭐️ 배경이 끝(-4000px)에 도달하지 않았을 때만 왼쪽으로 이동시킵니다!
