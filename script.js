@@ -8,9 +8,9 @@ const fade = document.getElementById('fade-overlay');
 let bgPosX = 0;
 let sceneNumber = 1;
 let isWalking = true;
-const walkSpeed = 4; // 걷는 속도
+const walkSpeed = 4; // 걷는 속도 (현재 아주 좋음!)
 
-// 사용할 배경 이미지 리스트 (폴더 안에 이 이름으로 파일이 있어야 함)
+// 사용할 배경 이미지 리스트
 const backgrounds = ["bg1.png", "bg2.png"]; 
 
 // 3. 메인 게임 루프 (반복 실행)
@@ -28,10 +28,7 @@ function gameLoop() {
         if (bgPosX <= -800 && bgPosX > -805) {
             hideBubble();
         }
-        // 배경 끝부분 도달 시 장면 전환
-        if (bgPosX <= -2000) { 
-            changeScene();
-        }
+        // 💡 주의: 원래 여기에 있던 '자동으로 넘어가던 코드'를 삭제했습니다!
     }
 
     // 두 번째(마지막) 장면 진행 중
@@ -47,6 +44,14 @@ function gameLoop() {
         }
     }
 }
+
+// ⭐ 새로 추가된 부분: 화면을 클릭(또는 터치)하면 다음 장면으로!
+document.body.addEventListener('click', function() {
+    // 첫 번째 장면이고, 현재 걷고 있는 상태일 때만 넘어가게 합니다.
+    if (sceneNumber === 1 && isWalking) {
+        changeScene();
+    }
+});
 
 // 4. 장면 전환 함수 (Fade Out -> 배경 교체 -> Fade In)
 function changeScene() {
