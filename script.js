@@ -133,7 +133,7 @@ function answer(choice) {
         choices.style.display = "none";
         showBubble("딩동댕! 이제 진짜 청첩장을 확인하러 갈까?");
         setTimeout(() => {
-            window.location.href = "https://your-wedding-link.com"; 
+            window.location.href = " https://gna-king.github.io/happy-wedding-day/"; 
         }, 2000);
     } else {
         choices.style.display = "none";
