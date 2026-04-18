@@ -1,54 +1,66 @@
-/* 게임 화면 기본 설정 */
+/* 게임 전체를 감싸는 컨테이너 */
 #game-container {
-    width: 300px;
-    height: 500px;
-    border: 2px solid #000;
+    /* 가로로 길게 설정 */
+    width: 100vw;  /* 화면 전체 가로 폭 */
+    height: 100vh; /* 화면 전체 세로 높이 */
     position: relative;
     overflow: hidden;
-    /* 중요! 픽셀 아트가 뭉개지지 않고 선명하게 보이게 함 */
-    image-rendering: pixelated; 
+    background-color: #87CEEB;
+    image-rendering: pixelated;
 }
 
 /* 배경 설정 */
 #background {
-    width: 2000px; /* 긴 배경 그림의 가로 크기 */
+    width: 5000px; /* 더 길게 걸어갈 수 있도록 가로를 늘려주면 좋아요 */
     height: 100%;
-    background-image: url('background.png'); /* 배경 그림 연결 */
-    background-size: cover;
+    background-image: url('background.png');
+    background-size: auto 100%; /* 세로 높이에 맞추고 가로는 그림 비율대로 */
+    background-repeat: repeat-x; /* 배경이 반복되게 설정 */
     position: absolute;
     left: 0;
     top: 0;
 }
 
-/* 캐릭터 설정 */
+/* 캐릭터 위치 조정 */
 #character {
-    width: 64px; /* 캐릭터 그림 크기에 맞추세요 */
-    height: 64px;
-    background-image: url('character.png'); /* 캐릭터 그림 연결 */
+    width: 80px;  /* 가로 화면이니 캐릭터를 조금 더 크게 봐도 좋아요 */
+    height: 80px;
+    background-image: url('character.png');
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
-    bottom: 50px;
-    left: 20px; /* 캐릭터 위치 고정 */
+    bottom: 20%;  /* 바닥에서 20% 높이에 위치 */
+    left: 10%;    /* 왼쪽에서 10% 지점에 고정 */
 }
 
-/* 말풍선 디자인 */
+/* 말풍선 위치 */
 #bubble {
     position: absolute;
-    bottom: 120px; /* 캐릭터 위쪽 */
-    left: 30px;
+    bottom: 35%;
+    left: 12%;
     background-color: white;
-    padding: 10px;
-    border-radius: 10px;
-    border: 2px solid black;
-    font-size: 14px;
-    z-index: 10; /* 가장 앞에 보이게 */
+    padding: 10px 15px;
+    border-radius: 15px;
+    border: 3px solid black;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 10;
 }
 
-/* 선택지 버튼 디자인 (약간 픽셀 느낌 나게) */
+/* 선택지 버튼을 가로로 배치 */
+#choices {
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    text-align: center;
+}
+
 #choices button {
-    margin: 5px;
-    padding: 5px 10px;
-    font-family: monospace; /* 픽셀폰트 느낌 */
+    padding: 15px 30px;
+    margin: 10px;
+    font-size: 20px;
     cursor: pointer;
+    background-color: #fff;
+    border: 4px solid #000;
+    font-family: 'Courier New', Courier, monospace;
 }
