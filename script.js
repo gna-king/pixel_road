@@ -4,7 +4,7 @@ const choices = document.getElementById('choices');
 const fade = document.getElementById('fade-overlay');
 const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
-
+const char = document.getElementById('character'); // ⭐️ 이 줄을 추가하세요!
 let bgPosX = 0;
 const walkSpeed = 2; // 대화를 읽는 동안 배경이 천천히 흘러갑니다
 
