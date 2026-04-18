@@ -45,13 +45,13 @@ body, html {
 /* 5. 배경 설정 */
 #background {
     width: 5000px;
-    height: 100%;
+    top: 0;
+    bottom: 0; /* ⭐️ height: 100% 대신 위아래를 꽉 잡게 만듭니다! */
     background-image: url('bg1.png');
     background-size: auto 100%;
     background-repeat: repeat-x;
     position: absolute;
     left: 0;
-    top: 0;
 }
 
 /* 6. 우측 상단 이동 버튼 */
