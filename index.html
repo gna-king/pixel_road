@@ -1,26 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>PIXEL ROAD</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="rotate-guide">
-        <p>📱 화면을 가로로 돌려주세요!</p>
+        <p>📱 원활한 진행을 위해<br>화면을 가로로 돌려주세요!</p>
     </div>
+
     <div id="game-container">
+        <div id="fade-overlay"></div>
+        
         <div id="background"></div>
         
-        <div id="bubble" style="display:none;">안녕하세요!</div>
+        <div id="bubble"></div>
         
         <div id="character"></div>
         
         <div id="choices" style="display:none;">
             <p id="question">우리가 처음 만난 계절은?</p>
-            <button onclick="answer('spring')">봄</button>
+            <button onclick="answer('spring')">봄 (정답)</button>
             <button onclick="answer('winter')">겨울</button>
         </div>
     </div>
+    
     <script src="script.js"></script>
 </body>
 </html>
