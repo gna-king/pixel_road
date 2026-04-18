@@ -12,21 +12,19 @@ const walkSpeed = 4;
 
 const backgrounds = ["bg1.png", "bg2.png"]; 
 
-// 화면 전환 시 버튼 보이기/숨기기 관리
 function updateNavButtons() {
     if (sceneNumber === 1) {
-        prevBtn.classList.add('hidden'); // 첫 화면: 이전 버튼 숨김
+        prevBtn.classList.add('hidden'); 
         nextBtn.classList.remove('hidden');
     } else if (sceneNumber === backgrounds.length) {
         prevBtn.classList.remove('hidden');
-        nextBtn.classList.add('hidden'); // 마지막 화면: 다음 버튼 숨김
+        nextBtn.classList.add('hidden'); 
     } else {
         prevBtn.classList.remove('hidden');
         nextBtn.classList.remove('hidden');
     }
 }
 
-// 처음 시작할 때 버튼 상태 업데이트
 updateNavButtons();
 
 function gameLoop() {
@@ -56,37 +54,33 @@ function gameLoop() {
     }
 }
 
-// 다음 버튼 클릭 시
 function goNext() {
     if (sceneNumber < backgrounds.length && isWalking) {
-        changeScene(1); // 1칸 앞으로
+        changeScene(1);
     }
 }
 
-// 이전 버튼 클릭 시
 function goPrev() {
     if (sceneNumber > 1 && isWalking) {
-        changeScene(-1); // 1칸 뒤로
+        changeScene(-1);
     }
 }
 
-// 장면 전환 (direction에 따라 1 또는 -1 적용)
 function changeScene(direction) {
     isWalking = false;
     hideBubble();
-    choices.style.display = "none"; // 혹시 열려있는 퀴즈창 닫기
+    choices.style.display = "none";
     
     fade.classList.add('fade-out'); 
 
     setTimeout(() => {
         sceneNumber += direction;
         
-        // 배경 이미지 교체 및 위치 초기화
         bg.style.backgroundImage = `url('${backgrounds[sceneNumber-1]}')`;
         bgPosX = 0;
         bg.style.left = "0px";
         
-        updateNavButtons(); // 버튼 상태 다시 확인
+        updateNavButtons(); 
         
         fade.classList.remove('fade-out');
         
