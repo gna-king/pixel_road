@@ -46,11 +46,16 @@ function gameLoop() {
 }
 
 // ⭐ 새로 추가된 부분: 화면을 클릭(또는 터치)하면 다음 장면으로!
-document.body.addEventListener('click', function() {
-    // 첫 번째 장면이고, 현재 걷고 있는 상태일 때만 넘어가게 합니다.
+// 컴퓨터의 마우스 '클릭'과 핸드폰의 손가락 '터치'를 모두 인식하게 만듭니다!
+window.addEventListener('click', tryChangeScene);
+window.addEventListener('touchstart', tryChangeScene);
+
+function tryChangeScene() {
+    // 첫 번째 장면이고 걷고 있을 때만 다음으로 넘어갑니다.
     if (sceneNumber === 1 && isWalking) {
         changeScene();
     }
+}  }
 });
 
 // 4. 장면 전환 함수 (Fade Out -> 배경 교체 -> Fade In)
