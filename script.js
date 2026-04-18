@@ -114,8 +114,11 @@ function changeScene(targetStep) {
 
 // 게임 내내 배경이 천천히 뒤로 흘러가게 만들기
 function gameLoop() {
-    bgPosX -= walkSpeed;
-    bg.style.left = bgPosX + "px";
+    // ⭐️ 배경이 끝(-4000px)에 도달하지 않았을 때만 왼쪽으로 이동시킵니다!
+    if (bgPosX > -4000) {
+        bgPosX -= walkSpeed;
+        bg.style.left = bgPosX + "px";
+    }
 }
 
 function showBubble(text) {
