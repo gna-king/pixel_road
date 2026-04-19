@@ -33,12 +33,12 @@ const story = [
     { bg: 'bg2.png', text: "드디어 식장 앞에 도착했다!", photos: ['photo1', 'photo2', 'photo3'] },
     { bg: 'bg2.png', text: "잠깐! 안으로 들어가기 전에 퀴즈를 맞혀봐!", photos: ['photo1', 'photo2', 'photo3'] },
 
-    { bg: 'bg3.png', text: "진아가 방에 누워있다." },
-    { bg: 'bg3.png', text: "진아 : 심심한데 형민오빠 뭐하고 있지? " },
+    { bg: 'bg3.jpeg', text: "진아가 방에 누워있다." },
+    { bg: 'bg3.jpeg', text: "진아 : 심심한데 형민오빠 뭐하고 있지? " },
     
     // [선택지 파트]
     { 
-        bg: 'bg3.png', 
+        bg: 'bg3.jpeg', 
         type: 'choice', 
         question: "어떻게 할까?", 
         options: [
@@ -48,14 +48,14 @@ const story = [
     },
 
     // --- [분기점 1] 전화건다 ---
-    { id: 'call_oppa', bg: 'bg3-1.png', text: "뚜루루루... 오빠 바빠?" },
-    { bg: 'bg3-1.png', text: "형민: 아니, 자기 생각하고 있었지~" },
-    { bg: 'bg3-1.png', text: "같이 예식장으로 출발하자!", nextId: 'final_quiz_start' }, 
+    { id: 'call_oppa', bg: 'bg3-1.jpeg', text: "뚜루루루... 오빠 바빠?" },
+    { bg: 'bg3-1.jpeg', text: "형민: 아니, 자기 생각하고 있었지~" },
+    { bg: 'bg3-1.jpeg', text: "같이 예식장으로 출발하자!", nextId: 'final_quiz_start' }, 
 
     // --- [분기점 2] 다시 눕는다 ---
-    { id: 'sleep_again', bg: 'bg3.png', text: "드르렁... 역시 침대가 최고야." },
-    { bg: 'bg3.png', text: "아뿔싸! 예식 시간에 늦겠다!" },
-    { bg: 'bg3.png', text: "서둘러서 식장으로 뛰어가자!", nextId: 'final_quiz_start' }, 
+    { id: 'sleep_again', bg: 'bg3.jpeg', text: "드르렁... 역시 침대가 최고야." },
+    { bg: 'bg3.jpeg', text: "아뿔싸! 예식 시간에 늦겠다!" },
+    { bg: 'bg3.jpeg', text: "서둘러서 식장으로 뛰어가자!", nextId: 'final_quiz_start' }, 
     
     // [마지막 퀴즈 파트] ⭐️ 새로운 시스템으로 통일했습니다!
     { 
