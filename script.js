@@ -9,9 +9,11 @@ const char = document.getElementById('character');
 let bgPosX = 0;          
 const walkSpeed = 2;     
 
-// ⭐️ [자동 재생을 위한 타이머 변수 추가] ⭐️
 let autoTimer; 
-const autoDelay = 4500; // 대사를 읽고 다음으로 넘어갈 때까지 기다리는 시간 (4500 = 4.5초)
+const autoDelay = 4500; // 4.5초 뒤 자동 넘김
+
+// 지나온 길을 기억하는 타임머신 배열
+let historyStack = [];
 
 const story = [
     { bg: 'bg1.png', text: "안녕! 우리의 결혼식장으로 가는 길이야." },
@@ -33,11 +35,40 @@ const story = [
 
     { bg: 'bg3.png', text: "진아가 방에 누워있다." },
     { bg: 'bg3.png', text: "진아 : 심심한데 형민오빠 뭐하고 있지? " },
-    // 퀴즈 파트
-    { bg: 'bg3.png', type: 'quiz', photos: ['photo1', 'photo2', 'photo3'] }     
     
-    // 마지막 퀴즈 파트
-    { bg: 'bg2.png', type: 'quiz', photos: ['photo1', 'photo2', 'photo3'] } 
+    // [선택지 파트]
+    { 
+        bg: 'bg3.png', 
+        type: 'choice', 
+        question: "어떻게 할까?", 
+        options: [
+            { text: "전화건다", target: "call_oppa" },
+            { text: "다시 눕는다", target: "sleep_again" }
+        ] 
+    },
+
+    // --- [분기점 1] 전화건다 ---
+    { id: 'call_oppa', bg: 'bg3-1.png', text: "뚜루루루... 오빠 바빠?" },
+    { bg: 'bg3-1.png', text: "형민: 아니, 자기 생각하고 있었지~" },
+    { bg: 'bg3-1.png', text: "같이 예식장으로 출발하자!", nextId: 'final_quiz_start' }, 
+
+    // --- [분기점 2] 다시 눕는다 ---
+    { id: 'sleep_again', bg: 'bg3-2.png', text: "드르렁... 역시 침대가 최고야." },
+    { bg: 'bg3-2.png', text: "아뿔싸! 예식 시간에 늦겠다!" },
+    { bg: 'bg3-2.png', text: "서둘러서 식장으로 뛰어가자!", nextId: 'final_quiz_start' }, 
+    
+    // [마지막 퀴즈 파트] ⭐️ 새로운 시스템으로 통일했습니다!
+    { 
+        id: 'final_quiz_start', // 👆 위 분기점들이 끝난 후 여기로 점프해서 모입니다!
+        bg: 'bg2.png', 
+        type: 'choice', 
+        question: "우리가 처음 만난 계절은?", 
+        photos: ['photo1', 'photo2', 'photo3'],
+        options: [
+            { text: "봄 (정답)", target: "link" }, // 정답 시 청첩장으로 이동
+            { text: "겨울", target: "wrong" }      // 오답 시 처리
+        ] 
+    } 
 ];
 
 let currentStep = 0;         
@@ -46,13 +77,13 @@ let isTransitioning = false;
 // 시작
 updateStory();
 
+// 1. 대본 출력 함수
 function updateStory() {
     let current = story[currentStep];
 
-    // ⭐️ [자동 재생 기능] ⭐️
-    // 새로운 대사가 뜰 때마다 기존에 돌아가던 타이머를 취소합니다. (중복 방지)
     clearTimeout(autoTimer);
 
+    // 갤러리 사진 처리
     const photoGallery = document.getElementById('photo-gallery');
     if (current.bg === 'bg2.png') {
         photoGallery.style.display = 'block'; 
@@ -66,11 +97,16 @@ function updateStory() {
         photoGallery.style.display = 'none'; 
     }
 
-    // 퀴즈 화면일 때는 버튼 숨기고, "자동 재생도 멈춥니다"
-    if (current.type === 'quiz') {
+    // ⭐️ 선택지 창 띄우기 및 버튼 생성
+    if (current.type === 'choice') {
         bubble.style.display = "none";     
         choices.style.display = "block";   
         nextBtn.classList.add('hidden'); 
+        
+        choices.innerHTML = `<p id="question">${current.question}</p>`;
+        current.options.forEach(opt => {
+            choices.innerHTML += `<button onclick="makeChoice('${opt.target}')">${opt.text}</button>`;
+        });
         return; 
     }
 
@@ -83,23 +119,57 @@ function updateStory() {
     if (currentStep === story.length - 1) nextBtn.classList.add('hidden');
     else nextBtn.classList.remove('hidden');
 
-    // ⭐️ [자동 재생 타이머 시작] ⭐️
-    // 아직 마지막 대사가 아니라면, 지정된 시간(4.5초) 뒤에 알아서 goNext()를 실행합니다!
-    if (currentStep < story.length - 1) {
+    // 대본에 nextId(점프)가 없을 때만 타이머 작동
+    if (currentStep < story.length - 1 && !current.nextId) {
         autoTimer = setTimeout(() => {
             goNext();
         }, autoDelay);
     }
 }
 
+// 2. ⭐️ 빠져있던 버튼 선택 로직 추가! 
+function makeChoice(target) {
+    if (target === 'link') {
+        // 정답을 맞춘 경우
+        choices.style.display = "none";
+        showBubble("딩동댕! 이제 진짜 청첩장을 확인하러 갈까?");
+        setTimeout(() => { window.location.href = "https://gna-king.github.io/happy-wedding-day/"; }, 2000);
+    } else if (target === 'wrong') {
+        // 틀린 경우
+        choices.style.display = "none";
+        showBubble("땡! 다시 한 번 잘 생각해봐!");
+        setTimeout(() => { updateStory(); }, 2000);
+    } else {
+        // 일반적인 분기점(전화걸기/눕기) 선택 시 점프
+        let targetIndex = story.findIndex(s => s.id === target);
+        if (targetIndex !== -1) {
+            historyStack.push(currentStep); // 이동 전 위치 저장
+            
+            if (story[targetIndex].bg !== story[currentStep].bg) {
+                changeScene(targetIndex, true);
+            } else {
+                currentStep = targetIndex;
+                updateStory();
+            }
+        }
+    }
+}
+
+// 3. ⭐️ 점프 기능이 추가된 다음 버튼
 function goNext() {
     if (isTransitioning) return; 
-    
-    // 사용자가 버튼을 직접 눌렀을 수도 있으니 타이머를 끕니다.
     clearTimeout(autoTimer); 
     
-    if (currentStep < story.length - 1) {
-        let nextStep = currentStep + 1;
+    let current = story[currentStep];
+    let nextStep = currentStep + 1; // 기본은 바로 다음 줄
+
+    // 대본에 nextId가 있다면 그 번호로 점프!
+    if (current.nextId) {
+        nextStep = story.findIndex(s => s.id === current.nextId);
+    }
+
+    if (nextStep < story.length && nextStep !== -1) {
+        historyStack.push(currentStep); // 이동 전 위치 저장
         
         if (story[nextStep].bg !== story[currentStep].bg) {
             changeScene(nextStep, true); 
@@ -110,14 +180,14 @@ function goNext() {
     }
 }
 
+// 4. ⭐️ 길을 잃지 않는 이전 버튼
 function goPrev() {
     if (isTransitioning) return;
-    
-    // 뒤로 가기를 눌러도 타이머를 한 번 끕니다.
     clearTimeout(autoTimer);
     
-    if (currentStep > 0) {
-        let prevStep = currentStep - 1;
+    // historyStack에 저장된 '최근 위치'로 되돌아갑니다.
+    if (historyStack.length > 0) {
+        let prevStep = historyStack.pop(); 
         
         if (story[prevStep].bg !== story[currentStep].bg) {
             changeScene(prevStep, false); 
@@ -128,12 +198,11 @@ function goPrev() {
     }
 }
 
+// 장면 전환
 function changeScene(targetStep, isNext) {
     isTransitioning = true;
     hideBubble();
     choices.style.display = "none";
-    
-    // 장면이 넘어가는 도중에는 자동 재생이 겹치지 않게 타이머를 끕니다.
     clearTimeout(autoTimer);
     
     let delayBeforeFade = 0; 
@@ -148,13 +217,12 @@ function changeScene(targetStep, isNext) {
 
         setTimeout(() => {
             currentStep = targetStep;
-            
             bg.style.backgroundImage = `url('${story[currentStep].bg}')`;
             bgPosX = 0; 
             bg.style.left = "0px";
             
             char.classList.remove('walk-off');
-            updateStory(); // 여기서 다시 타이머가 작동 시작합니다!
+            updateStory(); 
             
             fade.classList.remove('fade-out'); 
             
@@ -165,6 +233,7 @@ function changeScene(targetStep, isNext) {
     }, delayBeforeFade);
 }
 
+// 배경 스크롤 루프
 function gameLoop() {
     if (story[currentStep] && story[currentStep].bg === 'bg1.png') {
         if (bgPosX > -4000) {
@@ -178,24 +247,9 @@ function showBubble(text) {
     bubble.innerText = text;
     bubble.style.display = "block";
 }
+
 function hideBubble() {
     bubble.style.display = "none";
-}
-
-function answer(choice) {
-    if (choice === 'spring') {
-        choices.style.display = "none";
-        showBubble("딩동댕! 이제 진짜 청첩장을 확인하러 갈까?");
-        setTimeout(() => {
-            window.location.href = "https://gna-king.github.io/happy-wedding-day/"; 
-        }, 2000);
-    } else {
-        choices.style.display = "none";
-        showBubble("땡! 다시 한 번 잘 생각해봐!");
-        setTimeout(() => {
-            updateStory();
-        }, 2000);
-    }
 }
 
 setInterval(gameLoop, 30);
