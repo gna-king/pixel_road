@@ -21,7 +21,15 @@ const story = [
     { bg: 'bg1.png', text: "형민: 안녕 선배?"},
 
     ///배경을 사진들로 바꾼다.
+   
+    // bg2: 하얀 갤러리 배경 (이 배경에서는 알아서 스크롤이 멈춥니다)
+    { bg: 'bg2.png', text: "여기는 우리의 추억이 담긴 갤러리야." },
     { bg: 'bg2.png', text : "모바일 동기들과의 즐거운 시간"},
+    { bg: 'bg2.png', text: "우리가 처음 만난 날 기억나?", photos: ['photo1'] }, // 1번 사진 등장
+    { bg: 'bg2.png', text: "첫 여행 갔을 때 정말 재밌었는데!", photos: ['photo1', 'photo2'] }, // 2번 사진 추가
+    { bg: 'bg2.png', text: "웨딩 촬영 날도 빼놓을 수 없지.", photos: ['photo1', 'photo2', 'photo3'] }, // 3번 사진 추가
+    
+    { bg: 'bg2.png', type: 'quiz', photos: ['photo1', 'photo2', 'photo3'] }
     // 배경이 bg2.png로 바뀌면, 알아서 화면이 까맣게 변했다가 넘어갑니다.
     { bg: 'bg2.png', text: "드디어 식장 앞에 도착했다!" },
     { bg: 'bg2.png', text: "잠깐! 안으로 들어가기 전에 퀴즈를 맞혀봐!" },
@@ -39,7 +47,23 @@ updateStory();
 // 대본(story)에 맞춰서 화면에 말풍선을 띄우는 함수
 function updateStory() {
     let current = story[currentStep];
-
+// ⭐️ [추가된 부분] 갤러리 사진 업데이트
+    const photoGallery = document.getElementById('photo-gallery');
+    if (current.bg === 'bg2.png') {
+        photoGallery.style.display = 'block'; // 갤러리 영역 켜기
+        
+        // 1. 일단 모든 사진을 투명하게 숨깁니다 (이전을 눌렀을 때를 대비)
+        document.querySelectorAll('.photo-frame').forEach(el => el.classList.remove('show'));
+        
+        // 2. 현재 스텝에 지정된 사진(photos 배열)만 스르륵 나타나게 합니다
+        if (current.photos) {
+            current.photos.forEach(id => {
+                document.getElementById(id).classList.add('show');
+            });
+        }
+    } else {
+        photoGallery.style.display = 'none'; // bg1에서는 갤러리 숨김
+    }
     // 만약 퀴즈가 나올 차례라면?
     if (current.type === 'quiz') {
         bubble.style.display = "none";     // 말풍선 숨기고
