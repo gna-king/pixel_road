@@ -77,13 +77,41 @@ const story = [
 // --- [분기점 1] ---
     { id: "show_your_mind", bg: 'bg3-1.jpeg', text: "(관심없다고 하면 다신 나랑 안놀 것 같아.. 일단 지르자) " },
     { bg: 'bg3.jpeg', text: "진아: 나도 오빠 좋아..!" , nextId: 'some_ing'},
-
     // --- [분기점 2]  ---
     { id: "dog_sound", bg: 'bg3.jpeg', text: "진아: (뭔 소리야 이 오빠는? )" , nextId: 'show_your_mind'} ,
 
-
     {  id: "some_ing", bg: 'bg2.png', text: "놀랍게도 이때부터 사귀는게 아니라 썸을 탔다." },     
+    { bg:  'bg2.png', text: "2021.10.23 동탄호수공원" },
+    { bg:  'bg2.png', text: "진아: (벌써 호수만 5바퀴쨰야, 이 오빠 고백할건가?)" },
+    { bg:  'bg2.png', text: "진아: 오빠 뭐 할 말 있어?" },    
+    { bg:  'bg2.png', text: "한참을 뜸을 들인다." },    
+    { bg:  'bg2.png', text: "형민: 우리 3개월만 만나볼래?" },    
 
+    // [선택지 파트]
+    { 
+        bg: 'bg2.png', 
+        type: 'choice', 
+        question: "어떻게 할까?", 
+        options: [
+            { text: "이게 말이야 방구야", target: "show_your_mind2" },
+            { text: "못 들은 척 한다", target: "dog_sound2" }
+        ] 
+    },
+    
+// --- [분기점 1] ---
+    { id: "show_your_mind2", bg: 'bg3-1.jpeg', text: "(이게 말이야 방구야) " },
+    { bg: 'bg3.jpeg', text: "진아: 다시 고백해!!!" },
+    { bg:  'bg3.jpeg', text: "한참을 뜸을 들인다." },   
+    { bg: 'bg3.jpeg', text: "형민: 우리 만나보자" },       
+    { bg: 'bg3.jpeg', text: "진아: 좋아!" , nextId: 'dating'},       
+
+    // --- [분기점 2]  ---
+    { id: "dog_sound2", bg: 'bg3.jpeg', text: "진아: 뭐라고?" , nextId: 'show_your_mind2'} ,
+
+    {  id: "dating", bg: 'bg2.png', text: "그렇게 우리는 사귀게 되었다." },     
+    {  id: "dating", bg: 'bg2.png', text: "" },         
+
+    
     
     // [마지막 퀴즈 파트] ⭐️ 새로운 시스템으로 통일했습니다!
     { 
