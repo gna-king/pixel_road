@@ -200,9 +200,12 @@ body, html {
     background-size: cover;
     background-position: center;
     opacity: 0; /* 처음엔 투명하게 안 보임 */
-    transition: opacity 1s ease-in-out; /* 1초 동안 스르륵 나타남! */
+    /*transition: opacity 1s ease-in-out; /* 1초 동안 스르륵 나타남! */
 }
-
+/* 이 클래스가 붙는 순간 사진이 즉시 나타납니다 */
+.photo-frame.show {
+    opacity: 1;
+}
 /* 각 사진마다 위치와 기울기를 다르게 설정 (원하는 이미지 파일명으로 바꾸세요!) */
 #photo1 { top: 15%; left: 10%; transform: rotate(-5deg); background-image: url('pic1.jpeg'); }
 #photo2 { top: 25%; left: 35%; transform: rotate(4deg); background-image: url('pic2.jpeg'); }
