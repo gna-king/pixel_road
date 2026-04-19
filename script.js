@@ -33,7 +33,7 @@ const story = [
     { bg: 'bg2.png', text: "드디어 식장 앞에 도착했다!", photos: ['photo1', 'photo2', 'photo3'] },
     { bg: 'bg2.png', text: "잠깐! 안으로 들어가기 전에 퀴즈를 맞혀봐!", photos: ['photo1', 'photo2', 'photo3'] },
 
-    { bg: 'bg3.jpeg', text: "진아가 방에 누워있다." },
+    { bg: 'bg3.jpeg', text: "21년 봄과 여름 사이 어디쯤, 진아가 방에 누워있다." },
     { bg: 'bg3.jpeg', text: "진아 : 심심한데 형민오빠 뭐하고 있지? " },
     
     // [선택지 파트]
@@ -47,15 +47,48 @@ const story = [
         ] 
     },
 
-    // --- [분기점 1] 전화건다 ---
+// --- [분기점 1] 전화건다 ---
     { id: 'call_oppa', bg: 'bg3-1.jpeg', text: "뚜루루루... 오빠 바빠?" },
-    { bg: 'bg3-1.jpeg', text: "형민: 아니, 자기 생각하고 있었지~" },
-    { bg: 'bg3-1.jpeg', text: "같이 예식장으로 출발하자!", nextId: 'final_quiz_start' }, 
+    { bg: 'bg3.jpeg', text: "형민: 아니, 왜?" },
+    { bg: 'bg3.jpeg', text: "진아: 나랑 놀래? (두근두근)"}, 
+    { bg: 'bg3.jpeg', text: "형민: 좋아!" , nextId: 'go_to_watch_movie' },    
 
     // --- [분기점 2] 다시 눕는다 ---
-    { id: 'sleep_again', bg: 'bg3.jpeg', text: "드르렁... 역시 침대가 최고야." },
-    { bg: 'bg3.jpeg', text: "아뿔싸! 예식 시간에 늦겠다!" },
-    { bg: 'bg3.jpeg', text: "서둘러서 식장으로 뛰어가자!", nextId: 'final_quiz_start' }, 
+    // ⭐️ 눕는다를 선택하면 이 대사를 치고, 바로 분기점 1번(call_oppa)으로 점프시켜버립니다!
+    { id: 'sleep_again', bg: 'bg3.jpeg', text: "진아: 흠.. 아무래도 심심한데 전화 해봐야겠어.", nextId: 'call_oppa' },
+
+    // ==========================================
+    // --- [새로운 장면] 영화관 데이트 ---
+    // ==========================================
+    
+    // ⭐️ 분기점 1번이 끝난 후 여기로 도착합니다!
+    { id: 'go_to_watch_movie', bg: 'bg3.jpeg', text: "동탄 북광장 메가박스" },
+    { bg: 'bg3.jpeg', text: "영화 보고 나와서 술집을 갔다." },
+    { bg: 'bg3.jpeg', text: "형민: 너 나 좋아하냐? " },
+    { bg: 'bg3.jpeg', text: "진아: .. (뭐지 이 테토맨은? 테스토스테론이 흘러 넘치다 못해 과한데? ) " },
+    { bg: 'bg3.jpeg', text: "형민: 난 여자랑 1:1로 안논다. 관심없으면 " },    
+
+    // [선택지 파트]
+    { 
+        bg: 'bg3.jpeg', 
+        type: 'choice', 
+        question: "어떻게 할까?", 
+        options: [
+            { text: "나도 좋아..!", target: "show_your_mind" },
+            { text: "뭔 소리여", target: "dog_sound" }
+        ] 
+    },
+
+// --- [분기점 1] ---
+    { id: "show_your_mind", bg: 'bg3-1.jpeg', text: "(관심없다고 하면 다신 나랑 안놀 것 같아.. 일단 지르자) " },
+    { bg: 'bg3.jpeg', text: "진아: 나도 오빠 좋아..!" , nextId: 'some_ing'},
+
+    // --- [분기점 2]  ---
+    { id: "dog_sound", bg: 'bg3.jpeg', text: "진아: (뭔 소리야 이 오빠는? ) , nextId: 'show_your_mind'} },
+
+
+    { bg: 'bg2.jpeg', text: "놀랍게도 이때부터 사귀는게 아니라 썸을 탔다." },     
+
     
     // [마지막 퀴즈 파트] ⭐️ 새로운 시스템으로 통일했습니다!
     { 
