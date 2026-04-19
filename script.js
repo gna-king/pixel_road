@@ -79,7 +79,7 @@ const story = [
     { bg: 'bg3.jpeg', text: "진아: 나도 오빠 좋아..!" , nextId: 'some_ing'},
 
     // --- [분기점 2]  ---
-    { id: "dog_sound", bg: 'bg3.jpeg', text: "진아: (뭔 소리야 이 오빠는? )" , nextId: 'show_your_mind'} },
+    { id: "dog_sound", bg: 'bg3.jpeg', text: "진아: (뭔 소리야 이 오빠는? )" , nextId: 'show_your_mind'} ,
 
 
     {  id: "some_ing", bg: 'bg2.jpeg', text: "놀랍게도 이때부터 사귀는게 아니라 썸을 탔다." },     
