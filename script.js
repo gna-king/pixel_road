@@ -54,15 +54,17 @@ function updateStory() {
 }
 
 // 다음 버튼 클릭 시
+
+// 다음 버튼 클릭 시
 function goNext() {
-    if (isTransitioning) return; // 화면 넘어갈 땐 클릭 금지!
+    if (isTransitioning) return; 
     
     if (currentStep < story.length - 1) {
         let nextStep = currentStep + 1;
         
-        // 다음 대사의 배경 그림이 현재 배경과 다르면? -> 화면 전환(Fade out/in)
         if (story[nextStep].bg !== story[currentStep].bg) {
-            changeScene(nextStep);
+            // ⭐️ 두 번째 값으로 true를 전달해서 '앞으로 가는 중'임을 알려줍니다.
+            changeScene(nextStep, true); 
         } else {
             currentStep = nextStep;
             updateStory();
@@ -78,7 +80,8 @@ function goPrev() {
         let prevStep = currentStep - 1;
         
         if (story[prevStep].bg !== story[currentStep].bg) {
-            changeScene(prevStep);
+            // ⭐️ 두 번째 값으로 false를 전달해서 '뒤로 가는 중'임을 알려줍니다.
+            changeScene(prevStep, false); 
         } else {
             currentStep = prevStep;
             updateStory();
@@ -86,42 +89,47 @@ function goPrev() {
     }
 }
 
-// 장면 전환 함수 (오른쪽 퇴장 -> 검은 커튼 효과 -> 배경 교체)
-function changeScene(targetStep) {
+// 장면 전환 함수
+function changeScene(targetStep, isNext) {
     isTransitioning = true;
     hideBubble();
     choices.style.display = "none";
     
-    // 1. 캐릭터에게 'walk-off' 클래스를 추가해 오른쪽으로 걷게 합니다.
-    char.classList.add('walk-off');
+    let delayBeforeFade = 0; // 화면이 까매지기 전 기다리는 시간
 
-    // 2. 캐릭터가 이동하는 시간(1.5초)을 기다린 후 화면을 어둡게(Fade-out) 만듭니다.
+    // '다음'으로 넘어갈 때만 캐릭터가 오른쪽으로 걷습니다.
+    if (isNext) {
+        char.classList.add('walk-off');
+        delayBeforeFade = 2700; // 걷는 모션을 보여주기 위해 2.7초 대기
+    }
+
+    // 지정된 시간(다음: 2.7초, 이전: 0초)이 지나면 검은 커튼을 칩니다.
     setTimeout(() => {
         fade.classList.add('fade-out'); 
 
-        // 3. 화면이 완전히 까매지면(1초 뒤) 배경을 교체하고 캐릭터를 제자리로 돌려놓습니다.
         setTimeout(() => {
             currentStep = targetStep;
             
-            // 배경 교체 및 위치 초기화
+            // 배경 이미지 교체
             bg.style.backgroundImage = `url('${story[currentStep].bg}')`;
             bgPosX = 0; 
             bg.style.left = "0px";
             
-            // 다음 장면을 위해 캐릭터의 'walk-off' 클래스를 제거 (몰래 왼쪽 15%로 복귀)
+            // 다음 혹은 이전 장면을 위해 캐릭터 위치 리셋
             char.classList.remove('walk-off');
             
             updateStory(); 
             
-            // 4. 다시 화면을 밝게(Fade-in) 만듭니다.
+            // 검은 커튼 걷기
             fade.classList.remove('fade-out'); 
             
             setTimeout(() => {
                 isTransitioning = false;
             }, 1000);
         }, 1000); 
-    }, 2800); // 1.5초는 CSS의 transition 시간과 맞춥니다.
+    }, delayBeforeFade);
 }
+
 // 게임 내내 배경이 천천히 뒤로 흘러가게 만들기
 function gameLoop() {
     // ⭐️ 배경이 끝(-4000px)에 도달하지 않았을 때만 왼쪽으로 이동시킵니다!
