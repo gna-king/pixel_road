@@ -291,7 +291,7 @@ function changeScene(targetStep, isNext) {
 
 // 배경 스크롤 루프
 function gameLoop() {
-    if (story[currentStep] && story[currentStep].bg === 'campus.png') {
+    if (story[currentStep] && story[currentStep].bg === 'campus2.png') {
         if (bgPosX > -4000) {
             bgPosX -= walkSpeed;
             bg.style.left = bgPosX + "px";
