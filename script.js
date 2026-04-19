@@ -30,6 +30,11 @@ const story = [
     { bg: 'bg2.png', text: "웨딩 촬영 날도 빼놓을 수 없지.", photos: ['photo1', 'photo2', 'photo3'] }, 
     { bg: 'bg2.png', text: "드디어 식장 앞에 도착했다!", photos: ['photo1', 'photo2', 'photo3'] },
     { bg: 'bg2.png', text: "잠깐! 안으로 들어가기 전에 퀴즈를 맞혀봐!", photos: ['photo1', 'photo2', 'photo3'] },
+
+    { bg: 'bg3.png', text: "진아가 방에 누워있다." },
+    { bg: 'bg3.png', text: "진아 : 심심한데 형민오빠 뭐하고 있지? " },
+    // 퀴즈 파트
+    { bg: 'bg3.png', type: 'quiz', photos: ['photo1', 'photo2', 'photo3'] }     
     
     // 마지막 퀴즈 파트
     { bg: 'bg2.png', type: 'quiz', photos: ['photo1', 'photo2', 'photo3'] } 
