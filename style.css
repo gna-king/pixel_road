@@ -16,7 +16,7 @@ body, html {
 #game-container {
     width: 100vw;
     max-width: 850px; /* PC에서 너무 커지지 않게 가로 길이 제한 */
-    aspect-ratio: 12 / 9; /* 무조건 16:9 비율 강제 유지 */
+    aspect-ratio: 8 / 12; /* 무조건 16:9 비율 강제 유지 */
     position: relative; overflow: hidden;
     background-color: #87CEEB; image-rendering: pixelated; 
 }
