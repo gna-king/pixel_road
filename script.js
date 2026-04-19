@@ -16,11 +16,11 @@ const autoDelay = 4500; // 4.5초 뒤 자동 넘김
 let historyStack = [];
 
 const story = [
-    { bg: 'bg1.png', text: "때는 2019, 진아는 갓 입사한 신입사원이다."},
-    { bg: 'bg1.png', text: "1년 뒤, 2020 형민이가 입사한다."},
-    { bg: 'bg1.png', text: "진아: 저 잘생긴 오빠 뭐지? 흥미가 생긴다."},
-    { bg: 'bg1.png', text: "실제로 20년도의 형민이는 잘생겼었다."},
-    { bg: 'bg1.png', text: "형민: 안녕 선배?"},
+    { bg: 'campus.png', text: "때는 2019, 진아는 갓 입사한 신입사원이다."},
+    { bg: 'campus.png', text: "1년 뒤, 2020 형민이가 입사한다."},
+    { bg: 'campus.png', text: "진아: 저 잘생긴 오빠 뭐지? 흥미가 생긴다."},
+    { bg: 'campus.png', text: "실제로 20년도의 형민이는 잘생겼었다."},
+    { bg: 'campus.png', text: "형민: 안녕 선배?"},
 
     { bg: 'bg2.png', text: "여기는 우리의 추억이 담긴 갤러리야." },
     { bg: 'bg2.png', text: "모바일 동기들과의 즐거운 시간"},
@@ -291,7 +291,7 @@ function changeScene(targetStep, isNext) {
 
 // 배경 스크롤 루프
 function gameLoop() {
-    if (story[currentStep] && story[currentStep].bg === 'bg1.png') {
+    if (story[currentStep] && story[currentStep].bg === 'campus.png') {
         if (bgPosX > -4000) {
             bgPosX -= walkSpeed;
             bg.style.left = bgPosX + "px";
