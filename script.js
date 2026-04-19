@@ -53,9 +53,9 @@ const story = [
     { bg: 'bg3-1.png', text: "같이 예식장으로 출발하자!", nextId: 'final_quiz_start' }, 
 
     // --- [분기점 2] 다시 눕는다 ---
-    { id: 'sleep_again', bg: 'bg3-2.png', text: "드르렁... 역시 침대가 최고야." },
-    { bg: 'bg3-2.png', text: "아뿔싸! 예식 시간에 늦겠다!" },
-    { bg: 'bg3-2.png', text: "서둘러서 식장으로 뛰어가자!", nextId: 'final_quiz_start' }, 
+    { id: 'sleep_again', bg: 'bg3.png', text: "드르렁... 역시 침대가 최고야." },
+    { bg: 'bg3.png', text: "아뿔싸! 예식 시간에 늦겠다!" },
+    { bg: 'bg3.png', text: "서둘러서 식장으로 뛰어가자!", nextId: 'final_quiz_start' }, 
     
     // [마지막 퀴즈 파트] ⭐️ 새로운 시스템으로 통일했습니다!
     { 
