@@ -16,9 +16,6 @@ const autoDelay = 4500; // 4.5초 뒤 자동 넘김
 let historyStack = [];
 
 const story = [
-    { bg: 'bg1.png', text: "안녕! 우리의 결혼식장으로 가는 길이야." },
-    { bg: 'bg1.png', text: "함께 준비하느라 정말 고생 많았지?" },
-    { bg: 'bg1.png', text: "어? 저기 멀리 예식장이 보이기 시작했어!" },
     { bg: 'bg1.png', text: "때는 2019, 진아는 갓 입사한 신입사원이다."},
     { bg: 'bg1.png', text: "1년 뒤, 2020 형민이가 입사한다."},
     { bg: 'bg1.png', text: "진아: 저 잘생긴 오빠 뭐지? 흥미가 생긴다."},
@@ -30,8 +27,6 @@ const story = [
     { bg: 'bg2.png', text: "우리가 처음 만난 날 기억나?", photos: ['photo1'] }, 
     { bg: 'bg2.png', text: "첫 여행 갔을 때 정말 재밌었는데!", photos: ['photo1', 'photo2'] }, 
     { bg: 'bg2.png', text: "웨딩 촬영 날도 빼놓을 수 없지.", photos: ['photo1', 'photo2', 'photo3'] }, 
-    { bg: 'bg2.png', text: "드디어 식장 앞에 도착했다!", photos: ['photo1', 'photo2', 'photo3'] },
-    { bg: 'bg2.png', text: "잠깐! 안으로 들어가기 전에 퀴즈를 맞혀봐!", photos: ['photo1', 'photo2', 'photo3'] },
 
     { bg: 'bg3.jpeg', text: "21년 봄과 여름 사이 어디쯤, 진아가 방에 누워있다." },
     { bg: 'bg3.jpeg', text: "진아 : 심심한데 형민오빠 뭐하고 있지? " },
