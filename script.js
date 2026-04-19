@@ -162,13 +162,25 @@ function changeScene(targetStep, isNext) {
 }
 
 // 게임 내내 배경이 천천히 뒤로 흘러가게 만들기
-function gameLoop() {
+//function gameLoop() {
     // ⭐️ 배경이 끝(-4000px)에 도달하지 않았을 때만 왼쪽으로 이동시킵니다!
-    if (bgPosX > -4000) {
-        bgPosX -= walkSpeed;
-        bg.style.left = bgPosX + "px";
+ //   if (bgPosX > -4000) {
+ //       bgPosX -= walkSpeed;
+ //       bg.style.left = bgPosX + "px";
+ //   }
+//}
+
+// 게임 내내 배경이 흘러가게 만들기
+function gameLoop() {
+    // ⭐️ 현재 배경이 bg1일 때만 배경이 움직입니다! (bg2에서는 멈춤)
+    if (story[currentStep] && story[currentStep].bg === 'bg1.png') {
+        if (bgPosX > -4000) {
+            bgPosX -= walkSpeed;
+            bg.style.left = bgPosX + "px";
+        }
     }
 }
+
 
 function showBubble(text) {
     bubble.innerText = text;
