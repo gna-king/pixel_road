@@ -204,9 +204,9 @@ body, html {
 }
 
 /* 각 사진마다 위치와 기울기를 다르게 설정 (원하는 이미지 파일명으로 바꾸세요!) */
-#photo1 { top: 15%; left: 10%; transform: rotate(-5deg); background-image: url('pic1.jpg'); }
-#photo2 { top: 25%; left: 35%; transform: rotate(4deg); background-image: url('pic2.jpg'); }
-#photo3 { top: 10%; left: 60%; transform: rotate(-3deg); background-image: url('pic3.jpg'); }
+#photo1 { top: 15%; left: 10%; transform: rotate(-5deg); background-image: url('pic1.jpeg'); }
+#photo2 { top: 25%; left: 35%; transform: rotate(4deg); background-image: url('pic2.jpeg'); }
+#photo3 { top: 10%; left: 60%; transform: rotate(-3deg); background-image: url('pic3.jpeg'); }
 
 /* 이 클래스가 붙으면 사진이 스르륵 나타납니다 */
 .photo-frame.show {
