@@ -16,24 +16,26 @@ const autoDelay = 4500; // 4.5초 뒤 자동 넘김
 let historyStack = [];
 
 const story = [
-    { bg: 'campus.png', text: "때는 2019, 진아는 갓 입사한 신입사원이다."},
-    { bg: 'campus.png', text: "1년 뒤, 2020 형민이가 입사한다."},
-    { bg: 'campus.png', text: "진아: 저 잘생긴 오빠 뭐지? 흥미가 생긴다."},
-    { bg: 'campus.png', text: "실제로 20년도의 형민이는 잘생겼었다."},
-    { bg: 'campus.png', text: "형민: 안녕 선배?"},
+    { bg: 'dsr.png', text: "때는 2019, 진아는 갓 입사한 신입사원이다."},
+    { bg: 'Gn.png', text: "진아: 안녕하십니까!"},
+    
+    { bg: 'Gn.png', text: "1년 뒤, 2020 형민이가 입사한다."},
+    { bg: 'hm.png', text: "진아: 저 잘생긴 오빠 뭐지? 흥미가 생긴다."},
+    { bg: 'hm.png', text: "실제로 20년도의 형민이는 잘생겼었다."},
+    { bg: 'hm.png', text: "형민: 안녕 선배?"},
 
-    { bg: 'bg2.png', text: "여기는 우리의 추억이 담긴 갤러리야." },
-    { bg: 'bg2.png', text: "모바일 동기들과의 즐거운 시간"},
-    { bg: 'bg2.png', text: "우리가 처음 만난 날 기억나?", photos: ['photo1'] }, 
-    { bg: 'bg2.png', text: "첫 여행 갔을 때 정말 재밌었는데!", photos: ['photo1', 'photo2'] }, 
-    { bg: 'bg2.png', text: "웨딩 촬영 날도 빼놓을 수 없지.", photos: ['photo1', 'photo2', 'photo3'] }, 
+ //   { bg: 'bg2.png', text: "여기는 우리의 추억이 담긴 갤러리야." },
+ //   { bg: 'bg2.png', text: "모바일 동기들과의 즐거운 시간"},
+ //   { bg: 'bg2.png', text: "우리가 처음 만난 날 기억나?", photos: ['photo1'] }, 
+ //   { bg: 'bg2.png', text: "첫 여행 갔을 때 정말 재밌었는데!", photos: ['photo1', 'photo2'] }, 
+ //   { bg: 'bg2.png', text: "웨딩 촬영 날도 빼놓을 수 없지.", photos: ['photo1', 'photo2', 'photo3'] }, 
 
-    { bg: 'bg3.jpeg', text: "21년 봄과 여름 사이 어디쯤, 진아가 방에 누워있다." },
-    { bg: 'bg3.jpeg', text: "진아 : 심심한데 형민오빠 뭐하고 있지? " },
+    { bg: 'room.png', text: "21년 봄과 여름 사이 어디쯤, 진아가 방에 누워있다." },
+    { bg: 'room.png', text: "진아 : 심심한데 형민오빠 뭐하고 있지? " },
     
     // [선택지 파트]
     { 
-        bg: 'bg3.jpeg', 
+        bg: 'room.png', 
         type: 'choice', 
         question: "어떻게 할까?", 
         options: [
@@ -43,29 +45,29 @@ const story = [
     },
 
 // --- [분기점 1] 전화건다 ---
-    { id: 'call_oppa', bg: 'bg3-1.jpeg', text: "뚜루루루... 오빠 바빠?" },
-    { bg: 'bg3.jpeg', text: "형민: 아니, 왜?" },
-    { bg: 'bg3.jpeg', text: "진아: 나랑 놀래? (두근두근)"}, 
-    { bg: 'bg3.jpeg', text: "형민: 좋아!" , nextId: 'go_to_watch_movie' },    
+    { id: 'call_oppa', bg: 'room.png', text: "뚜루루루... 오빠 바빠?" },
+    { bg: 'room.png', text: "형민: 아니, 왜?" },
+    { bg: 'room.png', text: "진아: 나랑 놀래? (두근두근)"}, 
+    { bg: 'room.png', text: "형민: 좋아!" , nextId: 'go_to_watch_movie' },    
 
     // --- [분기점 2] 다시 눕는다 ---
     // ⭐️ 눕는다를 선택하면 이 대사를 치고, 바로 분기점 1번(call_oppa)으로 점프시켜버립니다!
-    { id: 'sleep_again', bg: 'bg3.jpeg', text: "진아: 흠.. 아무래도 심심한데 전화 해봐야겠어.", nextId: 'call_oppa' },
+    { id: 'sleep_again', bg: 'room.png', text: "진아: 흠.. 아무래도 심심한데 전화 해봐야겠어.", nextId: 'call_oppa' },
 
     // ==========================================
     // --- [새로운 장면] 영화관 데이트 ---
     // ==========================================
     
     // ⭐️ 분기점 1번이 끝난 후 여기로 도착합니다!
-    { id: 'go_to_watch_movie', bg: 'bg3.jpeg', text: "동탄 북광장 메가박스" },
-    { bg: 'bg3.jpeg', text: "영화 보고 나와서 술집을 갔다." },
-    { bg: 'bg3.jpeg', text: "형민: 너 나 좋아하냐? " },
-    { bg: 'bg3.jpeg', text: "진아: .. (뭐지 이 테토맨은? 테스토스테론이 흘러 넘치다 못해 과한데? ) " },
-    { bg: 'bg3.jpeg', text: "형민: 난 여자랑 1:1로 안논다. 관심없으면 " },    
+    { id: 'go_to_watch_movie', bg: 'mega.png', text: "동탄 북광장 메가박스" },
+    { bg: 'fishzip.png', text: "영화 보고 나와서 술집을 갔다." },
+    { bg: 'fishzip.png', text: "형민: 너 나 좋아하냐? " },
+    { bg: 'fishzip.png', text: "진아: .. (뭐지 이 테토맨은? 테스토스테론이 흘러 넘치다 못해 과한데? ) " },
+    { bg: 'fishzip.png', text: "형민: 난 여자랑 1:1로 안논다. 관심없으면 " },    
 
     // [선택지 파트]
     { 
-        bg: 'bg3.jpeg', 
+        bg: 'fishzip.png', 
         type: 'choice', 
         question: "어떻게 할까?", 
         options: [
@@ -75,21 +77,21 @@ const story = [
     },
 
 // --- [분기점 1] ---
-    { id: "show_your_mind", bg: 'bg3-1.jpeg', text: "(관심없다고 하면 다신 나랑 안놀 것 같아.. 일단 지르자) " },
-    { bg: 'bg3.jpeg', text: "진아: 나도 오빠 좋아..!" , nextId: 'some_ing'},
+    { id: "show_your_mind", bg: 'fishzip.png', text: "(관심없다고 하면 다신 나랑 안놀 것 같아.. 일단 지르자) " },
+    { bg: 'fishzip.png', text: "진아: 나도 오빠 좋아..!" , nextId: 'some_ing'},
     // --- [분기점 2]  ---
-    { id: "dog_sound", bg: 'bg3.jpeg', text: "진아: (뭔 소리야 이 오빠는? )" , nextId: 'show_your_mind'} ,
+    { id: "dog_sound", bg: 'fishzip.png', text: "진아: (뭔 소리야 이 오빠는? )" , nextId: 'show_your_mind'} ,
 
-    {  id: "some_ing", bg: 'bg2.png', text: "놀랍게도 이때부터 사귀는게 아니라 썸을 탔다." },     
-    { bg:  'bg2.png', text: "2021.10.23 동탄호수공원" },
-    { bg:  'bg2.png', text: "진아: (벌써 호수만 5바퀴쨰야, 이 오빠 고백할건가?)" },
-    { bg:  'bg2.png', text: "진아: 오빠 뭐 할 말 있어?" },    
-    { bg:  'bg2.png', text: "한참을 뜸을 들인다." },    
-    { bg:  'bg2.png', text: "형민: 우리 3개월만 만나볼래?" },    
+    {  id: "some_ing", bg: 'fishzip.png', text: "이때부터 썸을 탔다." },     
+    { bg:  'dongtan_lake.png', text: "2021.10.23 동탄호수공원" },
+    { bg:  'dongtan_lake.png', text: "진아: (벌써 호수만 5바퀴쨰야, 이 오빠 고백할건가?)" },
+    { bg:  'dongtan_lake.png', text: "진아: 오빠 뭐 할 말 있어?" },    
+    { bg:  'dongtan_lake.png', text: "한참을 뜸을 들인다." },    
+    { bg:  'dongtan_lake.png', text: "형민: 우리 3개월만 만나볼래?" },    
 
     // [선택지 파트]
     { 
-        bg: 'bg2.png', 
+        bg: 'dongtan_lake.png', 
         type: 'choice', 
         question: "어떻게 할까?", 
         options: [
@@ -99,17 +101,17 @@ const story = [
     },
     
 // --- [분기점 1] ---
-    { id: "show_your_mind2", bg: 'bg3-1.jpeg', text: "(이게 말이야 방구야) " },
-    { bg: 'bg3.jpeg', text: "진아: 다시 고백해!!!" },
-    { bg:  'bg3.jpeg', text: "한참을 뜸을 들인다." },   
-    { bg: 'bg3.jpeg', text: "형민: 우리 만나보자" },       
-    { bg: 'bg3.jpeg', text: "진아: 좋아!" , nextId: 'dating'},       
+    { id: "show_your_mind2", bg: 'dongtan_lake.png', text: "(이게 말이야 방구야) " },
+    { bg: 'dongtan_lake.png', text: "진아: 다시 고백해!!!" },
+    { bg:  'dongtan_lake.png', text: "한참을 뜸을 들인다." },   
+    { bg: 'dongtan_lake.png', text: "형민: 우리 만나보자" },       
+    { bg: 'dongtan_lake.png', text: "진아: 좋아!" , nextId: 'dating'},       
 
     // --- [분기점 2]  ---
-    { id: "dog_sound2", bg: 'bg3.jpeg', text: "진아: 뭐라고?" , nextId: 'show_your_mind2'} ,
+    { id: "dog_sound2", bg: 'dongtan_lake.png', text: "진아: 뭐라고?" , nextId: 'show_your_mind2'} ,
 
-    {  id: "dating", bg: 'bg2.png', text: "그렇게 우리는 사귀게 되었다." },     
-    {  id: "dating", bg: 'bg2.png', text: "" },         
+    {  id: "dating", bg: 'dongtan_lake.png', text: "그렇게 우리는 사귀게 되었다." },     
+    {  id: "dating", bg: 'dongtan_lake.png', text: "" },         
 
     
     
@@ -291,7 +293,7 @@ function changeScene(targetStep, isNext) {
 
 // 배경 스크롤 루프
 function gameLoop() {
-    if (story[currentStep] && story[currentStep].bg === 'campus2.png') {
+    if (story[currentStep] && story[currentStep].bg === 'dsr2.png') {
         if (bgPosX > -4000) {
             bgPosX -= walkSpeed;
             bg.style.left = bgPosX + "px";
