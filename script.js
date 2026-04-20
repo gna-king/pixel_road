@@ -113,6 +113,8 @@ const story = [
     {  id: "dating", bg: 'dongtan_lake.png', text: "그렇게 우리는 사귀게 되었다." },     
     {  id: "dating", bg: 'dongtan_lake.png', text: "" },         
 
+
+    
     
     
     // [마지막 퀴즈 파트] ⭐️ 새로운 시스템으로 통일했습니다!
