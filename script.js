@@ -6,6 +6,7 @@ const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 const char = document.getElementById('character'); 
 
+let msgTimer;
 let bgPosX = 0;          
 const walkSpeed = 2;     
 
@@ -150,6 +151,13 @@ function updateStory() {
     let current = story[currentStep];
 
     clearTimeout(autoTimer);
+    clearInterval(dayTimer);
+    clearInterval(msgTimer); // ⭐️ 추가
+
+    // 핸드폰 팝업은 기본적으로 숨겨둡니다.
+    const phonePopup = document.getElementById('phone-popup');
+    phonePopup.style.display = 'none';
+    
 // ⭐️ [새로 추가] 형민 캐릭터 등장 로직
     const charHyungmin = document.getElementById('char-hyungmin');
     if (current.showHyungmin) {
@@ -202,7 +210,43 @@ function updateStory() {
         clearInterval(dayTimer);
         isDdayRunning = false;
     }
+// =========================================================
+    // ⭐️ [새로 추가] 카카오톡 메신저 연출 파트
+    // =========================================================
+    if (current.type === 'messenger') {
+        bubble.style.display = "none";     
+        choices.style.display = "none";   
+        nextBtn.classList.add('hidden'); // 메시지가 다 올 때까지 다음 버튼 숨김
+        prevBtn.classList.add('hidden'); 
 
+        phonePopup.style.display = 'block'; // 핸드폰 켜기
+        
+        const chatBox = document.getElementById('chat-box');
+        chatBox.innerHTML = ''; // 이전 메시지들 초기화
+
+        let msgIndex = 0;
+
+        // 1.5초(1500ms) 간격으로 메시지를 하나씩 화면에 찍어냅니다.
+        msgTimer = setInterval(() => {
+            if (msgIndex < current.messages.length) {
+                const msgDiv = document.createElement('div');
+                msgDiv.className = 'chat-msg';
+                msgDiv.innerText = current.messages[msgIndex];
+                chatBox.appendChild(msgDiv);
+                msgIndex++;
+            } else {
+                // 메시지가 다 도착하면 타이머를 끄고 '다음' 버튼을 보여줍니다.
+                clearInterval(msgTimer);
+                nextBtn.classList.remove('hidden');
+                
+                // (선택 사항) 자동으로 다음 장면으로 넘어가게 하려면 아래 주석을 푸세요
+                // setTimeout(goNext, 2000); 
+            }
+        }, 1500); // 1500 = 1.5초. 숫자를 줄이면 카톡이 더 빨리 옵니다.
+        
+        return; // 메신저 연출 중에는 일반 대화창 로직을 실행하지 않음
+    }
+    // =========================================================
 
     
     // ⭐️ 선택지 창 띄우기 및 버튼 생성
