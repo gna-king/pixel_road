@@ -7,6 +7,9 @@ const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 const char = document.getElementById('character');
 
+
+let walkOffTimer = null;
+let pendingTargetStep = -1;
 let msgTimer;
 let bgPosX = 0;
 const walkSpeed = 2;
@@ -332,7 +335,15 @@ function makeChoice(target) {
 }
 
 function goNext() {
-    if (isTransitioning) return;
+// ⭐️ 화면 전환(걸어나가는 중)일 때 누르면 스킵 발동!
+    if (isTransitioning) {
+        if (walkOffTimer) {
+            clearTimeout(walkOffTimer); // 2.7초 기다리는 타이머 취소
+            walkOffTimer = null;
+            executeFade(pendingTargetStep); // 묻지도 따지지도 않고 바로 화면 암전
+        }
+        return; 
+    }
     clearTimeout(autoTimer);
 
     let current = story[currentStep];
@@ -373,6 +384,7 @@ function goPrev() {
 
 function changeScene(targetStep, isNext) {
     isTransitioning = true;
+    pendingTargetStep = targetStep; // 스킵 시 이동할 목표 지점 저장    
     hideBubble();
     if (choices) choices.style.display = "none";
 
@@ -381,37 +393,42 @@ function changeScene(targetStep, isNext) {
 
     clearTimeout(autoTimer);
 
-    let delayBeforeFade = 0;
-
     if (isNext) {
         if(char) char.classList.add('walk-off');
-        delayBeforeFade = 2700;
+        // 2.7초 타이머를 변수에 담아둡니다 (스킵할 때 부수기 위해)
+        walkOffTimer = setTimeout(() => {
+            walkOffTimer = null;
+            executeFade(targetStep);
+        }, 2700);
+    } else {
+        executeFade(targetStep);
     }
+}
+
+// ⭐️ 암전 및 화면 교체 로직을 담당하는 새 함수
+function executeFade(targetStep) {
+    fade.classList.add('fade-out');
 
     setTimeout(() => {
-        fade.classList.add('fade-out');
+        currentStep = targetStep;
+
+        // 몽타주 타입일 때는 배경 초기화를 건너뜀
+        if (story[currentStep].type !== 'montage') {
+            bg.style.backgroundImage = `url('${story[currentStep].bg}')`;
+        }
+
+        bgPosX = 0;
+        bg.style.left = "0px";
+
+        if(char) char.classList.remove('walk-off');
+        updateStory();
+
+        fade.classList.remove('fade-out');
 
         setTimeout(() => {
-            currentStep = targetStep;
-
-            // 몽타주 타입일 때는 배경 초기화를 건너뜀
-            if (story[currentStep].type !== 'montage') {
-                bg.style.backgroundImage = `url('${story[currentStep].bg}')`;
-            }
-
-            bgPosX = 0;
-            bg.style.left = "0px";
-
-            if(char) char.classList.remove('walk-off');
-            updateStory();
-
-            fade.classList.remove('fade-out');
-
-            setTimeout(() => {
-                isTransitioning = false;
-            }, 1000);
+            isTransitioning = false;
         }, 1000);
-    }, delayBeforeFade);
+    }, 1000);
 }
 
 // ⭐️ 배경 스크롤 기능
