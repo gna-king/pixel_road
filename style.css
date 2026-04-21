@@ -269,7 +269,7 @@ body, html {
 /* --- ⭐️ 새로 추가: 챕터 제목 스타일 --- */
 #scene-title {
     position: absolute;
-    top: 30px;
+    top: 80px;
     width: 100%;
     text-align: center;
     color: white;
