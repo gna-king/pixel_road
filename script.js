@@ -150,7 +150,13 @@ function updateStory() {
     let current = story[currentStep];
 
     clearTimeout(autoTimer);
-
+// ⭐️ [새로 추가] 형민 캐릭터 등장 로직
+    const charHyungmin = document.getElementById('char-hyungmin');
+    if (current.showHyungmin) {
+        charHyungmin.style.display = 'block'; // 대본에 showHyungmin이 있으면 짠! 나타남
+    } else {
+        charHyungmin.style.display = 'none';  // 없으면 다시 숨김
+    }
     // 갤러리 사진 처리
     const photoGallery = document.getElementById('photo-gallery');
     if (current.bg === 'bg2.png') {
