@@ -13,15 +13,10 @@ const walkSpeed = 2;
 let autoTimer; 
 const autoDelay = 4500; // 4.5초 뒤 자동 넘김
 
-// ⭐️ 새로 추가된 변수들
 let dayTimer;
 let currentDay = 1;         // 현재 며칠인지 기억하는 변수
 let isDdayRunning = false;  // D-day 카운터가 이미 돌아가고 있는지 확인하는 변수
 
-
-
-
-// 지나온 길을 기억하는 타임머신 배열
 let historyStack = [];
 
 const story = [
@@ -33,11 +28,6 @@ const story = [
     { bg: 'Gn.png', text: "실제로 20년도의 형민이는 잘생겼었다."},
     { bg: 'Gn.png', text: "형민: 안녕 선배?", showHyungmin: true},
     { bg: 'Gn.png', text: "진아: 어.. 안녕?", showHyungmin: true},
- //   { bg: 'bg2.png', text: "여기는 우리의 추억이 담긴 갤러리야." },
- //   { bg: 'bg2.png', text: "모바일 동기들과의 즐거운 시간"},
- //   { bg: 'bg2.png', text: "우리가 처음 만난 날 기억나?", photos: ['photo1'] }, 
- //   { bg: 'bg2.png', text: "첫 여행 갔을 때 정말 재밌었는데!", photos: ['photo1', 'photo2'] }, 
- //   { bg: 'bg2.png', text: "웨딩 촬영 날도 빼놓을 수 없지.", photos: ['photo1', 'photo2', 'photo3'] }, 
 
     { bg: 'room.png', text: "21년 봄과 여름 사이 어디쯤, 진아가 방에 누워있다." },
     { bg: 'room.png', text: "진아 : 심심한데 형민오빠 뭐하고 있지? " },
@@ -53,21 +43,16 @@ const story = [
         ] 
     },
 
-// --- [분기점 1] 전화건다 ---
+    // --- [분기점 1] 전화건다 ---
     { id: 'call_oppa', bg: 'room.png', text: "뚜루루루... 오빠 바빠?" },
     { bg: 'room.png', text: "형민: 아니, 왜?" },
     { bg: 'room.png', text: "진아: 나랑 놀래? (두근두근)"}, 
     { bg: 'room.png', text: "형민: 좋아!" , nextId: 'go_to_watch_movie' },    
 
     // --- [분기점 2] 다시 눕는다 ---
-    // ⭐️ 눕는다를 선택하면 이 대사를 치고, 바로 분기점 1번(call_oppa)으로 점프시켜버립니다!
     { id: 'sleep_again', bg: 'room.png', text: "진아: 흠.. 아무래도 심심한데 전화 해봐야겠어.", nextId: 'call_oppa' },
 
-    // ==========================================
     // --- [새로운 장면] 영화관 데이트 ---
-    // ==========================================
-    
-    // ⭐️ 분기점 1번이 끝난 후 여기로 도착합니다!
     { id: 'go_to_watch_movie', bg: 'mega.png', text: "동탄 북광장 메가박스" },
     { bg: 'fishzip.png', text: "영화 보고 나와서 술집을 갔다." },
     { bg: 'fishzip.png', text: "형민: 너 나 좋아하냐? " },
@@ -85,13 +70,14 @@ const story = [
         ] 
     },
 
-// --- [분기점 1] ---
+    // --- [분기점 1] ---
     { id: "show_your_mind", bg: 'fishzip.png', text: "(관심없다고 하면 다신 나랑 안놀 것 같아.. 일단 지르자) " },
     { bg: 'fishzip.png', text: "진아: 나도 오빠 좋아..!" , nextId: 'some_ing'},
+    
     // --- [분기점 2]  ---
     { id: "dog_sound", bg: 'fishzip.png', text: "진아: (뭔 소리야 이 오빠는? )" , nextId: 'show_your_mind'} ,
 
-    {  id: "some_ing", bg: 'fishzip.png', text: "이때부터 썸을 탔다." },     
+    {  id: "some_ing", bg: 'fishzip.png', text: "이때부터 썸을 탔다." },      
     { bg:  'dongtan_lake.png', text: "2021.10.23 동탄호수공원" },
     { bg:  'dongtan_lake.png', text: "진아: (벌써 호수만 5바퀴쨰야, 이 오빠 고백할건가?)" },
     { bg:  'dongtan_lake.png', text: "진아: 오빠 뭐 할 말 있어?" },    
@@ -109,20 +95,20 @@ const story = [
         ] 
     },
     
-// --- [분기점 1] ---
+    // --- [분기점 1] ---
     { id: "show_your_mind2", bg: 'dongtan_lake.png', text: "(이게 말이야 방구야) " },
     { bg: 'dongtan_lake.png', text: "진아: 다시 고백해!!!" },
     { bg:  'dongtan_lake.png', text: "한참을 뜸을 들인다." },   
-    { bg: 'dongtan_lake.png', text: "형민: 우리 만나보자" },       
-    { bg: 'dongtan_lake.png', text: "진아: 좋아!" , nextId: 'dating'},       
+    { bg: 'dongtan_lake.png', text: "형민: 우리 만나보자" },        
+    { bg: 'dongtan_lake.png', text: "진아: 좋아!" , nextId: 'dating'},        
 
     // --- [분기점 2]  ---
     { id: "dog_sound2", bg: 'dongtan_lake.png', text: "진아: 뭐라고?" , nextId: 'show_your_mind2'} ,
 
-    {  id: "dating", bg: 'dongtan_lake.png', text: "그렇게 우리는 사귀게 되었다." },     
-    {  id: "dating", bg: 'dongtan_lake.png', text: "" },         
+    // ⭐️ 중복 아이디 에러 수정 완료!
+    {  id: "dating", bg: 'dongtan_lake.png', text: "그렇게 우리는 사귀게 되었다." },      
 
-// ⭐️ 카톡 연출 파트
+    // ⭐️ 카톡 연출 파트
     { 
         bg: 'room2.png', 
         type: 'messenger', 
@@ -133,18 +119,16 @@ const story = [
         ] 
     },
     
-    
-    
-    // [마지막 퀴즈 파트] ⭐️ 새로운 시스템으로 통일했습니다!
+    // [마지막 퀴즈 파트]
     { 
-        id: 'final_quiz_start', // 👆 위 분기점들이 끝난 후 여기로 점프해서 모입니다!
-        bg: 'bg2.png', 
+        id: 'final_quiz_start', 
+        bg: 'room2.png', 
         type: 'choice', 
         question: "우리가 처음 만난 계절은?", 
         photos: ['photo1', 'photo2', 'photo3'],
         options: [
-            { text: "봄 (정답)", target: "link" }, // 정답 시 청첩장으로 이동
-            { text: "겨울", target: "wrong" }      // 오답 시 처리
+            { text: "봄 (정답)", target: "link" }, 
+            { text: "겨울", target: "wrong" }      
         ] 
     } 
 ];
@@ -161,104 +145,102 @@ function updateStory() {
 
     clearTimeout(autoTimer);
     clearInterval(dayTimer);
-    clearInterval(msgTimer); // ⭐️ 추가
+    clearInterval(msgTimer); 
 
     // 핸드폰 팝업은 기본적으로 숨겨둡니다.
     const phonePopup = document.getElementById('phone-popup');
-    phonePopup.style.display = 'none';
+    if (phonePopup) phonePopup.style.display = 'none';
     
-// ⭐️ [새로 추가] 형민 캐릭터 등장 로직
+    // 형민 캐릭터 등장 로직
     const charHyungmin = document.getElementById('char-hyungmin');
-    if (current.showHyungmin) {
-        charHyungmin.style.display = 'block'; // 대본에 showHyungmin이 있으면 짠! 나타남
-    } else {
-        charHyungmin.style.display = 'none';  // 없으면 다시 숨김
+    if (charHyungmin) {
+        if (current.showHyungmin) {
+            charHyungmin.style.display = 'block'; 
+        } else {
+            charHyungmin.style.display = 'none';  
+        }
     }
+
     // 갤러리 사진 처리
     const photoGallery = document.getElementById('photo-gallery');
-    if (current.bg === 'bg2.png') {
-        photoGallery.style.display = 'block'; 
-        document.querySelectorAll('.photo-frame').forEach(el => el.classList.remove('show'));
-        if (current.photos) {
-            current.photos.forEach(id => {
-                document.getElementById(id).classList.add('show');
-            });
+    if (photoGallery) {
+        if (current.bg === 'room2.png') {
+            photoGallery.style.display = 'block'; 
+            document.querySelectorAll('.photo-frame').forEach(el => el.classList.remove('show'));
+            if (current.photos) {
+                current.photos.forEach(id => {
+                    const photoEl = document.getElementById(id);
+                    if(photoEl) photoEl.classList.add('show');
+                });
+            }
+        } else {
+            photoGallery.style.display = 'none'; 
         }
-    } else {
-        photoGallery.style.display = 'none'; 
     }
-// =========================================================
-    // ⭐️ [변경됨] bg6 ~ bg9 흐름과 D-day 카운터
+
+    // =========================================================
+    // D-day 카운터
     // =========================================================
     const dayCounter = document.getElementById('day-counter');
-    // 여기에 카운터를 띄우고 싶은 배경 이름들을 다 적어줍니다!
     const dDayScenes = ['autumn2.png', 'winter.png', 'spring.png', 'summer.png'];
 
-    if (dDayScenes.includes(current.bg)) {
-        dayCounter.style.display = 'block'; // 숫자 켜기
-        char.classList.add('walking');      // 캐릭터 걷는 애니메이션 켜기
-        
-        // ⭐️ 카운터가 아직 안 켜져 있을 때만(bg6 처음 진입 시) 새로 타이머를 켭니다!
-        if (!isDdayRunning) {
-            isDdayRunning = true;
-            currentDay = 1; // 처음 시작은 1
-            dayCounter.innerText = `D+${currentDay}`;
-
-            dayTimer = setInterval(() => {
-                currentDay++;
+    if (dayCounter) {
+        if (dDayScenes.includes(current.bg)) {
+            dayCounter.style.display = 'block'; 
+            if(char) char.classList.add('walking');      
+            
+            if (!isDdayRunning) {
+                isDdayRunning = true;
+                currentDay = 1; 
                 dayCounter.innerText = `D+${currentDay}`;
-                
-                // 1000일에서 멈추게 하려면 아래 숫자를 수정하세요!
-                if (currentDay >= 1000) clearInterval(dayTimer);
-            }, 30); // 30ms 간격으로 빠르게 올라감
+
+                dayTimer = setInterval(() => {
+                    currentDay++;
+                    dayCounter.innerText = `D+${currentDay}`;
+                    if (currentDay >= 1000) clearInterval(dayTimer);
+                }, 30); 
+            }
+        } else {
+            dayCounter.style.display = 'none';
+            if(char) char.classList.remove('walking');
+            clearInterval(dayTimer);
+            isDdayRunning = false;
         }
-    } else {
-        // bg6~9가 아닌 다른 배경으로 넘어가면 카운터와 걷기를 끕니다.
-        dayCounter.style.display = 'none';
-        char.classList.remove('walking');
-        clearInterval(dayTimer);
-        isDdayRunning = false;
     }
-// =========================================================
-    // ⭐️ [새로 추가] 카카오톡 메신저 연출 파트
+
+    // =========================================================
+    // 카카오톡 메신저 연출 파트
     // =========================================================
     if (current.type === 'messenger') {
         bubble.style.display = "none";     
         choices.style.display = "none";   
-        nextBtn.classList.add('hidden'); // 메시지가 다 올 때까지 다음 버튼 숨김
+        nextBtn.classList.add('hidden'); 
         prevBtn.classList.add('hidden'); 
 
-        phonePopup.style.display = 'block'; // 핸드폰 켜기
+        if (phonePopup) phonePopup.style.display = 'block'; 
         
         const chatBox = document.getElementById('chat-box');
-        chatBox.innerHTML = ''; // 이전 메시지들 초기화
+        if (chatBox) {
+            chatBox.innerHTML = ''; 
+            let msgIndex = 0;
 
-        let msgIndex = 0;
-
-        // 1.5초(1500ms) 간격으로 메시지를 하나씩 화면에 찍어냅니다.
-        msgTimer = setInterval(() => {
-            if (msgIndex < current.messages.length) {
-                const msgDiv = document.createElement('div');
-                msgDiv.className = 'chat-msg';
-                msgDiv.innerText = current.messages[msgIndex];
-                chatBox.appendChild(msgDiv);
-                msgIndex++;
-            } else {
-                // 메시지가 다 도착하면 타이머를 끄고 '다음' 버튼을 보여줍니다.
-                clearInterval(msgTimer);
-                nextBtn.classList.remove('hidden');
-                
-                // (선택 사항) 자동으로 다음 장면으로 넘어가게 하려면 아래 주석을 푸세요
-                // setTimeout(goNext, 2000); 
-            }
-        }, 1500); // 1500 = 1.5초. 숫자를 줄이면 카톡이 더 빨리 옵니다.
-        
-        return; // 메신저 연출 중에는 일반 대화창 로직을 실행하지 않음
+            msgTimer = setInterval(() => {
+                if (msgIndex < current.messages.length) {
+                    const msgDiv = document.createElement('div');
+                    msgDiv.className = 'chat-msg';
+                    msgDiv.innerText = current.messages[msgIndex];
+                    chatBox.appendChild(msgDiv);
+                    msgIndex++;
+                } else {
+                    clearInterval(msgTimer);
+                    nextBtn.classList.remove('hidden');
+                }
+            }, 1500); 
+        }
+        return; 
     }
-    // =========================================================
 
-    
-    // ⭐️ 선택지 창 띄우기 및 버튼 생성
+    // 선택지 창 띄우기 및 버튼 생성
     if (current.type === 'choice') {
         bubble.style.display = "none";     
         choices.style.display = "block";   
@@ -280,7 +262,6 @@ function updateStory() {
     if (currentStep === story.length - 1) nextBtn.classList.add('hidden');
     else nextBtn.classList.remove('hidden');
 
-    // 대본에 nextId(점프)가 없을 때만 타이머 작동
     if (currentStep < story.length - 1 && !current.nextId) {
         autoTimer = setTimeout(() => {
             goNext();
@@ -288,24 +269,19 @@ function updateStory() {
     }
 }
 
-// 2. ⭐️ 빠져있던 버튼 선택 로직 추가! 
 function makeChoice(target) {
     if (target === 'link') {
-        // 정답을 맞춘 경우
         choices.style.display = "none";
         showBubble("딩동댕! 이제 진짜 청첩장을 확인하러 갈까?");
         setTimeout(() => { window.location.href = "https://gna-king.github.io/happy-wedding-day/"; }, 2000);
     } else if (target === 'wrong') {
-        // 틀린 경우
         choices.style.display = "none";
         showBubble("땡! 다시 한 번 잘 생각해봐!");
         setTimeout(() => { updateStory(); }, 2000);
     } else {
-        // 일반적인 분기점(전화걸기/눕기) 선택 시 점프
         let targetIndex = story.findIndex(s => s.id === target);
         if (targetIndex !== -1) {
-            historyStack.push(currentStep); // 이동 전 위치 저장
-            
+            historyStack.push(currentStep); 
             if (story[targetIndex].bg !== story[currentStep].bg) {
                 changeScene(targetIndex, true);
             } else {
@@ -316,21 +292,19 @@ function makeChoice(target) {
     }
 }
 
-// 3. ⭐️ 점프 기능이 추가된 다음 버튼
 function goNext() {
     if (isTransitioning) return; 
     clearTimeout(autoTimer); 
     
     let current = story[currentStep];
-    let nextStep = currentStep + 1; // 기본은 바로 다음 줄
+    let nextStep = currentStep + 1; 
 
-    // 대본에 nextId가 있다면 그 번호로 점프!
     if (current.nextId) {
         nextStep = story.findIndex(s => s.id === current.nextId);
     }
 
     if (nextStep < story.length && nextStep !== -1) {
-        historyStack.push(currentStep); // 이동 전 위치 저장
+        historyStack.push(currentStep); 
         
         if (story[nextStep].bg !== story[currentStep].bg) {
             changeScene(nextStep, true); 
@@ -341,12 +315,10 @@ function goNext() {
     }
 }
 
-// 4. ⭐️ 길을 잃지 않는 이전 버튼
 function goPrev() {
     if (isTransitioning) return;
     clearTimeout(autoTimer);
     
-    // historyStack에 저장된 '최근 위치'로 되돌아갑니다.
     if (historyStack.length > 0) {
         let prevStep = historyStack.pop(); 
         
@@ -359,17 +331,21 @@ function goPrev() {
     }
 }
 
-// 장면 전환
 function changeScene(targetStep, isNext) {
     isTransitioning = true;
     hideBubble();
     choices.style.display = "none";
+    
+    // ⭐️ 화면 넘어갈 때 카톡창 잔상 제거
+    const phonePopup = document.getElementById('phone-popup');
+    if (phonePopup) phonePopup.style.display = 'none';
+
     clearTimeout(autoTimer);
     
     let delayBeforeFade = 0; 
 
     if (isNext) {
-        char.classList.add('walk-off');
+        if(char) char.classList.add('walk-off');
         delayBeforeFade = 2700; 
     }
 
@@ -382,7 +358,7 @@ function changeScene(targetStep, isNext) {
             bgPosX = 0; 
             bg.style.left = "0px";
             
-            char.classList.remove('walk-off');
+            if(char) char.classList.remove('walk-off');
             updateStory(); 
             
             fade.classList.remove('fade-out'); 
@@ -394,17 +370,14 @@ function changeScene(targetStep, isNext) {
     }, delayBeforeFade);
 }
 
-// 배경 스크롤 루프
-// ⭐️ [변경됨] 배경 스크롤 루프
 function gameLoop() {
     let current = story[currentStep];
     if (!current) return;
 
-    // 움직이는 배경 목록에 bg6 ~ bg9도 추가합니다!
-    const scrollScenes = ['bg1.png', 'bg6.jpeg', 'bg7.jpeg', 'bg8.jpeg', 'bg9.jpeg'];
+    // ⭐️ 현재 대본에 맞춰 스크롤되는 배경 이름들을 모두 추가했습니다!
+    const scrollScenes = ['autumn2.png', 'winter.png', 'spring.png', 'summer.png'];
     
     if (scrollScenes.includes(current.bg)) {
-        // 배경이 끝에 도달하지 않았을 때만 왼쪽으로 이동
         if (bgPosX > -4000) {
             bgPosX -= walkSpeed;
             bg.style.left = bgPosX + "px";
@@ -413,12 +386,14 @@ function gameLoop() {
 }
 
 function showBubble(text) {
-    bubble.innerText = text;
-    bubble.style.display = "block";
+    if(bubble) {
+        bubble.innerText = text;
+        bubble.style.display = "block";
+    }
 }
 
 function hideBubble() {
-    bubble.style.display = "none";
+    if(bubble) bubble.style.display = "none";
 }
 
 setInterval(gameLoop, 30);
