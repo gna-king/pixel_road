@@ -31,19 +31,19 @@ const dDayScenes = ['autumn2.png', 'winter.png', 'spring.png', 'summer.png'];
 // === 대본 (Story) ===
 // (진아님이 수정하신 대본 원본 그대로 유지했습니다!)
 const story = [
-    { bg: 'dsr.png', text: "때는 2019, 진아는 갓 입사한 신입사원이다.",walkOff: true},
+    { bg: 'dsr.png', title: "2019년도", ext: "때는 2019, 진아는 갓 입사한 신입사원이다.",walkOff: true},
     
     // ⭐️ title 속성을 넣으면 상단에 제목이 뜹니다.
     { bg: 'Gn.png', title: "모바일 그룹", text: "진아: 안녕하십니까!"},
-    { bg: 'hm.png', title: "모바일 그룹", text: "1년 뒤, 2020 형민이가 입사한다."},
-    { bg: 'hm.png', title: "모바일 그룹", text: "진아: 저 잘생긴 오빠 뭐지? 흥미가 생긴다."},
-    { bg: 'hm.png', title: "모바일 그룹", text: "실제로 20년도의 형민이는 잘생겼었다."},
+    { bg: 'hm.png', title: "모바일 그룹", text: "1년 뒤, 2020 형민이가 입사한다.", showHyungmin: true},
+    { bg: 'hm.png', title: "모바일 그룹", text: "진아: 저 잘생긴 오빠 뭐지? 흥미가 생긴다.", showHyungmin: true},
+    { bg: 'hm.png', title: "모바일 그룹", text: "실제로 20년도의 형민이는 잘생겼었다.", showHyungmin: true},
     
     // title 속성이 없으면 제목이 스르륵 사라집니다.
     { bg: 'hm.png', text: "형민: 안녕 선배?", showHyungmin: true},
     { bg: 'hm.png', text: "진아: 어.. 안녕?", showHyungmin: true},
 
-    { bg: 'room1.png', text: "21년 봄과 여름 사이 어디쯤, 진아가 방에 누워있다." },
+    { bg: 'room1.png', title: "21년 봄과 여름 사이", text: "진아가 방에 누워있다." },
     { bg: 'room1.png', text: "진아 : 심심한데 형민오빠 뭐하고 있지? " },
 
     // [선택지 파트]
@@ -67,11 +67,13 @@ const story = [
     { id: 'sleep_again', bg: 'room1.png', text: "진아: 흠.. 아무래도 심심한데 전화 해봐야겠어.", nextId: 'call_oppa' },
 
     // --- [새로운 장면] 영화관 데이트 ---
-    { id: 'go_to_watch_movie', bg: 'mega.png', text: "동탄 북광장 메가박스", walkOff: true},
-    { bg: 'fishzip.png', text: "영화 보고 나와서 술집을 갔다." },
-    { bg: 'fishzip.png', text: "형민: 너 나 좋아하냐? " },
-    { bg: 'fishzip.png', text: "진아: .. (뭐지 이 테토맨은? 테스토스테론이 흘러 넘치다 못해 과한데? ) " },
-    { bg: 'fishzip.png', text: "형민: 난 여자랑 1:1로 안논다. 관심없으면 " },
+    { id: 'go_to_watch_movie', bg: 'mega.png', text: "동탄 북광장 메가박스", walkOff: true, showHyungmin: true},
+    { bg: 'mega.png', text: "형민, 진아 : (어색하게) 안녕!" , showHyungmin: true},
+
+    { bg: 'fishzip.png', text: "영화 보고 나와서 술집을 갔다." , showHyungmin: true},
+    { bg: 'fishzip.png', text: "형민: 너 나 좋아하냐? " , showHyungmin: true},
+    { bg: 'fishzip.png', text: "진아: .. (뭐지 이 테토맨은? 테스토스테론이 흘러 넘치다 못해 과한데? ) " , showHyungmin: true},
+    { bg: 'fishzip.png', text: "형민: 난 여자랑 1:1로 안논다. 관심없으면 " , showHyungmin: true},
 
     // [선택지 파트]
     {
@@ -85,18 +87,18 @@ const story = [
     },
 
     // --- [분기점 1] ---
-    { id: "show_your_mind", bg: 'fishzip.png', text: "(관심없다고 하면 다신 나랑 안놀 거 같아.. 일단 지르자) " },
-    { bg: 'fishzip.png', text: "진아: 나도 오빠 좋아..!" , nextId: 'some_ing'},
+    { id: "show_your_mind", bg: 'fishzip.png', text: "(관심없다고 하면 다신 나랑 안놀 거 같아.. 일단 지르자) " , showHyungmin: true},
+    { bg: 'fishzip.png', text: "진아: 나도 오빠 좋아..!" , nextId: 'some_ing', showHyungmin: true},
 
     // --- [분기점 2]  ---
-    { id: "dog_sound", bg: 'fishzip.png', text: "진아: (뭔 소리야 이 오빠는? )" , nextId: 'show_your_mind'} ,
+    { id: "dog_sound", bg: 'fishzip.png', text: "진아: (뭔 소리야 이 오빠는? )" , nextId: 'show_your_mind', showHyungmin: true} ,
 
-    { id: "some_ing", bg: 'fishzip.png', text: "이때부터 썸을 탔다." },
-    { bg:  'dongtan_lake.png', text: "2021.10.23 동탄호수공원" },
-    { bg:  'dongtan_lake.png', text: "진아: (벌써 호수만 5바퀴째야, 이 오빠 고백할건가?)" },
-    { bg:  'dongtan_lake.png', text: "진아: 오빠 뭐 할 말 있어?" },
-    { bg:  'dongtan_lake.png', text: "한참을 뜸을 들인다." },
-    { bg:  'dongtan_lake.png', text: "형민: 우리 3개월만 만나볼래?" },
+    { id: "some_ing", bg: 'fishzip.png', text: "이때부터 썸을 탔다." , showHyungmin: true},
+    { bg:  'dongtan_lake.png', text: "2021.10.23 동탄호수공원" , showHyungmin: true},
+    { bg:  'dongtan_lake.png', text: "진아: (벌써 호수만 5바퀴째야, 이 오빠 고백할건가?)" , showHyungmin: true},
+    { bg:  'dongtan_lake.png', text: "진아: 오빠 뭐 할 말 있어?" , showHyungmin: true},
+    { bg:  'dongtan_lake.png', text: "한참을 뜸을 들인다." , showHyungmin: true},
+    { bg:  'dongtan_lake.png', text: "형민: 우리 3개월만 만나볼래?" , showHyungmin: true},
 
     // [선택지 파트]
     {
@@ -111,15 +113,15 @@ const story = [
 
     // --- [분기점 1] ---
     { id: "show_your_mind2", bg: 'dongtan_lake.png', text: "(이게 말이야 방구야) " },
-    { bg: 'dongtan_lake.png', text: "진아: 다시 고백해!!!" },
-    { bg:  'dongtan_lake.png', text: "한참을 뜸을 들인다." },
-    { bg: 'dongtan_lake.png', text: "형민: 우리 만나보자" },
-    { bg: 'dongtan_lake.png', text: "진아: 좋아!" , nextId: 'dating'},
+    { bg: 'dongtan_lake.png', text: "진아: 다시 고백해!!!" , showHyungmin: true},
+    { bg:  'dongtan_lake.png', text: "한참을 뜸을 들인다." , showHyungmin: true},
+    { bg: 'dongtan_lake.png', text: "형민: 우리 만나보자" , showHyungmin: true},
+    { bg: 'dongtan_lake.png', text: "진아: 좋아!" , nextId: 'dating', showHyungmin: true},
 
     // --- [분기점 2]  ---
-    { id: "dog_sound2", bg: 'dongtan_lake.png', text: "진아: 뭐라고?" , nextId: 'show_your_mind2'} ,
+    { id: "dog_sound2", bg: 'dongtan_lake.png', text: "진아: 뭐라고?" , nextId: 'show_your_mind2', showHyungmin: true} ,
 
-    { id: "dating", bg: 'dongtan_lake.png', text: "그렇게 우리는 사귀게 되었다." },
+    { id: "dating", bg: 'dongtan_lake.png', text: "그렇게 우리는 사귀게 되었다.", showHyungmin: true },
 
     // ⭐️ [몽타주 파트] 사계절 자동 전환 및 D-day 연출
     {
@@ -130,9 +132,9 @@ const story = [
         nextId: "여울"
     },
 
-    { id : '여울', bg: '여울.png', title: '25년 봄과 여름 사이',text: "진아: 오빠 같이 살자."},
-    { bg: '여울.png', text: "형민: 나는 아직 잘 모르겠어.."},
-    { bg: '여울.png', text: "진아: 나 그럼 결혼하러 갈게..!",walkOff: true},
+    { id : '여울', bg: '여울.png', title: '25년 봄과 여름 사이',text: "진아: 오빠 같이 살자.", showHyungmin: true},
+    { bg: '여울.png', text: "형민: 나는 아직 잘 모르겠어..", showHyungmin: true},
+    { bg: '여울.png', text: "진아: 나 그럼 결혼하러 갈게..!",walkOff: true, showHyungmin: true},
     // ⭐️ [몽타주 파트] 사계절 자동 전환 및 D-day 연출
     
     {id: "sad_time",bg : "rainy_day.png", text: "하 ,, 오빠 없으니 삶이 너무 무료하다.", nextId: "messenger_part",walkOff: true},
@@ -174,13 +176,13 @@ const story = [
     { id: "blocking", bg: 'room2.png', text: "진아: 차단하자."} ,
     { bg: 'room2.png', text: "진아: 흠.. 그래도 왜 연락했는지 물어나 볼까.." , nextId: 'call_him'},
 
-    { id: "izakaya", bg: 'izakaya.png', text: "영천동 어딘가 이자카야" },
-    { bg:  'izakaya.png', text: "형민: 너가 없는 시간이 힘들었어." },
-    { bg:  'izakaya.png', text: "진아: 나도 오빠 없으니 인생이 너무 재미가 없었어." },
-    { bg:  'izakaya.png', text: "형민: 잘 할게 (잘 하자?)" },
+    { id: "izakaya", bg: 'izakaya.png', title: '25년 겨울',text: "영천동 어딘가 이자카야" , showHyungmin: true},
+    { bg:  'izakaya.png', text: "형민: 너가 없는 시간이 힘들었어." , showHyungmin: true},
+    { bg:  'izakaya.png', text: "진아: 나도 오빠 없으니 인생이 너무 재미가 없었어." , showHyungmin: true},
+    { bg:  'izakaya.png', text: "형민: 잘 할게 (잘 하자?)" , showHyungmin: true},
 
-    { bg:  'proposal.png', text: "형민: 진아야 결혼하자!" },
-    { bg:  'proposal.png', text: "진아: 좋아!" },
+    { bg:  'proposal.png', text: "형민: 진아야 결혼하자!" , showHyungmin: true},
+    { bg:  'proposal.png', text: "진아: 좋아!" , showHyungmin: true},
 
     
     
