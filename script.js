@@ -395,5 +395,6 @@ function showBubble(text) {
 function hideBubble() {
     if(bubble) bubble.style.display = "none";
 }
-
+// ⭐️ 이 한 줄을 맨 아래에 추가하세요! (말풍선을 클릭하면 goNext 함수가 실행됩니다)
+bubble.addEventListener('click', goNext);
 setInterval(gameLoop, 30);
