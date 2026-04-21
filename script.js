@@ -31,7 +31,7 @@ const dDayScenes = ['autumn2.png', 'winter.png', 'spring.png', 'summer.png'];
 // === 대본 (Story) ===
 // (진아님이 수정하신 대본 원본 그대로 유지했습니다!)
 const story = [
-    { bg: 'dsr.png', text: "때는 2019, 진아는 갓 입사한 신입사원이다."},
+    { bg: 'dsr.png', text: "때는 2019, 진아는 갓 입사한 신입사원이다.",walkOff: true},
     
     // ⭐️ title 속성을 넣으면 상단에 제목이 뜹니다.
     { bg: 'Gn.png', title: "모바일 그룹", text: "진아: 안녕하십니까!"},
@@ -67,7 +67,7 @@ const story = [
     { id: 'sleep_again', bg: 'room1.png', text: "진아: 흠.. 아무래도 심심한데 전화 해봐야겠어.", nextId: 'call_oppa' },
 
     // --- [새로운 장면] 영화관 데이트 ---
-    { id: 'go_to_watch_movie', bg: 'mega.png', text: "동탄 북광장 메가박스" },
+    { id: 'go_to_watch_movie', bg: 'mega.png', text: "동탄 북광장 메가박스", walkOff: true},
     { bg: 'fishzip.png', text: "영화 보고 나와서 술집을 갔다." },
     { bg: 'fishzip.png', text: "형민: 너 나 좋아하냐? " },
     { bg: 'fishzip.png', text: "진아: .. (뭐지 이 테토맨은? 테스토스테론이 흘러 넘치다 못해 과한데? ) " },
@@ -125,13 +125,14 @@ const story = [
     {
         id: "season_montage",
         type: "montage",
+        walkOff: true,
         text: "우리의 시간은 쉼 없이 흘러...",
         nextId: "여울"
     },
 
-    { id : '여', bg: '여울.png', text: "진아: 오빠 같이 살자."},
+    { id : '여울', bg: '여울.png', text: "진아: 오빠 같이 살자."},
     { bg: '여울.png', text: "형민: 나는 아직 잘 모르겠어.."},
-    { bg: '여울.png', text: "진아: 나 그럼 결혼하러 갈게..!"},
+    { bg: '여울.png', text: "진아: 나 그럼 결혼하러 갈게..!",walkOff: true},
     // ⭐️ [몽타주 파트] 사계절 자동 전환 및 D-day 연출
     {
         id: "sad_time",
@@ -476,13 +477,18 @@ function changeScene(targetStep, isNext) {
 
     clearTimeout(autoTimer);
 
-    if (isNext) {
+    // ⭐️ 현재 재생 중인 대본 정보 가져오기
+    let current = story[currentStep];
+
+    // ⭐️ 앞으로 넘어가는데, 대본에 'walkOff: true'라고 적혀있을 때만 걸어나감!
+    if (isNext && current.walkOff) {
         if(char) char.classList.add('walk-off');
         walkOffTimer = setTimeout(() => {
             walkOffTimer = null;
             executeFade(targetStep);
         }, 2700);
     } else {
+        // 꼬리표가 없거나 뒤로 가기일 때는 기다림 없이 바로 화면 암전!
         executeFade(targetStep);
     }
 }
