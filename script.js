@@ -436,7 +436,7 @@ function gameLoop() {
     let current = story[currentStep];
     if (!current) return;
 
-    const scrollScenes = ['dsr.png', 'Gn.png', 'dongtan_lake.png', ...dDayScenes];
+    const scrollScenes = [ ...dDayScenes];
 
     if (scrollScenes.includes(current.bg) || current.type === 'montage') {
         if (bgPosX > -4000) {
