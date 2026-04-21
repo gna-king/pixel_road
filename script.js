@@ -32,20 +32,20 @@ const story = [
     
     // ⭐️ title 속성을 넣으면 상단에 제목이 뜹니다.
     { bg: 'Gn.png', title: "모바일 그룹", text: "진아: 안녕하십니까!"},
-    { bg: 'Gn.png', title: "모바일 그룹", text: "1년 뒤, 2020 형민이가 입사한다."},
-    { bg: 'Gn.png', title: "모바일 그룹", text: "진아: 저 잘생긴 오빠 뭐지? 흥미가 생긴다."},
-    { bg: 'Gn.png', title: "모바일 그룹", text: "실제로 20년도의 형민이는 잘생겼었다."},
+    { bg: 'hm.png', title: "모바일 그룹", text: "1년 뒤, 2020 형민이가 입사한다."},
+    { bg: 'hm.png', title: "모바일 그룹", text: "진아: 저 잘생긴 오빠 뭐지? 흥미가 생긴다."},
+    { bg: 'hm.png', title: "모바일 그룹", text: "실제로 20년도의 형민이는 잘생겼었다."},
     
     // title 속성이 없으면 제목이 스르륵 사라집니다.
-    { bg: 'Gn.png', text: "형민: 안녕 선배?", showHyungmin: true},
-    { bg: 'Gn.png', text: "진아: 어.. 안녕?", showHyungmin: true},
+    { bg: 'hm.png', text: "형민: 안녕 선배?", showHyungmin: true},
+    { bg: 'hm.png', text: "진아: 어.. 안녕?", showHyungmin: true},
 
-    { bg: 'room.png', text: "21년 봄과 여름 사이 어디쯤, 진아가 방에 누워있다." },
-    { bg: 'room.png', text: "진아 : 심심한데 형민오빠 뭐하고 있지? " },
+    { bg: 'room1.png', text: "21년 봄과 여름 사이 어디쯤, 진아가 방에 누워있다." },
+    { bg: 'room1.png', text: "진아 : 심심한데 형민오빠 뭐하고 있지? " },
 
     // [선택지 파트]
     {
-        bg: 'room.png',
+        bg: 'room1.png',
         type: 'choice',
         question: "어떻게 할까?",
         options: [
@@ -55,13 +55,13 @@ const story = [
     },
 
     // --- [분기점 1] 전화건다 ---
-    { id: 'call_oppa', bg: 'room.png', text: "뚜루루루... 오빠 바빠?" },
-    { bg: 'room.png', text: "형민: 아니, 왜?" },
-    { bg: 'room.png', text: "진아: 나랑 놀래? (두근두근)"},
-    { bg: 'room.png', text: "형민: 좋아!" , nextId: 'go_to_watch_movie' },
+    { id: 'call_oppa', bg: 'room1.png', text: "뚜루루루... 오빠 바빠?" },
+    { bg: 'room1.png', text: "형민: 아니, 왜?" },
+    { bg: 'room1.png', text: "진아: 나랑 놀래? (두근두근)"},
+    { bg: 'room1.png', text: "형민: 좋아!" , nextId: 'go_to_watch_movie' },
 
     // --- [분기점 2] 다시 눕는다 ---
-    { id: 'sleep_again', bg: 'room.png', text: "진아: 흠.. 아무래도 심심한데 전화 해봐야겠어.", nextId: 'call_oppa' },
+    { id: 'sleep_again', bg: 'room1.png', text: "진아: 흠.. 아무래도 심심한데 전화 해봐야겠어.", nextId: 'call_oppa' },
 
     // --- [새로운 장면] 영화관 데이트 ---
     { id: 'go_to_watch_movie', bg: 'mega.png', text: "동탄 북광장 메가박스" },
