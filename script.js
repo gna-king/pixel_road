@@ -134,12 +134,8 @@ const story = [
     { bg: '여울.png', text: "형민: 나는 아직 잘 모르겠어.."},
     { bg: '여울.png', text: "진아: 나 그럼 결혼하러 갈게..!",walkOff: true},
     // ⭐️ [몽타주 파트] 사계절 자동 전환 및 D-day 연출
-    {
-        id: "sad_time",
-        type: "montage",
-        text: "하 ,, 오빠 없으니 삶이 너무 무료하다.",
-        nextId: "messenger_part"
-    },
+    
+    {id: "sad_time",bg : "rainy_day.png", text: "하 ,, 오빠 없으니 삶이 너무 무료하다.", nextId: "messenger_part",walkOff: true},
     
     // ⭐️ 카톡 연출 파트
     {
@@ -270,23 +266,30 @@ function updateStory() {
         if (dayCounter) dayCounter.style.display = 'block';
         if (char) char.classList.add('walking');
         // ⭐️ 이전/다음 버튼을 숨기지 않음
-
+// ⭐️ 누락되었던 대화창(말풍선) 띄우기!
+        if (current.text) showBubble(current.text);
+        else hideBubble();
         let sceneIndex = 0;
         currentDay = 1;
-
-        bg.style.backgroundImage = `url('${dDayScenes[sceneIndex]}')`;
+// 대본에 bg를 안 썼으면 사계절 이미지, 썼으면 쓴 이미지 사용
+        if (!current.bg) {
+            bg.style.backgroundImage = `url('${dDayScenes[sceneIndex]}')`;
+        } else {
+            bg.style.backgroundImage = `url('${current.bg}')`;
+        }
 
         dayTimer = setInterval(() => {
             // 1️⃣ 한 번에 며칠씩 올라가게 할지 결정 (현재: 5일씩 팍팍)
             // ⭐️ 1씩 차근차근 올라가게 하고 싶다면 currentDay += 1; 로 바꾸세요!
             currentDay += 5; 
             if (dayCounter) dayCounter.innerText = `D+${currentDay}`;
-
-// ⭐️ 수정된 부분: 150일, 300일, 450일을 "넘어갈 때마다" 배경을 바꿉니다!
-            if (currentDay >= (sceneIndex + 1) * 450 && sceneIndex < dDayScenes.length - 1) {
+// 배경이 명시되지 않았을 때만 계절이 바뀝니다
+            if (!current.bg && currentDay >= (sceneIndex + 1) * 450 && sceneIndex < dDayScenes.length - 1) {
                 sceneIndex++;
                 bg.style.backgroundImage = `url('${dDayScenes[sceneIndex]}')`;
             }
+// ⭐️ 수정된 부분: 150일, 300일, 450일을 "넘어갈 때마다" 배경을 바꿉니다!
+
 
             // 600일이 되면 자동으로 넘김 (기다리기 싫으면 다음 버튼 누르면 됨)
             if (currentDay >= 1815) {
@@ -412,6 +415,7 @@ function goNext() {
     }
     
     clearTimeout(autoTimer);
+    clearInterval(dayTimer); // ⭐️ [수정] 스킵 시 타이머 확실히 종료!
     let current = story[currentStep];
 
     // ⭐️ 2. 카톡 장면 서브 스텝 이동
@@ -443,6 +447,7 @@ function goNext() {
 function goPrev() {
     if (isTransitioning) return;
     clearTimeout(autoTimer);
+    clearInterval(dayTimer); // ⭐️ [수정] 이전으로 갈 때도 타이머 종료!
     let current = story[currentStep];
 
     // ⭐️ 1. 카톡 장면 서브 스텝 이전 이동
@@ -476,7 +481,7 @@ function changeScene(targetStep, isNext) {
     if (phonePopup) phonePopup.style.display = 'none';
 
     clearTimeout(autoTimer);
-
+    clearInterval(dayTimer); // ⭐️ [수정] 화면 전환 중 타이머 작동 완벽 차단!
     // ⭐️ 현재 재생 중인 대본 정보 가져오기
     let current = story[currentStep];
 
