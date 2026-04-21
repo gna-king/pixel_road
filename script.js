@@ -21,13 +21,13 @@ let historyStack = [];
 
 const story = [
     { bg: 'dsr.png', text: "때는 2019, 진아는 갓 입사한 신입사원이다."},
-    { bg: 'Gn.png', text: "진아: 안녕하십니까!"},
+    { bg: 'Gn.png', title: "모바일그룹", text: "진아: 안녕하십니까!"},
     
-    { bg: 'Gn.png', text: "1년 뒤, 2020 형민이가 입사한다."},
-    { bg: 'Gn.png', text: "진아: 저 잘생긴 오빠 뭐지? 흥미가 생긴다."},
-    { bg: 'Gn.png', text: "실제로 20년도의 형민이는 잘생겼었다."},
-    { bg: 'Gn.png', text: "형민: 안녕 선배?", showHyungmin: true},
-    { bg: 'Gn.png', text: "진아: 어.. 안녕?", showHyungmin: true},
+    { bg: 'hm.png', title: "모바일그룹", text: "1년 뒤, 2020 형민이가 입사한다."},
+    { bg: 'hm.png', title: "모바일그룹", text: "진아: 저 잘생긴 오빠 뭐지? 흥미가 생긴다."},
+    { bg: 'hm.png', title: "모바일그룹", text: "실제로 20년도의 형민이는 잘생겼었다."},
+    { bg: 'hm.png', title: "모바일그룹", text: "형민: 안녕 선배?", showHyungmin: true},
+    { bg: 'hm.png', title: "모바일그룹", text: "진아: 어.. 안녕?", showHyungmin: true},
 
     { bg: 'room1.png', text: "21년 봄과 여름 사이 어디쯤, 진아가 방에 누워있다." },
     { bg: 'room1.png', text: "진아 : 심심한데 형민오빠 뭐하고 있지? " },
@@ -104,10 +104,18 @@ const story = [
 
     // --- [분기점 2]  ---
     { id: "dog_sound2", bg: 'dongtan_lake.png', text: "진아: 뭐라고?" , nextId: 'show_your_mind2'} ,
-
-    // ⭐️ 중복 아이디 에러 수정 완료!
     {  id: "dating", bg: 'dongtan_lake.png', text: "그렇게 우리는 사귀게 되었다." },      
 
+// ⭐️ 사계절이 지나가는 몽타주 연출 추가
+    { 
+        id: "season_montage", 
+        type: "montage", 
+        text: "우리는 즐겁고 치열하게 맞춰갔다...", 
+        nextId: "final_quiz_start" 
+    },    
+
+
+    
     // ⭐️ 카톡 연출 파트
     { 
         bg: 'room2.png', 
@@ -161,6 +169,21 @@ function updateStory() {
         }
     }
 
+    // =========================================================
+    // ⭐️ [새로 추가] 상단 챕터 제목 띄우기
+    // =========================================================
+    const sceneTitle = document.getElementById('scene-title');
+    if (sceneTitle) {
+        // 대본에 'title'이 적혀있으면 그 글씨를 화면에 띄웁니다.
+        if (current.title) {
+            sceneTitle.innerText = current.title;
+            sceneTitle.style.display = 'block';
+        } else {
+            // 대본에 'title'이 없으면 제목을 숨깁니다.
+            sceneTitle.style.display = 'none';
+        }
+    }
+    
     // 갤러리 사진 처리
     const photoGallery = document.getElementById('photo-gallery');
     if (photoGallery) {
