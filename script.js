@@ -126,21 +126,64 @@ const story = [
         id: "season_montage",
         type: "montage",
         text: "우리의 시간은 쉼 없이 흘러...",
-        nextId: "messenger_part"
+        nextId: "여울"
     },
 
+    { id : '여', bg: '여울.png', text: "진아: 오빠 같이 살자."},
+    { bg: '여울.png', text: "형민: 나는 아직 잘 모르겠어.."},
+    { bg: '여울.png', text: "진아: 나 그럼 결혼하러 갈게..!"},
+    // ⭐️ [몽타주 파트] 사계절 자동 전환 및 D-day 연출
+    {
+        id: "sad_time",
+        type: "montage",
+        text: "하 ,, 오빠 없으니 삶이 너무 무료하다.",
+        nextId: "messenger_part"
+    },
+    
     // ⭐️ 카톡 연출 파트
     {
         id: "messenger_part",
         bg: 'room2.png',
         type: 'messenger',
+        title: '25년 겨울',
         messages: [
             "자니?",
             "자는구나...",
             "잘 자"
         ]
     },
+    // title 속성이 없으면 제목이 스르륵 사라집니다.
+    { bg: 'room2.png', text: "진아: 이 오빠 술 마셨네"},
+    { bg: 'room2.png', text: "진아: 흠.. 근데 왜 연락했지?"},
 
+    // [선택지 파트]
+    {
+        bg: 'room2.png',
+        type: 'choice',
+        question: "어떻게 할까?",
+        options: [
+            { text: "궁금하니 연락해본다.", target: "call_him" },
+            { text: "차단하기", target: "blocking" }
+        ]
+    },
+
+    // --- [분기점 1] ---
+    { id: "call_him", bg: 'room2.png', text: " (타닥타닥) 왜 연락했어? " },
+    { bg: 'room2.png', text: "형민: (문자) 만나서 얘기하자 "},
+    
+    // --- [분기점 2]  ---
+    { id: "blocking", bg: 'room2.png', text: "진아: 차단하자."} ,
+    { bg: 'room2.png', text: "진아: 흠.. 그래도 왜 연락했는지 물어나 볼까.." , nextId: 'call_him'},
+
+    { id: "izakaya", bg: 'izakaya.png', text: "영천동 어딘가 이자카야" },
+    { bg:  'izakaya.png', text: "형민: 너가 없는 시간이 힘들었어." },
+    { bg:  'izakaya.png', text: "진아: 나도 오빠 없으니 인생이 너무 재미가 없었어." },
+    
+    { bg:  'proposal.png', text: "형민: 진아야 결혼하자!" },
+    { bg:  'proposal.png', text: "진아: 좋아!" },
+
+    
+    
     // [마지막 퀴즈 파트]
     {
         id: 'final_quiz_start',
