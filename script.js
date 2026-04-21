@@ -35,7 +35,7 @@ const story = [
     
     // ⭐️ title 속성을 넣으면 상단에 제목이 뜹니다.
     { bg: 'Gn.png', title: "모바일 그룹", text: "진아: 안녕하십니까!"},
-    { bg: 'hm.png', title: "모바일 그룹", text: "1년 뒤, 2020 형민이가 입사한다.", showHyungmin: true},
+    { bg: 'hm.png', title: "모바일 그룹", text: "1년 뒤, 2020 형민이가 입사한다."},
     { bg: 'hm.png', title: "모바일 그룹", text: "진아: 저 잘생긴 오빠 뭐지? 흥미가 생긴다.", showHyungmin: true},
     { bg: 'hm.png', title: "모바일 그룹", text: "실제로 20년도의 형민이는 잘생겼었다.", showHyungmin: true},
     
