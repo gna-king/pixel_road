@@ -153,9 +153,9 @@ body, html {
 .photo-frame.show { opacity: 1; }
 
 /* 각 사진마다 위치와 기울기를 다르게 설정 */
-#photo1 { top: 15%; left: 10%; transform: rotate(-5deg); background-image: url('pic1.jpeg'); }
-#photo2 { top: 25%; left: 35%; transform: rotate(4deg); background-image: url('pic2.jpeg'); }
-#photo3 { top: 10%; left: 60%; transform: rotate(-3deg); background-image: url('pic3.jpeg'); }
+#photo1 { top: 15%; left: 10%; transform: rotate(-5deg); background-image: url('room1.png'); }
+#photo2 { top: 25%; left: 35%; transform: rotate(4deg); background-image: url('room2.png'); }
+#photo3 { top: 10%; left: 60%; transform: rotate(-3deg); background-image: url('winter.png'); }
 /* --- ⭐️ 새로 추가: 카카오톡 팝업 스타일 --- */
 #phone-popup {
     position: absolute;
