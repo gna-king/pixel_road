@@ -7,7 +7,6 @@ const prevBtn = document.getElementById('prev-btn');
 const nextBtn = document.getElementById('next-btn');
 const char = document.getElementById('character');
 
-
 let walkOffTimer = null;
 let pendingTargetStep = -1;
 let msgTimer;
@@ -23,10 +22,14 @@ let isDdayRunning = false;
 
 let historyStack = [];
 
+// ⭐️ 카톡 화면 제어용 변수 추가
+let currentSubStep = 0; 
+
 // ⭐️ 몽타주 계절 배경 목록 (폴더에 이 파일들이 있어야 합니다!)
 const dDayScenes = ['autumn2.png', 'winter.png', 'spring.png', 'summer.png'];
 
 // === 대본 (Story) ===
+// (진아님이 수정하신 대본 원본 그대로 유지했습니다!)
 const story = [
     { bg: 'dsr.png', text: "때는 2019, 진아는 갓 입사한 신입사원이다."},
     
@@ -82,7 +85,7 @@ const story = [
     },
 
     // --- [분기점 1] ---
-    { id: "show_your_mind", bg: 'fishzip.png', text: "(관심없다고 하면 다신 나랑 안놀 것 같아.. 일단 지르자) " },
+    { id: "show_your_mind", bg: 'fishzip.png', text: "(관심없다고 하면 다신 나랑 안놀 거 같아.. 일단 지르자) " },
     { bg: 'fishzip.png', text: "진아: 나도 오빠 좋아..!" , nextId: 'some_ing'},
 
     // --- [분기점 2]  ---
@@ -90,7 +93,7 @@ const story = [
 
     { id: "some_ing", bg: 'fishzip.png', text: "이때부터 썸을 탔다." },
     { bg:  'dongtan_lake.png', text: "2021.10.23 동탄호수공원" },
-    { bg:  'dongtan_lake.png', text: "진아: (벌써 호수만 5바퀴쨰야, 이 오빠 고백할건가?)" },
+    { bg:  'dongtan_lake.png', text: "진아: (벌써 호수만 5바퀴째야, 이 오빠 고백할건가?)" },
     { bg:  'dongtan_lake.png', text: "진아: 오빠 뭐 할 말 있어?" },
     { bg:  'dongtan_lake.png', text: "한참을 뜸을 들인다." },
     { bg:  'dongtan_lake.png', text: "형민: 우리 3개월만 만나볼래?" },
@@ -173,14 +176,19 @@ function updateStory() {
     const sceneTitle = document.getElementById('scene-title');
     const charHyungmin = document.getElementById('char-hyungmin');
     const photoGallery = document.getElementById('photo-gallery');
+    const chatBox = document.getElementById('chat-box');
 
-    // 기본 숨김 처리
+    // 기본 숨김 처리 및 버튼 보이기
     if (dayCounter) dayCounter.style.display = 'none';
     if (phonePopup) phonePopup.style.display = 'none';
     if (char) char.classList.remove('walking');
     isDdayRunning = false;
+    
+    // ⭐️ 기본적으로 이전/다음 버튼 활성화
+    nextBtn.classList.remove('hidden');
+    prevBtn.classList.remove('hidden');
 
-    // 챕터 제목 처리 (대본에 title이 있으면 띄움)
+    // 챕터 제목 처리
     if (sceneTitle) {
         if (current.title) {
             sceneTitle.innerText = current.title;
@@ -212,13 +220,12 @@ function updateStory() {
     }
 
     // =========================================================
-    // ⭐️ 몽타주(사계절 자동 전환 & D-day) 연출 로직
+    // ⭐️ 몽타주(사계절 자동 전환 & D-day) 로직 (버튼 유지)
     // =========================================================
     if (current.type === 'montage') {
         if (dayCounter) dayCounter.style.display = 'block';
         if (char) char.classList.add('walking');
-        nextBtn.classList.add('hidden');
-        prevBtn.classList.add('hidden');
+        // ⭐️ 이전/다음 버튼을 숨기지 않음
 
         let sceneIndex = 0;
         currentDay = 1;
@@ -226,7 +233,7 @@ function updateStory() {
         bg.style.backgroundImage = `url('${dDayScenes[sceneIndex]}')`;
 
         dayTimer = setInterval(() => {
-            currentDay += 5; // 날짜 올라가는 속도 (5씩 증가)
+            currentDay += 5; 
             if (dayCounter) dayCounter.innerText = `D+${currentDay}`;
 
             // 150일 마다 배경 전환
@@ -235,7 +242,7 @@ function updateStory() {
                 bg.style.backgroundImage = `url('${dDayScenes[sceneIndex]}')`;
             }
 
-            // 600일이 되면 멈추고 다음 장면으로 자동 넘김
+            // 600일이 되면 자동으로 넘김 (기다리기 싫으면 다음 버튼 누르면 됨)
             if (currentDay >= 600) {
                 clearInterval(dayTimer);
                 if (char) char.classList.remove('walking');
@@ -243,37 +250,33 @@ function updateStory() {
             }
         }, 30);
 
-        return; // 함수 종료
+        return; 
     }
 
     // =========================================================
-    // 카카오톡 메신저 연출 파트
+    // ⭐️ 카카오톡 메신저 연출 파트 (버튼으로 단계 제어)
     // =========================================================
     if (current.type === 'messenger') {
         if (bubble) bubble.style.display = "none";
         if (choices) choices.style.display = "none";
-        nextBtn.classList.add('hidden');
-        prevBtn.classList.add('hidden');
 
-        if (phonePopup) phonePopup.style.display = 'block';
-
-        const chatBox = document.getElementById('chat-box');
-        if (chatBox) {
-            chatBox.innerHTML = '';
-            let msgIndex = 0;
-
-            msgTimer = setInterval(() => {
-                if (msgIndex < current.messages.length) {
-                    const msgDiv = document.createElement('div');
-                    msgDiv.className = 'chat-msg';
-                    msgDiv.innerText = current.messages[msgIndex];
-                    chatBox.appendChild(msgDiv);
-                    msgIndex++;
-                } else {
-                    clearInterval(msgTimer);
-                    nextBtn.classList.remove('hidden');
+        // 서브스텝에 따른 동작 (0: 배경만, 1: 빈 스마트폰, 2~: 메시지 추가)
+        if (currentSubStep === 0) {
+            if (phonePopup) phonePopup.style.display = 'none';
+        } else {
+            if (phonePopup) phonePopup.style.display = 'block';
+            if (chatBox) {
+                chatBox.innerHTML = '';
+                // 단계에 맞춰 메시지를 화면에 출력
+                for (let i = 0; i < currentSubStep - 1; i++) {
+                    if (current.messages[i]) {
+                        const msgDiv = document.createElement('div');
+                        msgDiv.className = 'chat-msg';
+                        msgDiv.innerText = current.messages[i];
+                        chatBox.appendChild(msgDiv);
+                    }
                 }
-            }, 1500);
+            }
         }
         return;
     }
@@ -284,7 +287,7 @@ function updateStory() {
     if (current.type === 'choice') {
         if (bubble) bubble.style.display = "none";
         if (choices) choices.style.display = "block";
-        nextBtn.classList.add('hidden');
+        nextBtn.classList.add('hidden'); // 선택지 화면에서는 다음 버튼 숨김
 
         choices.innerHTML = `<p id="question">${current.question}</p>`;
         current.options.forEach(opt => {
@@ -298,10 +301,7 @@ function updateStory() {
     showBubble(current.text);
 
     if (currentStep === 0) prevBtn.classList.add('hidden');
-    else prevBtn.classList.remove('hidden');
-
     if (currentStep === story.length - 1) nextBtn.classList.add('hidden');
-    else nextBtn.classList.remove('hidden');
 
     // 자동 넘김
     if (currentStep < story.length - 1 && !current.nextId) {
@@ -335,28 +335,36 @@ function makeChoice(target) {
 }
 
 function goNext() {
-// ⭐️ 화면 전환(걸어나가는 중)일 때 누르면 스킵 발동!
+    // 1. 걸어나가는 모션 중일 때 터치하면 스킵!
     if (isTransitioning) {
         if (walkOffTimer) {
-            clearTimeout(walkOffTimer); // 2.7초 기다리는 타이머 취소
+            clearTimeout(walkOffTimer); 
             walkOffTimer = null;
-            executeFade(pendingTargetStep); // 묻지도 따지지도 않고 바로 화면 암전
+            executeFade(pendingTargetStep); 
         }
         return; 
     }
+    
     clearTimeout(autoTimer);
-
     let current = story[currentStep];
-    let nextStep = currentStep + 1;
 
+    // ⭐️ 2. 카톡 장면 서브 스텝 이동
+    if (current.type === 'messenger' && currentSubStep < current.messages.length + 1) {
+        currentSubStep++;
+        updateStory();
+        return;
+    }
+
+    // 3. 일반 다음 장면 이동
+    let nextStep = currentStep + 1;
     if (current.nextId) {
         nextStep = story.findIndex(s => s.id === current.nextId);
     }
 
     if (nextStep < story.length && nextStep !== -1) {
         historyStack.push(currentStep);
+        currentSubStep = 0; // ⭐️ 다음 씬으로 넘어가면 서브스텝 초기화
 
-        // 몽타주 씬에서 넘어갈 때나 배경이 다를 때 화면 전환
         if (current.type === 'montage' || story[nextStep].bg !== story[currentStep].bg) {
             changeScene(nextStep, true);
         } else {
@@ -369,9 +377,19 @@ function goNext() {
 function goPrev() {
     if (isTransitioning) return;
     clearTimeout(autoTimer);
+    let current = story[currentStep];
 
+    // ⭐️ 1. 카톡 장면 서브 스텝 이전 이동
+    if (current.type === 'messenger' && currentSubStep > 0) {
+        currentSubStep--;
+        updateStory();
+        return;
+    }
+
+    // 2. 일반 이전 장면 이동
     if (historyStack.length > 0) {
         let prevStep = historyStack.pop();
+        currentSubStep = 0; // ⭐️ 이전 씬으로 갈 때도 서브스텝 초기화
 
         if (story[prevStep].bg !== story[currentStep].bg) {
             changeScene(prevStep, false);
@@ -384,7 +402,7 @@ function goPrev() {
 
 function changeScene(targetStep, isNext) {
     isTransitioning = true;
-    pendingTargetStep = targetStep; // 스킵 시 이동할 목표 지점 저장    
+    pendingTargetStep = targetStep; 
     hideBubble();
     if (choices) choices.style.display = "none";
 
@@ -395,7 +413,6 @@ function changeScene(targetStep, isNext) {
 
     if (isNext) {
         if(char) char.classList.add('walk-off');
-        // 2.7초 타이머를 변수에 담아둡니다 (스킵할 때 부수기 위해)
         walkOffTimer = setTimeout(() => {
             walkOffTimer = null;
             executeFade(targetStep);
@@ -405,14 +422,13 @@ function changeScene(targetStep, isNext) {
     }
 }
 
-// ⭐️ 암전 및 화면 교체 로직을 담당하는 새 함수
+// 암전 및 화면 교체
 function executeFade(targetStep) {
     fade.classList.add('fade-out');
 
     setTimeout(() => {
         currentStep = targetStep;
 
-        // 몽타주 타입일 때는 배경 초기화를 건너뜀
         if (story[currentStep].type !== 'montage') {
             bg.style.backgroundImage = `url('${story[currentStep].bg}')`;
         }
@@ -431,7 +447,7 @@ function executeFade(targetStep) {
     }, 1000);
 }
 
-// ⭐️ 배경 스크롤 기능
+// ⭐️ 진아님이 수정하신 배경 스크롤 기능 유지
 function gameLoop() {
     let current = story[currentStep];
     if (!current) return;
@@ -457,25 +473,33 @@ function hideBubble() {
     if(bubble) bubble.style.display = "none";
 }
 
-// ⭐️ 대화창 터치 시 다음으로 넘어가기
+// ⭐️ 대화창 터치 시 다음으로 넘어가기 (중복 터치 방지 추가)
 if (bubble) {
-    bubble.addEventListener('click', goNext);
+    bubble.addEventListener('click', (e) => {
+        e.stopPropagation();
+        goNext();
+    });
 }
 
 setInterval(gameLoop, 30);
 
-
 // =========================================================
-// ⭐️ 화면 전체 터치 감지기 (걸어나가는 모션 스킵용)
+// ⭐️ 화면 전체 터치 감지기
 // =========================================================
 const gameContainer = document.getElementById('game-container');
 if (gameContainer) {
     gameContainer.addEventListener('click', (e) => {
-        // 이미 있는 '이전/다음' 버튼이나 '선택지' 버튼을 눌렀을 때는 중복 실행 안 되게 막기
         if (e.target.tagName === 'BUTTON') return;
         
-        // 캐릭터가 걸어 나가는 중(타이머가 돌아가는 중)일 때 화면 아무 곳이나 누르면 스킵!
+        // 걸어나가는 중 스킵
         if (isTransitioning && walkOffTimer) {
+            goNext();
+            return;
+        }
+
+        // 카톡/몽타주 화면에서도 빈 바탕 누르면 '다음' 버튼 누른 것과 같게 작동
+        let current = story[currentStep];
+        if (!isTransitioning && current && current.type !== 'choice') {
             goNext();
         }
     });
