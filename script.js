@@ -12,6 +12,14 @@ const walkSpeed = 2;
 let autoTimer; 
 const autoDelay = 4500; // 4.5초 뒤 자동 넘김
 
+// ⭐️ 새로 추가된 변수들
+let dayTimer;
+let currentDay = 1;         // 현재 며칠인지 기억하는 변수
+let isDdayRunning = false;  // D-day 카운터가 이미 돌아가고 있는지 확인하는 변수
+
+
+
+
 // 지나온 길을 기억하는 타임머신 배열
 let historyStack = [];
 
@@ -156,7 +164,41 @@ function updateStory() {
     } else {
         photoGallery.style.display = 'none'; 
     }
+// =========================================================
+    // ⭐️ [변경됨] bg6 ~ bg9 흐름과 D-day 카운터
+    // =========================================================
+    const dayCounter = document.getElementById('day-counter');
+    // 여기에 카운터를 띄우고 싶은 배경 이름들을 다 적어줍니다!
+    const dDayScenes = ['bg6.jpeg', 'bg7.jpeg', 'bg8.jpeg', 'bg9.jpeg'];
 
+    if (dDayScenes.includes(current.bg)) {
+        dayCounter.style.display = 'block'; // 숫자 켜기
+        char.classList.add('walking');      // 캐릭터 걷는 애니메이션 켜기
+        
+        // ⭐️ 카운터가 아직 안 켜져 있을 때만(bg6 처음 진입 시) 새로 타이머를 켭니다!
+        if (!isDdayRunning) {
+            isDdayRunning = true;
+            currentDay = 1; // 처음 시작은 1
+            dayCounter.innerText = `D+${currentDay}`;
+
+            dayTimer = setInterval(() => {
+                currentDay++;
+                dayCounter.innerText = `D+${currentDay}`;
+                
+                // 1000일에서 멈추게 하려면 아래 숫자를 수정하세요!
+                if (currentDay >= 1000) clearInterval(dayTimer);
+            }, 30); // 30ms 간격으로 빠르게 올라감
+        }
+    } else {
+        // bg6~9가 아닌 다른 배경으로 넘어가면 카운터와 걷기를 끕니다.
+        dayCounter.style.display = 'none';
+        char.classList.remove('walking');
+        clearInterval(dayTimer);
+        isDdayRunning = false;
+    }
+
+
+    
     // ⭐️ 선택지 창 띄우기 및 버튼 생성
     if (current.type === 'choice') {
         bubble.style.display = "none";     
@@ -294,8 +336,16 @@ function changeScene(targetStep, isNext) {
 }
 
 // 배경 스크롤 루프
+// ⭐️ [변경됨] 배경 스크롤 루프
 function gameLoop() {
-    if (story[currentStep] && story[currentStep].bg === 'dsr.png') {
+    let current = story[currentStep];
+    if (!current) return;
+
+    // 움직이는 배경 목록에 bg6 ~ bg9도 추가합니다!
+    const scrollScenes = ['bg1.png', 'bg6.jpeg', 'bg7.jpeg', 'bg8.jpeg', 'bg9.jpeg'];
+    
+    if (scrollScenes.includes(current.bg)) {
+        // 배경이 끝에 도달하지 않았을 때만 왼쪽으로 이동
         if (bgPosX > -4000) {
             bgPosX -= walkSpeed;
             bg.style.left = bgPosX + "px";
