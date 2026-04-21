@@ -99,7 +99,20 @@ body, html {
     color: black; 
     line-height: 1.5;
 }
-
+/* --- ⭐️ 새로 추가: 형민 캐릭터 --- */
+#char-hyungmin {
+    width: 80px; 
+    height: 80px; 
+    background-image: url('char-hyungmin.png'); /* 폴더에 형민 오빠 픽셀 이미지를 넣어주세요! */
+    background-size: contain; 
+    background-repeat: no-repeat;
+    position: absolute; 
+    bottom: 40%; 
+    right: 15%; /* left 대신 right를 써서 오른쪽에 배치합니다 */
+    z-index: 10;
+    display: none; /* 평소에는 숨겨둡니다 */
+    transform: scaleX(-1); /* 진아를 마주 보도록 좌우 반전 거울 모드! */
+}
 /* 대화창 깜빡이는 화살표 */
 #bubble::after {
     content: "▼"; position: absolute; bottom: 8px; right: 15px; font-size: 14px; animation: blink 0.6s infinite;
