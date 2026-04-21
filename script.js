@@ -28,10 +28,10 @@ const story = [
     { bg: 'Gn.png', text: "진아: 안녕하십니까!"},
     
     { bg: 'Gn.png', text: "1년 뒤, 2020 형민이가 입사한다."},
-    { bg: 'hm.png', text: "진아: 저 잘생긴 오빠 뭐지? 흥미가 생긴다."},
-    { bg: 'hm.png', text: "실제로 20년도의 형민이는 잘생겼었다."},
-    { bg: 'hm.png', text: "형민: 안녕 선배?"},
-
+    { bg: 'Gn.png', text: "진아: 저 잘생긴 오빠 뭐지? 흥미가 생긴다."},
+    { bg: 'Gn.png', text: "실제로 20년도의 형민이는 잘생겼었다."},
+    { bg: 'Gn.png', text: "형민: 안녕 선배?", showHyungmin: true},
+    { bg: 'Gn.png', text: "진아: 어.. 안녕?", showHyungmin: true},
  //   { bg: 'bg2.png', text: "여기는 우리의 추억이 담긴 갤러리야." },
  //   { bg: 'bg2.png', text: "모바일 동기들과의 즐거운 시간"},
  //   { bg: 'bg2.png', text: "우리가 처음 만난 날 기억나?", photos: ['photo1'] }, 
