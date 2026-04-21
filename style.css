@@ -15,17 +15,24 @@ body, html {
 /* 2. 게임 전체 컨테이너 */
 #game-container {
     width: 100vw;
-    max-width: 850px; /* PC에서 너무 커지지 않게 가로 길이 제한 */
-    aspect-ratio: 8 / 12; /* 무조건 16:9 비율 강제 유지 */
-    position: relative; overflow: hidden;
-    background-color: #87CEEB; image-rendering: pixelated; 
+    /* ⭐️ 가로 크기를 850px에서 450px로 대폭 줄였습니다! (한눈에 들어오는 사이즈) */
+    max-width: 450px; 
+    /* ⭐️ 스마트폰 화면의 기본 비율인 9:16으로 세팅했습니다 */
+    aspect-ratio: 9 / 16; 
+    position: relative; 
+    overflow: hidden;
+    background-color: #87CEEB; 
+    image-rendering: pixelated; 
 }
 
 /* 3. PC 화면(넓은 화면)에서 볼 때 스마트폰 테두리(베젤) 효과 주기 */
-@media (min-width: 850px) {
+/* ⭐️ 기준점도 500px로 줄여서, 모바일보다 조금만 커도 바로 테두리가 생기게 했습니다 */
+@media (min-width: 500px) { 
     #game-container {
-        border-radius: 20px; border: 12px solid #222;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.8); height: auto;
+        border-radius: 20px; 
+        border: 12px solid #222;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.8); 
+        height: auto;
     }
 }
 
