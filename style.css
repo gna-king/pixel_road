@@ -229,3 +229,29 @@ body, html {
 @keyframes popIn {
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* ========================================= */
+/* ⭐️ 누락되었던 D-day 카운터 & 걷기 모션 추가 ⭐️ */
+/* ========================================= */
+
+/* 12. D-day 날짜 카운터 스타일 (왼쪽 상단 팝업) */
+#day-counter {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    font-family: 'Galmuri11', sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    text-shadow: 2px 2px 0px black;
+    z-index: 60;
+}
+
+/* 13. 캐릭터 걷기 애니메이션 (위아래로 둥실둥실) */
+.walking {
+    animation: walk-bob 0.4s infinite alternate;
+}
+@keyframes walk-bob {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
