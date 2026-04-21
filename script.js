@@ -283,7 +283,7 @@ function updateStory() {
             if (dayCounter) dayCounter.innerText = `D+${currentDay}`;
 
 // ⭐️ 수정된 부분: 150일, 300일, 450일을 "넘어갈 때마다" 배경을 바꿉니다!
-            if (currentDay >= (sceneIndex + 1) * 150 && sceneIndex < dDayScenes.length - 1) {
+            if (currentDay >= (sceneIndex + 1) * 450 && sceneIndex < dDayScenes.length - 1) {
                 sceneIndex++;
                 bg.style.backgroundImage = `url('${dDayScenes[sceneIndex]}')`;
             }
