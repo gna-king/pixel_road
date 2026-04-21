@@ -233,22 +233,26 @@ function updateStory() {
         bg.style.backgroundImage = `url('${dDayScenes[sceneIndex]}')`;
 
         dayTimer = setInterval(() => {
+            // 1️⃣ 한 번에 며칠씩 올라가게 할지 결정 (현재: 5일씩 팍팍)
+            // ⭐️ 1씩 차근차근 올라가게 하고 싶다면 currentDay += 1; 로 바꾸세요!
             currentDay += 5; 
             if (dayCounter) dayCounter.innerText = `D+${currentDay}`;
 
-            // 150일 마다 배경 전환
-            if (currentDay % 150 === 0 && sceneIndex < dDayScenes.length - 1) {
+// ⭐️ 수정된 부분: 150일, 300일, 450일을 "넘어갈 때마다" 배경을 바꿉니다!
+            if (currentDay >= (sceneIndex + 1) * 150 && sceneIndex < dDayScenes.length - 1) {
                 sceneIndex++;
                 bg.style.backgroundImage = `url('${dDayScenes[sceneIndex]}')`;
             }
 
             // 600일이 되면 자동으로 넘김 (기다리기 싫으면 다음 버튼 누르면 됨)
-            if (currentDay >= 600) {
+            if (currentDay >= 1815) {
                 clearInterval(dayTimer);
                 if (char) char.classList.remove('walking');
                 setTimeout(goNext, 1000);
             }
-        }, 30);
+           // 2️⃣ 얼마나 자주 숫자를 올릴지 시간 간격 결정 (현재: 30 밀리초)
+        // ⭐️ 이 숫자를 10으로 줄이면 엄청 빨라지고, 100으로 늘리면 천천히 올라갑니다! 
+        }, 5);
 
         return; 
     }
