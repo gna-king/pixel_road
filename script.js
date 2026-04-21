@@ -278,6 +278,24 @@ function updateStory() {
                 }
             }
         }
+// ⭐️ [새로 추가된 로직] 자동으로 다음 단계 넘기기
+        if (currentSubStep < current.messages.length + 1) {
+            // 카톡이 다 오기 전까지는 1.5초(1500ms)마다 자동으로 다음 메시지를 띄웁니다.
+            clearTimeout(autoTimer);
+            autoTimer = setTimeout(() => {
+                goNext();
+            }, 1500); 
+        } else {
+            // 카톡이 다 도착하고 나면 기존 대화 속도(autoDelay)에 맞춰서 다음 장면으로 넘어갑니다.
+            clearTimeout(autoTimer);
+            autoTimer = setTimeout(() => {
+                goNext();
+            }, autoDelay);
+        }
+
+
+
+        
         return;
     }
 
