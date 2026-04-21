@@ -266,3 +266,17 @@ body, html {
     0% { transform: translateY(0); }
     100% { transform: translateY(-10px); }
 }
+/* --- ⭐️ 새로 추가: 챕터 제목 스타일 --- */
+#scene-title {
+    position: absolute;
+    top: 30px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-family: 'Galmuri11', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    /* 상하좌우로 검은색 그림자를 넣어서 도트 테두리 느낌을 만듭니다 */
+    text-shadow: 2px 2px 0px black, -2px -2px 0px black, 2px -2px 0px black, -2px 2px 0px black; 
+    z-index: 60;
+}
