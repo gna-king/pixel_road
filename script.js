@@ -122,7 +122,16 @@ const story = [
     {  id: "dating", bg: 'dongtan_lake.png', text: "그렇게 우리는 사귀게 되었다." },     
     {  id: "dating", bg: 'dongtan_lake.png', text: "" },         
 
-
+// ⭐️ 카톡 연출 파트
+    { 
+        bg: 'room2.png', 
+        type: 'messenger', 
+        messages: [
+            "자니?", 
+            "자는구나...", 
+            "잘 자"
+        ] 
+    },
     
     
     
