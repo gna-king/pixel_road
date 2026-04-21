@@ -105,6 +105,10 @@ body, html {
     font-weight: bold; 
     color: black; 
     line-height: 1.5;
+    /* ⭐️ 맨 아래에 이 한 줄만 추가하세요! */
+    cursor: pointer;
+
+    
 }
 /* --- ⭐️ 새로 추가: 형민 캐릭터 --- */
 #char-hyungmin {
