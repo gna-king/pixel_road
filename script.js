@@ -31,7 +31,7 @@ const dDayScenes = ['autumn2.png', 'winter.png', 'spring.png', 'summer.png'];
 // === 대본 (Story) ===
 // (진아님이 수정하신 대본 원본 그대로 유지했습니다!)
 const story = [
-    { bg: 'dsr.png', title: "2019년도", ext: "때는 2019, 진아는 갓 입사한 신입사원이다.",walkOff: true},
+    { bg: 'dsr.png', title: "2019년도", text: "때는 2019, 진아는 갓 입사한 신입사원이다.",walkOff: true},
     
     // ⭐️ title 속성을 넣으면 상단에 제목이 뜹니다.
     { bg: 'Gn.png', title: "모바일 그룹", text: "진아: 안녕하십니까!"},
