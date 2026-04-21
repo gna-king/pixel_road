@@ -130,7 +130,7 @@ const story = [
         nextId: "여울"
     },
 
-    { id : '여울', bg: '여울.png', text: "진아: 오빠 같이 살자."},
+    { id : '여울', bg: '여울.png', title: '25년 봄과 여름 사이',text: "진아: 오빠 같이 살자."},
     { bg: '여울.png', text: "형민: 나는 아직 잘 모르겠어.."},
     { bg: '여울.png', text: "진아: 나 그럼 결혼하러 갈게..!",walkOff: true},
     // ⭐️ [몽타주 파트] 사계절 자동 전환 및 D-day 연출
@@ -166,7 +166,7 @@ const story = [
 
     // --- [분기점 1] ---
     { id: "call_him", bg: 'room2.png', text: " (타닥타닥) 왜 연락했어? " },
-    { bg: 'room2.png', text: "형민: (문자) 만나서 얘기하자 "},
+    { bg: 'room2.png', text: "형민: (문자) 만나서 얘기하자 " , nextId: 'izakaya'},
     
     // --- [분기점 2]  ---
     { id: "blocking", bg: 'room2.png', text: "진아: 차단하자."} ,
@@ -175,7 +175,8 @@ const story = [
     { id: "izakaya", bg: 'izakaya.png', text: "영천동 어딘가 이자카야" },
     { bg:  'izakaya.png', text: "형민: 너가 없는 시간이 힘들었어." },
     { bg:  'izakaya.png', text: "진아: 나도 오빠 없으니 인생이 너무 재미가 없었어." },
-    
+    { bg:  'izakaya.png', text: "형민: 잘 할게 (잘 하자?)" },
+
     { bg:  'proposal.png', text: "형민: 진아야 결혼하자!" },
     { bg:  'proposal.png', text: "진아: 좋아!" },
 
@@ -528,10 +529,10 @@ function gameLoop() {
     let current = story[currentStep];
     if (!current) return;
 
-    const scrollScenes = [ ...dDayScenes, 'rainy_day.png'];
+    const scrollScenes = ['rainy_day.png', ...dDayScenes];
 
     if (scrollScenes.includes(current.bg) || current.type === 'montage') {
-        if (bgPosX > -4000) {
+        if (bgPosX > -6000) {
             bgPosX -= walkSpeed;
             bg.style.left = bgPosX + "px";
         }
