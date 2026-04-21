@@ -175,7 +175,7 @@ function updateStory() {
     // =========================================================
     const dayCounter = document.getElementById('day-counter');
     // 여기에 카운터를 띄우고 싶은 배경 이름들을 다 적어줍니다!
-    const dDayScenes = ['bg6.jpeg', 'bg7.jpeg', 'bg8.jpeg', 'bg9.jpeg'];
+    const dDayScenes = ['autumn2.png', 'winter.png', 'spring.png', 'summer.png'];
 
     if (dDayScenes.includes(current.bg)) {
         dayCounter.style.display = 'block'; // 숫자 켜기
