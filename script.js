@@ -463,3 +463,20 @@ if (bubble) {
 }
 
 setInterval(gameLoop, 30);
+
+
+// =========================================================
+// ⭐️ 화면 전체 터치 감지기 (걸어나가는 모션 스킵용)
+// =========================================================
+const gameContainer = document.getElementById('game-container');
+if (gameContainer) {
+    gameContainer.addEventListener('click', (e) => {
+        // 이미 있는 '이전/다음' 버튼이나 '선택지' 버튼을 눌렀을 때는 중복 실행 안 되게 막기
+        if (e.target.tagName === 'BUTTON') return;
+        
+        // 캐릭터가 걸어 나가는 중(타이머가 돌아가는 중)일 때 화면 아무 곳이나 누르면 스킵!
+        if (isTransitioning && walkOffTimer) {
+            goNext();
+        }
+    });
+}
