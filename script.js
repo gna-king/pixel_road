@@ -136,7 +136,9 @@ const story = [
     // ⭐️ [몽타주 파트] 사계절 자동 전환 및 D-day 연출
     
     {id: "sad_time",bg : "rainy_day.png", text: "하 ,, 오빠 없으니 삶이 너무 무료하다.", nextId: "messenger_part",walkOff: true},
-    
+    {bg : "rainy_day.png", text: "난 결혼이 하고 싶었던게 아니라 오빠랑 함께이고 싶었던거구나 ..", nextId: "messenger_part",walkOff: true},
+    {bg : "rainy_day.png", text: "(나쁜 오빠)", nextId: "messenger_part",walkOff: true},
+
     // ⭐️ 카톡 연출 파트
     {
         id: "messenger_part",
