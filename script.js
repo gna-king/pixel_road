@@ -172,7 +172,7 @@ const story = [
     // 👦🏻 [루트 B] 형민의 이야기 시작 (여기에 이어서 작성하세요!)
     // =========================================================
     { id: 'hm_start', bg: 'dsr.png', text: "때는 2020년, 나는 설레는 마음으로 입사했다." },
-    { bg: 'Gn.png', title: "모바일 그룹", text: "형민: 안녕하십니까! 신입사원입니다!"},
+    { bg: 'hm.png', title: "모바일 그룹", text: "형민: 안녕하십니까! 신입사원입니다!"},
     // ⭐️ 형민이 이야기 마지막 부분은 다음 퀴즈 파트로 자연스럽게 넘어가게 nextId를 걸어주세요!
     { bg: 'hm.png', title: "모바일 그룹", text: "형민: (우와... 저 선배 예쁘다.)", showHyungmin: true, nextId: 'final_quiz_start' },
     
@@ -195,11 +195,11 @@ const story = [
     { bg: 'suwon.png', text: "진아: 나랑 둘이!" },
     { bg: 'suwon.png', text: "형민: ... 좋아! (꽤나 당돌하군,, 두근두근)"},
 
-    { id: 'go_to_watch_movie', bg: 'mega.png', text: "동탄 북광장 메가박스", walkOff: true, showHyungmin: true},
+    { bg: 'mega.png', text: "동탄 북광장 메가박스", walkOff: true, showHyungmin: true},
     { bg: 'mega.png', text: "형민, 진아 : (어색하게) 안녕!" , showHyungmin: true},
     { bg: 'fishzip.png', text: "영화 보고 나와서 술집을 갔다." , showHyungmin: true},
 
-    { bg: 'mega.png', text: "형민: (오늘 나랑 왜 보자고 했을까 궁금한데,)!" , showHyungmin: true},
+    { bg: 'fishzip.png', text: "형민: (오늘 나랑 왜 보자고 했을까 궁금한데,)!" , showHyungmin: true},
     
     {
         bg: 'fishzip.png',
@@ -272,7 +272,7 @@ const story = [
 
     {
         id: "messenger_part",
-        bg: 'room2.png',
+        bg: 'room3.png',
         type: 'messenger',
         title: '25년 겨울',
         messages: [
@@ -282,7 +282,7 @@ const story = [
         ]
     },
     {
-        bg: 'room2.png',
+        bg: 'room3.png',
         type: 'choice',
         question: "어떻게 할까?",
         options: [
@@ -291,10 +291,10 @@ const story = [
         ]
     },
     
-    { id: "not_sorry", bg: 'room2.png', text: "형민: 아니? 아무리 취했어도 그게 내 진심이었어.", nextID:"call_jina"},
+    { id: "not_sorry", bg: 'room3.png', text: "형민: 아니? 아무리 취했어도 그게 내 진심이었어.", nextID:"call_jina"},
 
-    { id: "call_jina", bg: 'room2.png', text: " 진아: 왜 연락했어? " },
-    { bg: 'room2.png', text: "형민: 만나서 얘기하자 " , nextId: 'izakaya2'},
+    { id: "call_jina", bg: 'room3.png', text: " 진아: 왜 연락했어? " },
+    { bg: 'room3.png', text: "형민: 만나서 얘기하자 " , nextId: 'izakaya2'},
     
 
     { id: "izakaya2", bg: 'izakaya.png', title: '25년 겨울',text: "영천동 어딘가 이자카야" , showHyungmin: true},
@@ -309,7 +309,7 @@ const story = [
     // =========================================================
     {
         id: 'final_quiz_start',
-        bg: 'bg2.png',
+        bg: 'wedding.png',
         type: 'choice',
         question: "저희는 잘 살 수 있을까요?",
         options: [
