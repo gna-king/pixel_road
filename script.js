@@ -176,7 +176,134 @@ const story = [
     // ⭐️ 형민이 이야기 마지막 부분은 다음 퀴즈 파트로 자연스럽게 넘어가게 nextId를 걸어주세요!
     { bg: 'hm.png', title: "모바일 그룹", text: "형민: (우와... 저 선배 예쁘다.)", showHyungmin: true, nextId: 'final_quiz_start' },
     
+    { bg: 'suwon.png', title: "21년 봄과 여름 사이", text: "본가를 다녀온 형민이는 수원역이다." },
+    { bg: 'suwon.png', text: "띠리리링, 발신인 : [김진아] " },
+    { bg: 'suwon.png', text: "형민: 오잉 무슨 일이지? " },
+    { bg: 'suwon.png', text: "진아: 나랑 놀래? " },  
+    { bg: 'suwon.png', text: "(또 술파티 구하나)" },  
+    {
+        bg: 'suwon.png',
+        type: 'choice',
+        question: "어떻게 할까?",
+        options: [
+            { text: "좋아!", target: "jina_call" },
+            { text: "아니 나 바빠", target: "jina_call" }
+        ]
+    },
 
+    { id: 'jina_call', bg: 'suwon.png', text: "형민: 그래! 근데 누구랑?" },
+    { bg: 'suwon.png', text: "진아: 나랑 둘이!" },
+    { bg: 'suwon.png', text: "형민: ... 좋아! (꽤나 당돌하군,, 두근두근)"},
+
+    { id: 'go_to_watch_movie', bg: 'mega.png', text: "동탄 북광장 메가박스", walkOff: true, showHyungmin: true},
+    { bg: 'mega.png', text: "형민, 진아 : (어색하게) 안녕!" , showHyungmin: true},
+    { bg: 'fishzip.png', text: "영화 보고 나와서 술집을 갔다." , showHyungmin: true},
+
+    { bg: 'mega.png', text: "형민: (오늘 나랑 왜 보자고 했을까 궁금한데,)!" , showHyungmin: true},
+    
+    {
+        bg: 'fishzip.png',
+        type: 'choice',
+        question: "어떻게 할까?",
+        options: [
+            { text: "관심 있는지 물어본다.!", target: "ask_jina" },
+            { text: "그냥 술이나 마신다.", target: "drink_more" }
+        ]
+    },
+    
+    {  id: "aks_jina", bg: 'fishzip.png', text: "형민: 너 나 좋아하냐? " , showHyungmin: true},
+    { bg: 'fishzip.png', text: "진아: ..? ) " , showHyungmin: true},
+    { bg: 'fishzip.png', text: "형민: 난 여자랑 1:1로 안논다. 관심없으면 " , showHyungmin: true},
+    { bg: 'fishzip.png', text: "진아: 나도 오빠 좋아! " , nextId: 'some_ing', showHyungmin: true},
+
+    { id: "drink_more", bg: 'fishzip.png', text: "(그래도 너무 궁금한데?) "  , nextId: 'ask_jina', showHyungmin: true},
+
+
+    { id: "some_ing", bg: 'fishzip.png', text: "이때부터 썸을 탔다." , showHyungmin: true},
+    { bg:  'dongtan_lake.png', text: "2021.10.23 동탄호수공원" , showHyungmin: true},
+    { bg:  'dongtan_lake.png', text: "형민: (벌써 호수만 5바퀴째다. 뭐라고 말하지?)" , showHyungmin: true},
+    { bg:  'dongtan_lake.png', text: "진아: 오빠 뭐 할 말 있어?" , showHyungmin: true},
+    { bg:  'dongtan_lake.png', text: "한참을 뜸을 들인다." , showHyungmin: true},
+    {
+        bg: 'dongtan_lake.png',
+        type: 'choice',
+        question: "어떻게 할까?",
+        options: [
+            { text: "남자답게 고백한다.", target: "go_baek" },
+            { text: "말 못하겠어..!", target: "mian" }
+        ]
+    },
+    
+    {  id: "go_baek",bg:  'dongtan_lake.png', text: "형민: 우리 3개월만 만나볼래?" , showHyungmin: true},
+    { bg: 'dongtan_lake.png', text: "진아: 이게 말이야 방구야! 다시 고백해!!!" , showHyungmin: true},
+    { bg: 'dongtan_lake.png', text: "형민: 우리 만나보자" , showHyungmin: true},
+    { bg: 'dongtan_lake.png', text: "진아: 좋아!" , nextId: 'dating', showHyungmin: true},
+
+    { id: "mian", bg: 'dongtan_lake.png', text: "형민: (그래도 남자가 가오가 있지.)" , nextId: 'go_baek', showHyungmin: true} ,
+
+    { id: "dating", bg: 'dongtan_lake.png', text: "그렇게 우리는 사귀게 되었다.", showHyungmin: true },
+
+    {
+        id: "season_montage",
+        type: "montage",
+        walkOff: true,
+        text: "우리의 시간은 쉼 없이 흘러...",
+        nextId: "여울"
+    },
+
+    { id : '여울', bg: '여울.png', title: '25년 봄과 여름 사이',text: "진아: 오빠 같이 살자.", showHyungmin: true},
+    {
+        bg: '여울.png',
+        type: 'choice',
+        question: "어떻게 할까?",
+        options: [
+            { text: "난 아직 준비가 안됐는걸,, ", target: "we_need_time" },
+            { text: "난 시간이 좀 더 필요해", target: "we_need_time" }
+        ]
+    },
+
+    
+    { id : "we_need_time" ,bg: '여울.png', text: "형민: 나는 아직 잘 모르겠어..", showHyungmin: true},
+    { bg: '여울.png', text: "진아: 나 그럼 결혼하러 갈게..!",walkOff: true, showHyungmin: true},
+    
+    {bg : "rainy_day.png", text: "진아 보고싶다."},
+    {bg : "rainy_day.png", text: "혼자면 편할 줄 알았는데, 너무 허전하다."},
+    {bg : "rainy_day.png", text: "(보고 싶어)", nextId: "messenger_part",walkOff: true},
+
+    {
+        id: "messenger_part",
+        bg: 'room2.png',
+        type: 'messenger',
+        title: '25년 겨울',
+        messages: [
+            "자니?",
+            "자는구나...",
+            "잘 자"
+        ]
+    },
+    {
+        bg: 'room2.png',
+        type: 'choice',
+        question: "어떻게 할까?",
+        options: [
+            { text: "하,, 이불킥", target: "not_sorry" },
+            { text: "이게 내 마음이야", target: "call_jina" }
+        ]
+    },
+    
+    { id: "not_sorry", bg: 'room2.png', text: "형민: 아니? 아무리 취했어도 그게 내 진심이었어.", nextID:"call_jina"},
+
+    { id: "call_jina", bg: 'room2.png', text: " 진아: 왜 연락했어? " },
+    { bg: 'room2.png', text: "형민: 만나서 얘기하자 " , nextId: 'izakaya2'},
+    
+
+    { id: "izakaya2", bg: 'izakaya.png', title: '25년 겨울',text: "영천동 어딘가 이자카야" , showHyungmin: true},
+    { bg:  'izakaya.png', text: "형민: 너가 없는 시간이 힘들었어." , showHyungmin: true},
+    { bg:  'izakaya.png', text: "진아: 나도 오빠 없으니 인생이 너무 재미가 없었어." , showHyungmin: true},
+    { bg:  'izakaya.png', text: "형민: 잘 할게 (잘 하자?)" , showHyungmin: true},
+
+    { bg:  'proposal.png', text: "형민: 진아야 결혼하자!" , showHyungmin: true},
+    { bg:  'proposal.png', text: "진아: 좋아!" , showHyungmin: true, nextId: 'final_quiz_start' },
     // =========================================================
     // 💍 [마지막 공통 퀴즈]
     // =========================================================
@@ -184,11 +311,10 @@ const story = [
         id: 'final_quiz_start',
         bg: 'bg2.png',
         type: 'choice',
-        question: "우리가 처음 만난 계절은?",
-        photos: ['photo1', 'photo2', 'photo3'],
+        question: "저희는 잘 살 수 있을까요?",
         options: [
-            { text: "봄 (정답)", target: "link" },
-            { text: "겨울", target: "wrong" }
+            { text: "당연하죠 (정답)", target: "link" },
+            { text: "흠 잘 모르겠는데요 (오답)", target: "wrong" }
         ]
     }
 ];
