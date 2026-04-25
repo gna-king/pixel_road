@@ -324,3 +324,14 @@ body, html {
     right: 120% !important; 
     transition: right 4s linear;
 }
+
+
+/* ========================================= */
+/* ⭐️ 내가 보낸 카톡 메시지 (노란색, 오른쪽 정렬) */
+/* ========================================= */
+.chat-msg.sent {
+    background-color: #fee500 !important; /* 카카오톡 기본 노란색 */
+    align-self: flex-end !important; /* 오른쪽 끝으로 밀어내기! */
+    border-top-left-radius: 12px !important; /* 왼쪽 위는 다시 둥글게 */
+    border-top-right-radius: 2px !important; /* 오른쪽 위를 뾰족하게 (꼬리) */
+}
