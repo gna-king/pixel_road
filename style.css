@@ -311,7 +311,16 @@ body, html {
 #loading-bar { width: 0%; height: 100%; background-color: #00ff00; transition: width 0.2s; }
 
 /* 캐릭터가 왼쪽으로 퇴장하는 애니메이션 (여울 파트용) */
+/* 수정 전: left를 써서 순간이동 버그 발생 */
+/*
 .walk-off-left {
-    left: -50% !important; /* 화면 왼쪽 밖으로 이동 */
+    left: -50% !important; 
     transition: left 3s linear;
+}
+*/
+
+/* ⭐️ 수정 후: right를 쭉 늘려서 왼쪽 밖으로 자연스럽게 밀어냄! */
+.walk-off-left {
+    right: 120% !important; 
+    transition: right 4s linear;
 }
