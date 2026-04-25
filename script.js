@@ -553,12 +553,20 @@ function preloadAllImages() {
         return;
     }
 
+    // ⭐️ 무적의 안전장치: 5초(5000ms)가 지나면 강제로 로딩을 끝냅니다!
+    let fallbackTimer = setTimeout(() => {
+        if (!isLoaded) {
+            console.warn("⏳ 로딩 시간 초과! 강제로 시작 화면을 띄웁니다.");
+            finishLoading(loadingText);
+        }
+    }, 5000);
+
     imagesToPreload.forEach(src => {
         const img = new Image();
         img.src = src;
         img.onload = () => { loadedCount++; updateProgress(); };
         img.onerror = () => { 
-            console.error("이미지 로드 실패:", src);
+            console.error("❌ 이미지 로드 실패:", src);
             loadedCount++; updateProgress(); 
         };
     });
@@ -568,6 +576,7 @@ function preloadAllImages() {
         if (loadingBar) loadingBar.style.width = progress + '%';
 
         if (loadedCount === imagesToPreload.length) {
+            clearTimeout(fallbackTimer); // ⭐️ 정상적으로 다 불러왔으면 강제 종료 타이머 취소
             finishLoading(loadingText);
         }
     }
