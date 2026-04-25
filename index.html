@@ -8,6 +8,22 @@
 </head>
 <body>
     
+    <div id="loading-screen">
+        <h1 class="main-title">우리들의 이야기</h1>
+        
+        <div class="route-buttons">
+            <button id="btn-jina" class="route-btn" onclick="selectRoute('jina_start')">👩🏻 진아의 이야기</button>
+            <button id="btn-hm" class="route-btn" onclick="selectRoute('hm_start')">👦🏻 형민의 이야기</button>
+        </div>
+
+        <div class="loading-status">
+            <div class="loading-text" id="loading-text">데이터 로딩 중...</div>
+            <div class="loading-bar-container">
+                <div id="loading-bar"></div>
+            </div>
+        </div>
+    </div>
+
     <div id="game-container">
         <div id="fade-overlay"></div>
         
