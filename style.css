@@ -309,3 +309,9 @@ body, html {
 .loading-text { font-size: 16px; margin-bottom: 10px; color: #ccc; }
 .loading-bar-container { width: 200px; height: 15px; border: 2px solid white; padding: 2px; }
 #loading-bar { width: 0%; height: 100%; background-color: #00ff00; transition: width 0.2s; }
+
+/* 캐릭터가 왼쪽으로 퇴장하는 애니메이션 (여울 파트용) */
+.walk-off-left {
+    left: -50% !important; /* 화면 왼쪽 밖으로 이동 */
+    transition: left 3s linear;
+}
