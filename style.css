@@ -1,3 +1,285 @@
+/* 0. 픽셀 게임 감성 폰트 (갈무리11) 불러오기 */
+@font-face {
+    font-family: 'Galmuri11';
+    src: url('https://cdn.jsdelivr.net/npm/galmuri@latest/dist/Galmuri11.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+/* 1. 기본 여백 제거 및 중앙 정렬 (PC 화면에서는 바깥쪽을 까맣게) */
+body, html {
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    background-color: #111; 
+    display: flex; justify-content: center; align-items: center;
+}
+
+/* 2. 게임 전체 컨테이너 */
+#game-container {
+    width: 100vw;
+    /* ⭐️ 가로 크기를 850px에서 450px로 대폭 줄였습니다! (한눈에 들어오는 사이즈) */
+    max-width: 450px; 
+    /* ⭐️ 스마트폰 화면의 기본 비율인 9:16으로 세팅했습니다 */
+    aspect-ratio: 9 / 16; 
+    position: relative; 
+    overflow: hidden;
+    background-color: #87CEEB; 
+    image-rendering: pixelated; 
+}
+
+/* 3. PC 화면(넓은 화면)에서 볼 때 스마트폰 테두리(베젤) 효과 주기 */
+/* ⭐️ 기준점도 500px로 줄여서, 모바일보다 조금만 커도 바로 테두리가 생기게 했습니다 */
+@media (min-width: 500px) { 
+    #game-container {
+        border-radius: 20px; 
+        border: 12px solid #222;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.8); 
+        height: auto;
+    }
+}
+
+/* 4. 모바일 가로 모드로 돌렸을 때는 기기 테두리 없이 화면 전체 꽉 채우기 */
+@media (orientation: landscape) and (max-width: 850px) {
+    #game-container {
+        height: 100vh; width: 100vw; aspect-ratio: auto;
+        border-radius: 0; border: none;
+    }
+}
+
+/* 5. 배경 설정 */
+#background {
+    width: 5000px;
+    top: 0; bottom: 0; /* 모바일 배경 증발 버그 방지용 */
+    background-image: url('dsr.png'); background-size: auto 100%;
+    background-repeat: repeat-x; position: absolute; left: 0;
+}
+
+/* 6. 우측 상단 이동 버튼 */
+#nav-buttons { position: absolute; top: 15px; right: 15px; z-index: 50; }
+#nav-buttons button {
+    background-color: rgba(255, 255, 255, 0.9); border: 3px solid black;
+    padding: 6px 12px; margin-left: 8px; 
+    /*font-family: 'Courier New', Courier, monospace;*/
+    font-family: 'Galmuri11', sans-serif; /* (변경) */
+    font-size: 14px; font-weight: bold; cursor: pointer; box-shadow: 2px 2px 0px #000;
+}
+#nav-buttons button:active { box-shadow: none; transform: translate(2px, 2px); }
+.hidden { display: none !important; }
+
+/* 7. 캐릭터 설정 */
+#character {
+    width: 80px; height: 80px; background-image: url('character.png');
+    background-size: contain; background-repeat: no-repeat;
+    position: absolute; bottom: 20%; left: 15%; z-index: 10;
+}
+
+/* 캐릭터가 오른쪽으로 퇴장하는 애니메이션 클래스 */
+.walk-off {
+    left: 120% !important; /* 화면 오른쪽 밖으로 이동 */
+    transition: left 4s linear; /* 4초 동안 일정한 속도로 걷기 */
+}
+
+/* 8. 고전 게임 스타일 대화창 */
+#bubble {
+    position: absolute; 
+    bottom: 10px; 
+    left: 50%; 
+    transform: translateX(-50%);
+    width: 90%; 
+    height: auto; 
+    min-height: 80px;
+    background-color: white; 
+    
+/* ⭐️ 포켓몬 말풍선 핵심 코드 ⭐️ */
+    border: 4px solid black; /* 1. 바깥쪽 굵은 테두리 */
+    border-radius: 8px; /* 2. 모서리를 살짝 둥글게 */
+    /* 3. 안쪽 여백(흰색 2px)과 안쪽 얇은 선(검은색 4px)을 그림자로 그려냅니다 */
+    box-shadow: inset 0 0 0 2px white, inset 0 0 0 4px black; 
+    
+    /* 안쪽 선 때문에 글씨가 너무 벽에 붙지 않도록 안쪽 여백을 조금 늘립니다 */
+    padding: 20px; 
+    
+    box-sizing: border-box; 
+    display: none; 
+    z-index: 20;
+    font-family: 'Galmuri11', sans-serif; 
+    font-size: 16px; 
+    font-weight: bold; 
+    color: black; 
+    line-height: 1.5;
+    /* ⭐️ 맨 아래에 이 한 줄만 추가하세요! */
+    cursor: pointer;
+}
+/* --- ⭐️ 새로 추가: 형민 캐릭터 --- */
+#char-hyungmin {
+    width: 80px; 
+    height: 80px; 
+    background-image: url('char-hyungmin.png'); /* 폴더에 형민 오빠 픽셀 이미지를 넣어주세요! */
+    background-size: contain; 
+    background-repeat: no-repeat;
+    position: absolute; 
+    bottom: 40%; 
+    right: 15%; /* left 대신 right를 써서 오른쪽에 배치합니다 */
+    z-index: 10;
+    display: none; /* 평소에는 숨겨둡니다 */
+    transform: scaleX(-1); /* 진아를 마주 보도록 좌우 반전 거울 모드! */
+}
+/* 대화창 깜빡이는 화살표 */
+#bubble::after {
+    content: "▼"; position: absolute; bottom: 8px; right: 15px; font-size: 14px; animation: blink 0.6s infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* 9. 퀴즈 선택지 창 */
+#choices { position: absolute; top: 40%; width: 100%; text-align: center; z-index: 30; }
+#question { /*font-family: 'Courier New', Courier, monospace; */
+            font-family: 'Galmuri11', sans-serif; /* (변경) */
+    
+           font-size: 20px; font-weight: bold; color: white; text-shadow: 2px 2px 0px black; margin-bottom: 15px; }
+#choices button { padding: 10px 20px; margin: 8px; 
+                 font-size: 18px; 
+                 /*font-family: 'Courier New', Courier, monospace; */
+                 font-family: 'Galmuri11', sans-serif; /* (변경) */
+                 font-weight: bold; cursor: pointer; background-color: white; border: 4px solid black; }
+
+/* 10. 장면 전환용 검은 커튼 */
+#fade-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: black;
+    opacity: 0; pointer-events: none; transition: opacity 1s; z-index: 100;
+}
+.fade-out { opacity: 1 !important; }
+
+/* --- 11. 갤러리 스타일 (클릭 즉시 나오도록 설정) --- */
+#photo-gallery {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 5; display: none; /* 평소엔 숨겨둠 */
+}
+.photo-frame {
+    position: absolute; width: 22%; aspect-ratio: 1 / 1;
+    background-color: #eee; border: 6px solid white; box-shadow: 2px 5px 15px rgba(0,0,0,0.3);
+    background-size: cover; background-position: center; 
+    opacity: 0; /* 처음엔 안 보임 (transition 코드를 빼서 즉시 나타나게 함) */
+}
+/* 자바스크립트가 show 클래스를 붙이면 사진이 바로 보입니다 */
+.photo-frame.show { opacity: 1; }
+
+/* 각 사진마다 위치와 기울기를 다르게 설정 */
+#photo1 { top: 15%; left: 10%; transform: rotate(-5deg); background-image: url('room1.png'); }
+#photo2 { top: 25%; left: 35%; transform: rotate(4deg); background-image: url('room2.png'); }
+#photo3 { top: 10%; left: 60%; transform: rotate(-3deg); background-image: url('winter.png'); }
+
+/* --- ⭐️ 새로 추가: 카카오톡 팝업 스타일 --- */
+#phone-popup {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 350px;
+    background-color: #333; /* 핸드폰 기기 테두리 (검은색) */
+    border-radius: 20px;
+    border: 4px solid #111;
+    box-shadow: 5px 10px 20px rgba(0,0,0,0.6);
+    z-index: 80;
+    display: none; /* 평소엔 숨김 */
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+/* 핸드폰 액정 화면 */
+.phone-screen {
+    width: 100%;
+    height: 100%;
+    background-color: #b2c7d9; /* 카카오톡 기본 배경색 */
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 카톡 상단 이름표 */
+.chat-header {
+    background-color: #a1b6c8;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Galmuri11', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    border-bottom: 2px solid #90a5b7;
+    color: #333;
+}
+
+/* 메시지들이 쌓이는 공간 */
+.chat-box {
+    padding: 10px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* 말풍선 사이 간격 */
+    overflow-y: auto;
+}
+
+/* 개별 카톡 말풍선 */
+.chat-msg {
+    background-color: white;
+    padding: 8px 12px;
+    border-radius: 12px;
+    border-top-left-radius: 2px; /* 왼쪽 위를 뾰족하게 */
+    font-family: 'Galmuri11', sans-serif;
+    font-size: 14px;
+    color: black;
+    max-width: 80%;
+    align-self: flex-start; /* 상대방 메시지이므로 왼쪽 정렬 */
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    
+    /* 팝업 애니메이션 */
+    opacity: 0;
+    transform: translateY(10px);
+    animation: popIn 0.3s forwards;
+}
+
+@keyframes popIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================= */
+/* ⭐️ 누락되었던 D-day 카운터 & 걷기 모션 추가 ⭐️ */
+/* ========================================= */
+
+/* 12. D-day 날짜 카운터 스타일 (왼쪽 상단 팝업) */
+#day-counter {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    font-family: 'Galmuri11', sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    text-shadow: 2px 2px 0px black;
+    z-index: 60;
+}
+
+/* 13. 캐릭터 걷기 애니메이션 (위아래로 둥실둥실) */
+.walking {
+    animation: walk-bob 0.4s infinite alternate;
+}
+@keyframes walk-bob {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+/* --- ⭐️ 새로 추가: 챕터 제목 스타일 --- */
+#scene-title {
+    position: absolute;
+    top: 80px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-family: 'Galmuri11', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    /* 상하좌우로 검은색 그림자를 넣어서 도트 테두리 느낌을 만듭니다 */
+    text-shadow: 2px 2px 0px black, -2px -2px 0px black, 2px -2px 0px black, -2px 2px 0px black; 
+    z-index: 60;
+}
+
 /* ========================================= */
 /* ⭐️ 시작 화면 & 로딩 화면 스타일 ⭐️ */
 /* ========================================= */
