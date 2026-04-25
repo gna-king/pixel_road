@@ -268,13 +268,14 @@ const story = [
     
     {bg : "rainy_day.png", text: "진아 보고싶다."},
     {bg : "rainy_day.png", text: "혼자면 편할 줄 알았는데, 너무 허전하다."},
-    {bg : "rainy_day.png", text: "(보고 싶어)", nextId: "messenger_part",walkOff: true},
+    {bg : "rainy_day.png", text: "(보고 싶어)", nextId: "messenger_part_hm",walkOff: true},
 
     {
-        id: "messenger_part",
+        id: "messenger_part_hm",
         bg: 'room3.png',
         type: 'messenger',
         title: '25년 겨울',
+        isSender: true, //
         messages: [
             "자니?",
             "자는구나...",
@@ -293,8 +294,8 @@ const story = [
     
     { id: "not_sorry", bg: 'room3.png', text: "형민: 아니? 아무리 취했어도 그게 내 진심이었어.", nextID:"call_jina"},
 
-    { id: "call_jina", bg: 'room3.png', text: " 진아: 왜 연락했어? " },
-    { bg: 'room3.png', text: "형민: 만나서 얘기하자 " , nextId: 'izakaya2'},
+    { id: "call_jina", bg: 'room3.png', text: " 진아: (문자) 왜 연락했어? " },
+    { bg: 'room3.png', text: "형민: (타닥타닥) 만나서 얘기하자 " , nextId: 'izakaya2'},
     
 
     { id: "izakaya2", bg: 'izakaya.png', title: '25년 겨울',text: "영천동 어딘가 이자카야" , showHyungmin: true},
@@ -422,6 +423,12 @@ function updateStory() {
                     if (current.messages[i]) {
                         const msgDiv = document.createElement('div');
                         msgDiv.className = 'chat-msg';
+                        
+                        // ⭐️ 대본에 isSender: true 가 있으면 'sent' 클래스(노란색, 오른쪽) 추가!
+                        if (current.isSender) {
+                            msgDiv.classList.add('sent');
+                        }
+                        
                         msgDiv.innerText = current.messages[i];
                         chatBox.appendChild(msgDiv);
                     }
