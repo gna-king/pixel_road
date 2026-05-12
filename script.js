@@ -351,7 +351,7 @@ function updateStory() {
         char.style.backgroundImage = "url('gn.png')";
         char.style.transform = "scaleX(1)";
         if (charHyungmin) {
-            charHyungmin.style.backgroundImage = "url('hm.png')";
+            charHyungmin.style.backgroundImage = "url('char_hm.png')";
             charHyungmin.style.transform = "scaleX(-1)";
         }
     }
