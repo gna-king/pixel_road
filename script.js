@@ -341,7 +341,7 @@ function updateStory() {
     if (chosenRoute === 'hm_start') {
         // 형민 루트: 주인공(왼쪽)이 형민, 파트너(오른쪽)가 진아
         char.style.backgroundImage = "url('char_hm.png')";
-        char.style.transform = "scaleX(1)"; // 형민은 오른쪽 보기
+        char.style.transform = "scaleX(-1)"; // 형민은 오른쪽 보기
         if (charHyungmin) {
             charHyungmin.style.backgroundImage = "url('gn.png')";
             charHyungmin.style.transform = "scaleX(-1)"; // 진아는 왼쪽 보기
@@ -352,7 +352,7 @@ function updateStory() {
         char.style.transform = "scaleX(1)";
         if (charHyungmin) {
             charHyungmin.style.backgroundImage = "url('char_hm.png')";
-            charHyungmin.style.transform = "scaleX(-1)";
+            charHyungmin.style.transform = "scaleX(1)";
         }
     }
 
