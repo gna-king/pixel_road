@@ -340,18 +340,18 @@ function updateStory() {
     // ⭐️ [역지사지 로직] 선택한 루트에 따라 주인공/파트너 이미지를 스왑합니다.
     if (chosenRoute === 'hm_start') {
         // 형민 루트: 주인공(왼쪽)이 형민, 파트너(오른쪽)가 진아
-        char.style.backgroundImage = "url('hm.jpg')";
+        char.style.backgroundImage = "url('char_hm.png')";
         char.style.transform = "scaleX(1)"; // 형민은 오른쪽 보기
         if (charHyungmin) {
-            charHyungmin.style.backgroundImage = "url('gn.jpg')";
+            charHyungmin.style.backgroundImage = "url('gn.png')";
             charHyungmin.style.transform = "scaleX(-1)"; // 진아는 왼쪽 보기
         }
     } else {
         // 진아 루트: 주인공(왼쪽)이 진아, 파트너(오른쪽)가 형민
-        char.style.backgroundImage = "url('gn.jpg')";
+        char.style.backgroundImage = "url('gn.png')";
         char.style.transform = "scaleX(1)";
         if (charHyungmin) {
-            charHyungmin.style.backgroundImage = "url('hm.jpg')";
+            charHyungmin.style.backgroundImage = "url('hm.png')";
             charHyungmin.style.transform = "scaleX(-1)";
         }
     }
