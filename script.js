@@ -22,10 +22,10 @@ let isDdayRunning = false;
 
 let historyStack = [];
 
-// ⭐️ 카톡 화면 제어용 변수 추가
+// 카톡 화면 제어용 변수
 let currentSubStep = 0; 
 
-// ⭐️ 몽타주 계절 배경 목록 (폴더에 이 파일들이 있어야 합니다!)
+// 몽타주 계절 배경 목록
 const dDayScenes = ['autumn2.png', 'winter.png', 'spring.png', 'summer.png'];
 
 // === 대본 (Story) ===
@@ -42,7 +42,7 @@ const story = [
     { bg: 'hm.png', text: "형민: 안녕 선배?", showHyungmin: true},
     { bg: 'hm.png', text: "진아: 어.. 안녕?", showHyungmin: true},
 
-    { bg: 'room1.png', title: "21년 봄과 여름 사이", text: "진아가 방에 누워있다." },
+    { bg: 'room1.png', title: "21년 봄과 여름 사이", text: "진아가 방에 누워있다." }, 
     { bg: 'room1.png', text: "진아 : 심심한데 형민오빠 뭐하고 있지? " },
 
     {
@@ -63,11 +63,11 @@ const story = [
     { id: 'sleep_again', bg: 'room1.png', text: "진아: 흠.. 아무래도 심심한데 전화 해봐야겠어.", nextId: 'call_oppa' },
 
     { id: 'go_to_watch_movie', bg: 'mega.png', text: "동탄 북광장 메가박스", walkOff: true, showHyungmin: true},
-    { bg: 'mega.png', text: "형민, 진아 : (어색하게) 안녕!" , showHyungmin: true},
+    { bg: 'mega.png', text: "형민, 진아 : (어색하게) 안녕!" , showHyungmin: true}, 
 
     { bg: 'fishzip.png', text: "영화 보고 나와서 술집을 갔다." , showHyungmin: true},
     { bg: 'fishzip.png', text: "형민: 너 나 좋아하냐? " , showHyungmin: true},
-    { bg: 'fishzip.png', text: "진아: .. (뭐지 이 테토맨은? 테스토스테론이 흘러 넘치다 못해 과한데? ) " , showHyungmin: true},
+    { bg: 'fishzip.png', text: "진아: .. (뭐지 이 테토맨은? 이런 남자는 처음이야 ) " , showHyungmin: true},
     { bg: 'fishzip.png', text: "형민: 난 여자랑 1:1로 안논다. 관심없으면 " , showHyungmin: true},
 
     {
@@ -86,7 +86,7 @@ const story = [
     { id: "dog_sound", bg: 'fishzip.png', text: "진아: (뭔 소리야 이 오빠는? )" , nextId: 'show_your_mind', showHyungmin: true} ,
 
     { id: "some_ing", bg: 'fishzip.png', text: "이때부터 썸을 탔다." , showHyungmin: true},
-    { bg:  'dongtan_lake.png', text: "2021.10.23 동탄호수공원" , showHyungmin: true},
+    { bg:  'dongtan_lake.png', text: "2021.10.23 동탄호수공원" , showHyungmin: true}, 
     { bg:  'dongtan_lake.png', text: "진아: (벌써 호수만 5바퀴째야, 이 오빠 고백할건가?)" , showHyungmin: true},
     { bg:  'dongtan_lake.png', text: "진아: 오빠 뭐 할 말 있어?" , showHyungmin: true},
     { bg:  'dongtan_lake.png', text: "한참을 뜸을 들인다." , showHyungmin: true},
@@ -112,9 +112,11 @@ const story = [
 
     { id: "dating", bg: 'dongtan_lake.png', text: "그렇게 우리는 사귀게 되었다.", showHyungmin: true },
 
-    {
+    { 
         id: "season_montage",
         type: "montage",
+        walkTogether: true, 
+        faceRight: true,    
         walkOff: true,
         text: "우리의 시간은 쉼 없이 흘러...",
         nextId: "여울"
@@ -133,6 +135,7 @@ const story = [
         bg: 'room2.png',
         type: 'messenger',
         title: '25년 겨울',
+        chatName: "형민오빠", 
         messages: [
             "자니?",
             "자는구나...",
@@ -170,9 +173,9 @@ const story = [
     // =========================================================
     // 👦🏻 [루트 B] 형민의 이야기 시작
     // =========================================================
-    { id: 'hm_start', bg: 'dsr.png', text: "때는 2020년, 나는 설레는 마음으로 입사했다." },
-    { bg: 'hm.png', title: "모바일 그룹", text: "형민: 안녕하십니까! 신입사원입니다!"},
-    { bg: 'hm.png', title: "모바일 그룹", text: "형민: (우와... 저 선배 예쁘다.)", showHyungmin: true, nextId: 'hm_suwon' }, // ⭐️ 바로 수원으로 넘어가게 연결!
+    { id: 'hm_start', bg: 'dsr.png', text: "때는 2020년, 형민이는 설레는 마음으로 입사했다." },
+    { bg: 'hm.png', title: "모바일 그룹", text: "형민: 안녕하십니까! 기형민 입니다!"},
+    { bg: 'hm.png', title: "모바일 그룹", text: "형민: (우와... 저 선배 예쁘다.)", showHyungmin: true, nextId: 'hm_suwon' }, 
     
     { id: 'hm_suwon', bg: 'suwon.png', title: "21년 봄과 여름 사이", text: "본가를 다녀온 형민이는 수원역이다." },
     { bg: 'suwon.png', text: "띠리리링, 발신인 : [김진아] " },
@@ -232,6 +235,8 @@ const story = [
     },
     
     {  id: "go_baek",bg:  'dongtan_lake.png', text: "형민: 우리 3개월만 만나볼래?" , showHyungmin: true},
+    { bg:  'dongtan_lake.png', text: "(3개월이라도 만나줘!!)" , showHyungmin: true},
+
     { bg: 'dongtan_lake.png', text: "진아: 이게 말이야 방구야! 다시 고백해!!!" , showHyungmin: true},
     { bg: 'dongtan_lake.png', text: "형민: 우리 만나보자" , showHyungmin: true},
     { bg: 'dongtan_lake.png', text: "진아: 좋아!" , nextId: 'dating2', showHyungmin: true},
@@ -240,9 +245,11 @@ const story = [
 
     { id: "dating2", bg: 'dongtan_lake.png', text: "그렇게 우리는 사귀게 되었다.", showHyungmin: true },
 
-    {
+    { 
         id: "season_montage2",
         type: "montage",
+        walkTogether: true, 
+        faceRight: true,    
         walkOff: true,
         text: "우리의 시간은 쉼 없이 흘러...",
         nextId: "여울2"
@@ -261,25 +268,27 @@ const story = [
     
     { id : "we_need_time" ,bg: '여울.png', text: "형민: 나는 아직 잘 모르겠어..", showHyungmin: true},
     
-    // ⭐️ [변경 포인트] 진아가 쿨하게 뒤돌아 가는 연출! 파트너(오른쪽 캐릭터)가 퇴장합니다.
     { bg: '여울.png', text: "진아: 나 그럼 결혼하러 갈게..!", walkOffPartner: true, showHyungmin: true},
     
-    {bg : "rainy_day.png", text: "진아 보고싶다."},
-    {bg : "rainy_day.png", text: "혼자면 편할 줄 알았는데, 너무 허전하다."},
-    {bg : "rainy_day.png", text: "(보고 싶어)", nextId: "messenger_part_hm",walkOff: true},
-
+    {bg : "rainy_day.png", text: "혼자면 편할 줄 알았는데, 힘이 안나..", hmEmotion: 'hm_crying.png', showHyungmin: true},
+    {bg : "rainy_day.png", text: "진아가 내게 큰 안식처였구나", hmEmotion: 'hm_crying.png', showHyungmin: true},
+    {bg : "rainy_day.png", text: "(보고 싶어)", hmEmotion: 'hm_crying.png', showHyungmin: true, nextId: "messenger_part_hm", walkOff: true},
+    
     {
         id: "messenger_part_hm",
-        bg: 'room3.png',
+        bg: 'rainy_day.png',
         type: 'messenger',
         title: '25년 겨울',
-        isSender: true, 
+        chatName: "진아", 
         messages: [
             "자니?",
             "자는구나...",
             "잘 자"
-        ]
+        ],
+        nextId: "regret_time"
     },
+    
+    { id: "regret_time", bg: 'room3.png', text: " 형민: 헉 내가 어제 무슨 짓을,, " }, 
     {
         bg: 'room3.png',
         type: 'choice',
@@ -290,10 +299,25 @@ const story = [
         ]
     },
     
-    // ⭐️ nextID 오타 수정완료! (nextId)
-    { id: "not_sorry", bg: 'room3.png', text: "형민: 아니? 아무리 취했어도 그게 내 진심이었어.", nextId:"call_jina"},
+    { id: "not_sorry", bg: 'room3.png', text: "형민: 아니? 아무리 취했어도 그게 내 진심이었어. 진아 잘 사는지도 궁금하고,, ", nextId:"call_jina"},
 
-    { id: "call_jina", bg: 'room3.png', text: " 진아: (문자) 왜 연락했어? " },
+    // ⭐️ 진아의 답장이 카톡 화면으로 뜨는 씬
+    { 
+        id: "call_jina", 
+        bg: 'room3.png', 
+        type: 'messenger',
+        title: '25년 겨울',
+        chatName: "진아", 
+        messages: [
+            { text: "자니?", sender: "me" },
+            { text: "자는구나...", sender: "me" },
+            { text: "잘 자", sender: "me" },
+            { text: "왜 연락했어?", sender: "other" } // 진아가 보낸 메시지
+        ],
+        nextId: "hm_react"
+    },
+
+    { id: "hm_react", bg: 'room3.png', text: "형민: 헉 연락이 왔다. " },      
     { bg: 'room3.png', text: "형민: (타닥타닥) 만나서 얘기하자 " , nextId: 'izakaya2'},
     
     { id: "izakaya2", bg: 'izakaya.png', title: '25년 겨울',text: "영천동 어딘가 이자카야" , showHyungmin: true},
@@ -336,29 +360,48 @@ function updateStory() {
     const charHyungmin = document.getElementById('char-hyungmin');
     const photoGallery = document.getElementById('photo-gallery');
     const chatBox = document.getElementById('chat-box');
+    const chatName = document.getElementById('chat-name'); 
 
-    // ⭐️ [역지사지 로직] 선택한 루트에 따라 주인공/파트너 이미지를 스왑합니다.
+    // 캐릭터 방향 및 스왑 로직
     if (chosenRoute === 'hm_start') {
-        // 형민 루트: 주인공(왼쪽)이 형민, 파트너(오른쪽)가 진아
-        char.style.backgroundImage = "url('char_hm.png')";
-        char.style.transform = "scaleX(-1)"; // 형민은 오른쪽 보기
+        char.style.backgroundImage = "url('char-hyungmin.png')";
+        char.style.transform = "scaleX(-1)"; 
         if (charHyungmin) {
-            charHyungmin.style.backgroundImage = "url('gn.png')";
-            charHyungmin.style.transform = "scaleX(-1)"; // 진아는 왼쪽 보기
+            charHyungmin.style.backgroundImage = "url('Gn.png')";
+            charHyungmin.style.transform = "scaleX(-1)"; 
         }
     } else {
-        // 진아 루트: 주인공(왼쪽)이 진아, 파트너(오른쪽)가 형민
-        char.style.backgroundImage = "url('gn.png')";
+        char.style.backgroundImage = "url('Gn.png')";
         char.style.transform = "scaleX(1)";
         if (charHyungmin) {
-            charHyungmin.style.backgroundImage = "url('char_hm.png')";
+            charHyungmin.style.backgroundImage = "url('char-hyungmin.png')";
             charHyungmin.style.transform = "scaleX(1)";
         }
     }
 
+    // 강제로 오른쪽 보기
+    if (current.faceRight) {
+        char.style.transform = "scaleX(1)";
+        if (charHyungmin) charHyungmin.style.transform = "scaleX(1)";
+    }
+
+    // 형민이 감정(우는 표정 등) 덮어쓰기 로직
+    if (current.hmEmotion) {
+        if (chosenRoute === 'hm_start') {
+            char.style.backgroundImage = `url('${current.hmEmotion}')`;
+        } else {
+            if (charHyungmin) charHyungmin.style.backgroundImage = `url('${current.hmEmotion}')`;
+        }
+    }
+
+    // 초기화 처리
     if (dayCounter) dayCounter.style.display = 'none';
     if (phonePopup) phonePopup.style.display = 'none';
     if (char) char.classList.remove('walking');
+    if (charHyungmin) {
+        charHyungmin.classList.remove('walking');
+        charHyungmin.style.marginLeft = "0px"; // 같이 걷기 간격 초기화
+    }
     isDdayRunning = false;
     
     nextBtn.classList.remove('hidden');
@@ -377,25 +420,17 @@ function updateStory() {
         charHyungmin.style.display = current.showHyungmin ? 'block' : 'none';
     }
 
-    if (photoGallery) {
-        if (current.bg === 'bg2.png') {
-            photoGallery.style.display = 'block';
-            document.querySelectorAll('.photo-frame').forEach(el => el.classList.remove('show'));
-            if (current.photos) {
-                current.photos.forEach(id => {
-                    const photoEl = document.getElementById(id);
-                    if(photoEl) photoEl.classList.add('show');
-                });
-            }
-        } else {
-            photoGallery.style.display = 'none';
-        }
-    }
-
-    // =========================================================
+    // ⭐️ 몽타주 같이 걷기 처리
     if (current.type === 'montage') {
         if (dayCounter) dayCounter.style.display = 'block';
         if (char) char.classList.add('walking');
+        
+        if (current.walkTogether && charHyungmin) {
+            charHyungmin.style.display = 'block';
+            charHyungmin.classList.add('walking');
+            charHyungmin.style.marginLeft = "60px"; // 겹치지 않게 간격 띄우기
+        }
+
         if (current.text) showBubble(current.text);
         else hideBubble();
         
@@ -419,6 +454,7 @@ function updateStory() {
             if (currentDay >= 1815) {
                 clearInterval(dayTimer);
                 if (char) char.classList.remove('walking');
+                if (charHyungmin) charHyungmin.classList.remove('walking');
                 setTimeout(goNext, 1000);
             }
         }, 10);
@@ -426,10 +462,14 @@ function updateStory() {
         return; 
     }
 
-    // =========================================================
+    // ⭐️ 메신저 처리 로직 (진아 답장 기능 추가)
     if (current.type === 'messenger') {
         if (bubble) bubble.style.display = "none";
         if (choices) choices.style.display = "none";
+
+        if (chatName && current.chatName) {
+            chatName.innerText = current.chatName;
+        }
 
         if (currentSubStep === 0) {
             if (phonePopup) phonePopup.style.display = 'none';
@@ -438,15 +478,20 @@ function updateStory() {
             if (chatBox) {
                 chatBox.innerHTML = '';
                 for (let i = 0; i < currentSubStep - 1; i++) {
-                    if (current.messages[i]) {
+                    let msgData = current.messages[i];
+                    if (msgData) {
                         const msgDiv = document.createElement('div');
                         msgDiv.className = 'chat-msg';
                         
-                        if (current.isSender) {
-                            msgDiv.classList.add('sent');
+                        // 문자열인지 객체인지 구분하여 처리
+                        if (typeof msgData === 'string') {
+                            if (current.isSender) msgDiv.classList.add('sent');
+                            msgDiv.innerText = msgData;
+                        } else {
+                            if (msgData.sender === 'me') msgDiv.classList.add('sent');
+                            msgDiv.innerText = msgData.text;
                         }
                         
-                        msgDiv.innerText = current.messages[i];
                         chatBox.appendChild(msgDiv);
                     }
                 }
@@ -467,7 +512,7 @@ function updateStory() {
         return;
     }
 
-    // =========================================================
+    // 선택지 로직
     if (current.type === 'choice') {
         if (bubble) bubble.style.display = "none";
         if (choices) choices.style.display = "block";
@@ -592,7 +637,7 @@ function changeScene(targetStep, isNext) {
     clearInterval(dayTimer); 
     
     let current = story[currentStep];
-    const charHyungmin = document.getElementById('char-hyungmin'); // ⭐️ 파트너 컨트롤용 변수
+    const charHyungmin = document.getElementById('char-hyungmin');
 
     if (isNext && current.walkOff) {
         if(char) char.classList.add('walk-off');
@@ -601,7 +646,6 @@ function changeScene(targetStep, isNext) {
             executeFade(targetStep);
         }, 2700);
     } else if (isNext && current.walkOffPartner) {
-        // ⭐️ [왼쪽 퇴장 로직] 파트너가 걸어 나가는 연출
         if(charHyungmin) charHyungmin.classList.add('walk-off-left');
         walkOffTimer = setTimeout(() => {
             walkOffTimer = null;
@@ -627,7 +671,7 @@ function executeFade(targetStep) {
         bg.style.left = "0px";
 
         if(char) char.classList.remove('walk-off');
-        if(charHyungmin) charHyungmin.classList.remove('walk-off-left'); // ⭐️ 파트너 퇴장 클래스 초기화
+        if(charHyungmin) charHyungmin.classList.remove('walk-off-left'); 
         
         updateStory();
 
@@ -692,15 +736,15 @@ if (gameContainer) {
 
 
 // =========================================================
-// ⭐️ 시작 화면 & 프리로딩 로직 (맨 밑에 추가됨)
+// ⭐️ 시작 화면 & 프리로딩 로직 
 // =========================================================
+// ❌ 사용하지 않는 bg2.png, character.png, char_hm.png 제거 완료
 const imagesToPreload = [
     'dsr.png', 'Gn.png', 'hm.png', 'room1.png', 'mega.png', 'fishzip.png', 
-    'dongtan_lake.png', '여울.png', 'room2.png', 'bg2.png', 'character.png', 
-    'char-hyungmin.png', 'rainy_day.png', 'izakaya.png', 'proposal.png',
-    'autumn2.png', 'winter.png', 'spring.png', 'summer.png',
-    // ⭐️ 새로 추가하신 이미지 3장도 로딩 리스트에 안전하게 넣었습니다!
-    'suwon.png', 'room3.png', 'wedding.png' 
+    'dongtan_lake.png', '여울.png', 'room2.png', 'char-hyungmin.png', 
+    'rainy_day.png', 'izakaya.png', 'proposal.png', 'autumn2.png', 
+    'winter.png', 'spring.png', 'summer.png', 'suwon.png', 'room3.png', 
+    'wedding.png', 'hm_crying.png' 
 ];
 
 let loadedCount = 0;
