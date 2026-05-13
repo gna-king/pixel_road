@@ -285,25 +285,13 @@ const story = [
             "자는구나...",
             "잘 자"
         ],
-        nextId: "regret_time"
+        
     },
-    
-    { id: "regret_time", bg: 'room3.png', text: " 형민: 헉 내가 어제 무슨 짓을,, " }, 
-    {
-        bg: 'room3.png',
-        type: 'choice',
-        question: "어떻게 할까?",
-        options: [
-            { text: "하,, 이불킥", target: "not_sorry" },
-            { text: "이게 내 마음이야", target: "call_jina" }
-        ]
-    },
-    
-    { id: "not_sorry", bg: 'room3.png', text: "형민: 아니? 아무리 취했어도 그게 내 진심이었어. 진아 잘 사는지도 궁금하고,, ", nextId:"call_jina"},
+    { bg: 'room3.png', text: " 형민: zzZ ",nextId: "regret_time" }, 
 
     // ⭐️ 진아의 답장이 카톡 화면으로 뜨는 씬
     { 
-        id: "call_jina", 
+        id: "regret_time", 
         bg: 'room3.png', 
         type: 'messenger',
         title: '25년 겨울',
@@ -316,9 +304,22 @@ const story = [
         ],
         nextId: "hm_react"
     },
+    
+    { id: "hm_react", bg: 'room3.png', text: " 형민: 헉 내가 어제 무슨 짓을,, " }, 
+    {
+        bg: 'room3.png',
+        type: 'choice',
+        question: "어떻게 할까?",
+        options: [
+            { text: "하,, 이불킥", target: "not_sorry" },
+            { text: "이게 내 마음이야", target: "call_jina" }
+        ]
+    },
+    
+    { id: "not_sorry", bg: 'room3.png', text: "형민: 아니? 아무리 취했어도 그게 내 진심이었어. 진아 잘 사는지도 궁금하고,, ", nextId:"call_jina"},
 
-    { id: "hm_react", bg: 'room3.png', text: "형민: 헉 연락이 왔다. " },      
-    { bg: 'room3.png', text: "형민: (타닥타닥) 만나서 얘기하자 " , nextId: 'izakaya2'},
+  
+    {  id: "call_jina",bg: 'room3.png', text: "형민: (타닥타닥) 만나서 얘기하자 " , nextId: 'izakaya2'},
     
     { id: "izakaya2", bg: 'izakaya.png', title: '25년 겨울',text: "영천동 어딘가 이자카야" , showHyungmin: true},
     { bg:  'izakaya.png', text: "형민: 너가 없는 시간이 힘들었어." , showHyungmin: true},
@@ -357,14 +358,14 @@ function updateStory() {
     const dayCounter = document.getElementById('day-counter');
     const phonePopup = document.getElementById('phone-popup');
     const sceneTitle = document.getElementById('scene-title');
-    const charHyungmin = document.getElementById('char-hm');
+    const charHyungmin = document.getElementById('char-hyungmin');
     const photoGallery = document.getElementById('photo-gallery');
     const chatBox = document.getElementById('chat-box');
     const chatName = document.getElementById('chat-name'); 
 
     // 캐릭터 방향 및 스왑 로직
     if (chosenRoute === 'hm_start') {
-        char.style.backgroundImage = "url('char-hm.png')";
+        char.style.backgroundImage = "url('char_hm.png')";
         char.style.transform = "scaleX(-1)"; 
         if (charHyungmin) {
             charHyungmin.style.backgroundImage = "url('gn.png')";
@@ -374,7 +375,7 @@ function updateStory() {
         char.style.backgroundImage = "url('gn.png')";
         char.style.transform = "scaleX(1)";
         if (charHyungmin) {
-            charHyungmin.style.backgroundImage = "url('char-hyungmin.png')";
+            charHyungmin.style.backgroundImage = "url('char_hm.png')";
             charHyungmin.style.transform = "scaleX(1)";
         }
     }
@@ -759,7 +760,7 @@ if (gameContainer) {
 // ❌ 사용하지 않는 bg2.png, character.png, char_hm.png 제거 완료
 const imagesToPreload = [
     'dsr.png', 'Gn.png', 'hm.png', 'room1.png', 'mega.png', 'fishzip.png', 
-    'dongtan_lake.png', '여울.png', 'room2.png', 'char-hyungmin.png', 
+    'dongtan_lake.png', '여울.png', 'room2.png', 'char_hm.png', 
     'rainy_day.png', 'izakaya.png', 'proposal.png', 'autumn2.png', 
     'winter.png', 'spring.png', 'summer.png', 'suwon.png', 'room3.png', 
     'wedding.png', 'hm_crying.png' 
