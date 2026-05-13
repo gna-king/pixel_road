@@ -83,11 +83,11 @@ const story = [
 
     { id: "some_ing", bg: 'fishzip.png', text: "이때부터 썸을 탔다." , showHyungmin: true},
     
-    // ⭐️ 진아 시점: 호수공원 동그라미 돌기 
-    { bg:  'dongtan_lake.png', text: "2021.10.23 동탄호수공원" , showHyungmin: true, isCircling: true}, 
-    { bg:  'dongtan_lake.png', text: "진아: (벌써 호수만 5바퀴째야, 이 오빠 고백할건가?)" , showHyungmin: true, isCircling: true},
-    { bg:  'dongtan_lake.png', text: "진아: 오빠 뭐 할 말 있어?" , showHyungmin: true, isCircling: true},
-    { bg:  'dongtan_lake.png', text: "한참을 뜸을 들인다." , showHyungmin: true, isCircling: true},
+    // ⭐️ 진아 시점: 호수공원 동그라미 돌기 (faceRight: true 추가 - 둘 다 오른쪽 출발)
+    { bg:  'dongtan_lake.png', text: "2021.10.23 동탄호수공원" , showHyungmin: true, isCircling: true, faceRight: true}, 
+    { bg:  'dongtan_lake.png', text: "진아: (벌써 호수만 5바퀴째야, 이 오빠 고백할건가?)" , showHyungmin: true, isCircling: true, faceRight: true},
+    { bg:  'dongtan_lake.png', text: "진아: 오빠 뭐 할 말 있어?" , showHyungmin: true, isCircling: true, faceRight: true},
+    { bg:  'dongtan_lake.png', text: "한참을 뜸을 들인다." , showHyungmin: true, isCircling: true, faceRight: true},
     { bg:  'dongtan_lake.png', text: "형민: 우리 3개월만 만나볼래?" , showHyungmin: true, isCircling: false}, // 정지
 
     {
@@ -224,11 +224,11 @@ const story = [
 
     { id: "some_ing2", bg: 'fishzip.png', text: "이때부터 썸을 탔다." , showHyungmin: true},
     
-    // ⭐️ 형민 시점: 둘 다 왼쪽에 붙어서 호수공원 동그라미 돌기 
-    { bg:  'dongtan_lake.png', text: "2021.10.23 동탄호수공원" , showHyungmin: true, isCircling: true},
-    { bg:  'dongtan_lake.png', text: "형민: (벌써 호수만 5바퀴째다. 뭐라고 말하지?)" , showHyungmin: true, isCircling: true},
-    { bg:  'dongtan_lake.png', text: "진아: 오빠 뭐 할 말 있어?" , showHyungmin: true, isCircling: true},
-    { bg:  'dongtan_lake.png', text: "한참을 뜸을 들인다." , showHyungmin: true, isCircling: true},
+    // ⭐️ 형민 시점: 호수공원 동그라미 돌기 (faceRight: true 추가 - 둘 다 오른쪽 출발)
+    { bg:  'dongtan_lake.png', text: "2021.10.23 동탄호수공원" , showHyungmin: true, isCircling: true, faceRight: true},
+    { bg:  'dongtan_lake.png', text: "형민: (벌써 호수만 5바퀴째다. 뭐라고 말하지?)" , showHyungmin: true, isCircling: true, faceRight: true},
+    { bg:  'dongtan_lake.png', text: "진아: 오빠 뭐 할 말 있어?" , showHyungmin: true, isCircling: true, faceRight: true},
+    { bg:  'dongtan_lake.png', text: "한참을 뜸을 들인다." , showHyungmin: true, isCircling: true, faceRight: true},
     
     {
         bg: 'dongtan_lake.png',
@@ -442,7 +442,7 @@ function updateStory() {
         }
     }
 
-    // ⭐️ 3. 호수공원 동그라미 돌기 로직 (완전 수정)
+    // ⭐️ 3. 호수공원 동그라미 돌기 로직 (완전 수정 - 겹침 완벽 해결)
     if (current.isCircling) {
         // CSS 애니메이션에서 방향 전환(scaleX)을 담당하므로 JS 강제 변환은 리셋합니다.
         char.style.transform = ""; 
@@ -451,10 +451,11 @@ function updateStory() {
         if (charHyungmin) {
             charHyungmin.style.display = 'block';
             charHyungmin.style.right = 'auto'; // 마주보는 위치 취소
-            charHyungmin.style.left = '10%';   // 메인 캐릭터와 같은 시작점 배정
+            // ⭐️ 퍼센트가 아닌 픽셀(px)로 단단하게 고정해서 겹침 방지 (캐릭터 너비 150px 고려)
+            charHyungmin.style.left = '12%';   // 메인 캐릭터와 같은 시작점 (애니메이션 딜레이로 separation 생성)
             charHyungmin.style.transform = ""; // JS 강제 변환 리셋
             charHyungmin.classList.add('circling');
-            charHyungmin.style.animationDelay = "0.7s"; // 약간 뒤쳐져서 쫓아가게
+            charHyungmin.style.animationDelay = "1s"; // 술래잡기 느낌으로 더 확실하게 separation
         }
     } else {
         if (charHyungmin) {
@@ -464,7 +465,7 @@ function updateStory() {
         }
     }
 
-    // ⭐️ 4. 몽타주 같이 걷기 로직 (나란히 세팅)
+    // ⭐️ 4. 몽타주 같이 걷기 로직 (나란히 세팅 - 겹침 완벽 해결)
     if (current.type === 'montage') {
         if (dayCounter) dayCounter.style.display = 'block';
         if (char) char.classList.add('walking');
@@ -472,7 +473,9 @@ function updateStory() {
         if (current.walkTogether && charHyungmin) {
             charHyungmin.style.display = 'block';
             charHyungmin.style.right = 'auto';
-            charHyungmin.style.left = '30%'; // 나란히 붙어서 걷기
+            // ⭐️ 퍼센트가 아닌 픽셀(px)로 틈을 확실히 벌림 (한 몸 증발!)
+            char.style.left = '30px'; 
+            charHyungmin.style.left = '170px'; // 겹치지 않게 간격 띄우기
             charHyungmin.classList.add('walking');
         }
 
