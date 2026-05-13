@@ -35,7 +35,7 @@ const story = [
     // =========================================================
     { id: 'jina_start', bg: 'dsr.png', title: "2019년도", text: "때는 2019, 진아는 갓 입사한 신입사원이다.",walkOff: true},
     { bg: 'Gn.png', title: "모바일 그룹", text: "진아: 안녕하십니까!"},
-    { bg: 'hm.png', title: "모바일 그룹", text: "1년 뒤, 2020 형민이가 입사한다."},
+    { bg: 'hm.png', title: "모바일 그룹", text: "1년 뒤, 2020 형민이가 입사한다.", noFade: true},
     { bg: 'hm.png', title: "모바일 그룹", text: "진아: 저 잘생긴 오빠 뭐지? 흥미가 생긴다.", showHyungmin: true},
     { bg: 'hm.png', title: "모바일 그룹", text: "실제로 20년도의 형민이는 잘생겼었다.", showHyungmin: true},
     
@@ -591,7 +591,16 @@ function goNext() {
         currentSubStep = 0; 
 
         if (current.type === 'montage' || story[nextStep].bg !== story[currentStep].bg) {
-            changeScene(nextStep, true);
+            // ⭐️ noFade 로직 추가 (암전 없이 바로 변경)
+            if (story[nextStep].noFade) {
+                currentStep = nextStep;
+                bg.style.backgroundImage = `url('${story[currentStep].bg}')`;
+                bgPosX = 0;
+                bg.style.left = "0px";
+                updateStory();
+            } else {
+                changeScene(nextStep, true);
+            }
         } else {
             currentStep = nextStep;
             updateStory();
@@ -616,7 +625,16 @@ function goPrev() {
         currentSubStep = 0; 
 
         if (story[prevStep].bg !== story[currentStep].bg) {
-            changeScene(prevStep, false);
+            // ⭐️ 뒤로 갈 때도 암전 없애기 적용
+            if (story[currentStep].noFade) {
+                currentStep = prevStep;
+                bg.style.backgroundImage = `url('${story[currentStep].bg}')`;
+                bgPosX = 0;
+                bg.style.left = "0px";
+                updateStory();
+            } else {
+                changeScene(prevStep, false);
+            }
         } else {
             currentStep = prevStep;
             updateStory();
