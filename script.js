@@ -315,7 +315,7 @@ const story = [
     },
 
     { id: "hm_react", title: '25년 겨울',bg: 'room3.png', text: " 형민: 헉 연락이 왔다. " }, 
-    { bg: 'room3.png', title: '25년 겨울',text: " 형민: 내가 어제 무슨 짓을,, " }, 
+    { bg: 'room3.png', title: '25년 겨울',text: " 형민: 헉 내가 어제 무슨 짓을,, " }, 
     {
         bg: 'room3.png',
         type: 'choice',
@@ -442,23 +442,19 @@ function updateStory() {
         }
     }
 
-    // ⭐️ 3. 호수공원 동그라미 돌기 로직 
+    // ⭐️ 3. 호수공원 동그라미 돌기 로직 (완전 수정)
     if (current.isCircling) {
-        // 둘 다 오른쪽 바라보게 세팅
-        if (chosenRoute === 'hm_start') {
-            char.style.transform = "scaleX(-1)"; 
-            if (charHyungmin) charHyungmin.style.transform = "scaleX(1)";
-        } else {
-            char.style.transform = "scaleX(1)";
-            if (charHyungmin) charHyungmin.style.transform = "scaleX(-1)";
-        }
-
+        // CSS 애니메이션에서 방향 전환(scaleX)을 담당하므로 JS 강제 변환은 리셋합니다.
+        char.style.transform = ""; 
         char.classList.add('circling');
+        
         if (charHyungmin) {
-            charHyungmin.style.right = 'auto';
-            charHyungmin.style.left = '25%'; // 왼쪽 하단에서 메인 캐릭터 옆에 딱 붙기
+            charHyungmin.style.display = 'block';
+            charHyungmin.style.right = 'auto'; // 마주보는 위치 취소
+            charHyungmin.style.left = '10%';   // 메인 캐릭터와 같은 시작점 배정
+            charHyungmin.style.transform = ""; // JS 강제 변환 리셋
             charHyungmin.classList.add('circling');
-            charHyungmin.style.animationDelay = "0.5s";
+            charHyungmin.style.animationDelay = "0.7s"; // 약간 뒤쳐져서 쫓아가게
         }
     } else {
         if (charHyungmin) {
@@ -511,7 +507,7 @@ function updateStory() {
         return; 
     }
 
-    // ⭐️ 메신저 처리 (주고받는 톡 분기 완벽 지원)
+    // 메신저 처리 로직
     if (current.type === 'messenger') {
         if (bubble) bubble.style.display = "none";
         if (choices) choices.style.display = "none";
@@ -532,6 +528,7 @@ function updateStory() {
                         const msgDiv = document.createElement('div');
                         msgDiv.className = 'chat-msg';
                         
+                        // 문자열인지 객체인지 구분하여 처리
                         if (typeof msgData === 'string') {
                             if (current.isSender) msgDiv.classList.add('sent');
                             msgDiv.innerText = msgData;
