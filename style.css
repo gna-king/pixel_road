@@ -149,15 +149,26 @@ body, html {
 .walking { animation: walk-bob 0.4s infinite alternate; }
 @keyframes walk-bob { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
 
-/* ⭐️ 화면을 벗어나지 않는 동그라미 걷기 애니메이션 */
+/* ⭐️ 크게 돌면서 좌우 반전되는 동그라미 애니메이션 */
 @keyframes circleWalk {
-    0% { margin-left: 0px; margin-bottom: 0px; }
-    25% { margin-left: 100px; margin-bottom: 30px; }
-    50% { margin-left: 180px; margin-bottom: 0px; }
-    75% { margin-left: 100px; margin-bottom: -30px; }
-    100% { margin-left: 0px; margin-bottom: 0px; }
+    0% { transform: translate(0, 0) scaleX(1); }
+    25% { transform: translate(120px, -120px) scaleX(1); } /* 오른쪽 위로 */
+    49% { transform: translate(220px, 0) scaleX(1); }    /* 오른쪽 끝 도달 */
+    50% { transform: translate(220px, 0) scaleX(-1); }   /* 홱! 반전 */
+    75% { transform: translate(120px, 120px) scaleX(-1); } /* 왼쪽 아래로 */
+    99% { transform: translate(0, 0) scaleX(-1); }      /* 제자리 도달 */
+    100% { transform: translate(0, 0) scaleX(1); }      /* 다시 앞보기 */
 }
-.circling { animation: circleWalk 6s linear infinite !important; }
+
+/* 애니메이션 적용 클래스 */
+.circling {
+    animation: circleWalk 8s linear infinite !important; /* 속도를 조금 늦춰서 더 여유롭게 돌게 함 */
+}
+
+/* 캐릭터 기본 설정 유지 (JS에서 제어하므로 scaleX 중복 주의) */
+#character, #char-hyungmin {
+    transition: margin 0.5s, transform 0.1s; /* 반전 시 부드러움 추가 */
+}
 
 /* 챕터 제목 */
 #scene-title { position: absolute; top: 80px; width: 100%; text-align: center; color: white; font-family: 'Galmuri11', sans-serif; font-size: 28px; font-weight: bold; text-shadow: 2px 2px 0px black, -2px -2px 0px black, 2px -2px 0px black, -2px 2px 0px black; z-index: 60; }
