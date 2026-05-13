@@ -357,14 +357,14 @@ function updateStory() {
     const dayCounter = document.getElementById('day-counter');
     const phonePopup = document.getElementById('phone-popup');
     const sceneTitle = document.getElementById('scene-title');
-    const charHyungmin = document.getElementById('char-hyungmin');
+    const charHyungmin = document.getElementById('char-hm');
     const photoGallery = document.getElementById('photo-gallery');
     const chatBox = document.getElementById('chat-box');
     const chatName = document.getElementById('chat-name'); 
 
     // 캐릭터 방향 및 스왑 로직
     if (chosenRoute === 'hm_start') {
-        char.style.backgroundImage = "url('char-hyungmin.png')";
+        char.style.backgroundImage = "url('char-hm.png')";
         char.style.transform = "scaleX(-1)"; 
         if (charHyungmin) {
             charHyungmin.style.backgroundImage = "url('gn.png')";
