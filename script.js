@@ -367,11 +367,11 @@ function updateStory() {
         char.style.backgroundImage = "url('char-hyungmin.png')";
         char.style.transform = "scaleX(-1)"; 
         if (charHyungmin) {
-            charHyungmin.style.backgroundImage = "url('Gn.png')";
+            charHyungmin.style.backgroundImage = "url('gn.png')";
             charHyungmin.style.transform = "scaleX(-1)"; 
         }
     } else {
-        char.style.backgroundImage = "url('Gn.png')";
+        char.style.backgroundImage = "url('gn.png')";
         char.style.transform = "scaleX(1)";
         if (charHyungmin) {
             charHyungmin.style.backgroundImage = "url('char-hyungmin.png')";
