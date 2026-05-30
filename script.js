@@ -493,7 +493,7 @@ function updateStory() {
             charHyungmin.style.display = 'block';
             charHyungmin.style.right = 'auto';
             char.style.left = '30px'; 
-            charHyungmin.style.left = '170px'; 
+            charHyungmin.style.left = '120px'; 
             charHyungmin.classList.add('walking');
         }
 
