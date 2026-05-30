@@ -371,20 +371,20 @@ function updateStory() {
     const chatBox = document.getElementById('chat-box');
     const chatName = document.getElementById('chat-name'); 
 
-    // ⭐️ 1. 캐릭터 기본 방향 및 스왑
+// ⭐️ 1. 캐릭터 기본 방향 및 스왑 (섞인 이미지 이름 복구 완료!)
     if (chosenRoute === 'hm_start') {
-        char.style.backgroundImage = "url('char_hm_office.png')";
-        char.style.transform = "scaleX(1)"; // 형민 베이스: 기본적으로 서로 마주보게(오른쪽)
+        char.style.backgroundImage = "url('char_hm.png')"; // ◀ 형민 캐릭터 복구
+        char.style.transform = "scaleX(1)"; 
         if (charHyungmin) {
-            charHyungmin.style.backgroundImage = "url('gn_office.png')";
-            charHyungmin.style.transform = "scaleX(-1)"; // 진아: 왼쪽 봄
+            charHyungmin.style.backgroundImage = "url('gn.png')"; // ◀ 진아 캐릭터 복구
+            charHyungmin.style.transform = "scaleX(-1)"; 
         }
     } else {
-        char.style.backgroundImage = "url('gn_office.png')";
-        char.style.transform = "scaleX(1)"; // 진아 베이스: 서로 마주보게(오른쪽)
+        char.style.backgroundImage = "url('gn.png')"; // ◀ 진아 캐릭터 복구
+        char.style.transform = "scaleX(1)"; 
         if (charHyungmin) {
-            charHyungmin.style.backgroundImage = "url('char_hm_office.png')";
-            charHyungmin.style.transform = "scaleX(-1)"; // 형민: 왼쪽 봄
+            charHyungmin.style.backgroundImage = "url('char_hm.png')"; // ◀ 형민 캐릭터 복구
+            charHyungmin.style.transform = "scaleX(-1)"; 
         }
     }
 
