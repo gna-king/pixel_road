@@ -217,7 +217,7 @@ const story = [
     },
     
     {  id: "ask_jina", bg: 'fishzip.png', text: "형민: 너 나 좋아하냐? " , showHyungmin: true},
-    { bg: 'fishzip.png', text: "진아: ..?(당황한 표정) ) " , showHyungmin: true},
+    { bg: 'fishzip.png', text: "진아: ..?(당황한 표정) " , showHyungmin: true},
     { bg: 'fishzip.png', text: "형민: 난 여자랑 1:1로 안논다. 관심없으면 " , showHyungmin: true},
     { bg: 'fishzip.png', text: "진아: 나도 오빠 좋아! " , nextId: 'some_ing2', showHyungmin: true, gnEmotion: 'gn_smile.png' , hmEmotion: 'hm_smile.png'},
 
@@ -317,7 +317,7 @@ const story = [
     },
 
     { id: "hm_react", title: '25년 겨울',bg: 'hm_room.png', text: " 형민: 헉 연락이 왔다. " }, 
-    { bg: 'hm_room.png', title: '25년 겨울',text: " 형민: 헉 내가 어제 무슨 짓을,, " }, 
+    { bg: 'hm_room.png', title: '25년 겨울',text: " 형민: 내가 어제 무슨 짓을,, " }, 
     {
         bg: 'hm_room.png',
         type: 'choice',
