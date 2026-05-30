@@ -63,15 +63,15 @@ body, html {
 
 /* 7. 캐릭터 설정 */
 #character, #char-hyungmin {
-    width: 150px; /* ⭐️ 캐릭터 크기 150px로 시원하게 확대 */
+    width: 150px; 
     height: 150px; 
     background-size: contain; 
     background-position: bottom center; 
     background-repeat: no-repeat;
     position: absolute; 
-    bottom: 15%; /* ⭐️ 발이 땅에 닿도록 설정 */
+    bottom: 15%; 
     z-index: 10;
-    transition: margin 0.5s, transform 0.1s; /* 반전 및 이동 시 부드러움 추가 */
+    transition: margin 0.5s, transform 0.1s; 
 }
 
 /* 진아(메인) 기본 위치 */
@@ -91,47 +91,40 @@ body, html {
 
 /* ⭐️ 8. 캐릭터 퇴장 애니메이션 */
 .walk-off {
-    margin-left: 500px !important; 
+    margin-left: 150vw !important; 
     transition: margin-left 3s linear !important;
 }
 
 .walk-off-left {
-    margin-left: -500px !important; 
+    margin-left: -150vw !important; 
     transition: margin-left 3s linear !important;
 }
 
-/* ⭐️ 9. 호수공원 둥글게 도는 애니메이션 (말풍선 위로 크게 돌기 + 좌우 반전) */
-/* 진아 시점용 */
+/* ⭐️ 9. 호수공원 둥글게 도는 애니메이션 */
 @keyframes circleWalkJina {
     0% { transform: translate(0, 0) scaleX(1); }
-    25% { transform: translate(100px, -200px) scaleX(1); } /* 말풍선 위로 높게! */
+    25% { transform: translate(100px, -200px) scaleX(1); } 
     49% { transform: translate(200px, -100px) scaleX(1); }
-    50% { transform: translate(200px, -100px) scaleX(-1); } /* 왼쪽으로 턴 */
+    50% { transform: translate(200px, -100px) scaleX(-1); } 
     75% { transform: translate(100px, -50px) scaleX(-1); }
     99% { transform: translate(0, 0) scaleX(-1); }
-    100% { transform: translate(0, 0) scaleX(1); } /* 제자리 및 앞보기 */
+    100% { transform: translate(0, 0) scaleX(1); } 
 }
-.circling-jina {
-    animation: circleWalkJina 7s linear infinite !important;
+.circling-jina, .circling {
+    animation: circleWalkJina 7s linear infinite both !important;
 }
 
-/* 형민 시점용 */
 @keyframes circleWalkHm {
     0% { transform: translate(0, 0) scaleX(-1); }
     25% { transform: translate(100px, -200px) scaleX(-1); }
     49% { transform: translate(200px, -100px) scaleX(-1); }
-    50% { transform: translate(200px, -100px) scaleX(1); } /* 왼쪽으로 턴 */
+    50% { transform: translate(200px, -100px) scaleX(1); } 
     75% { transform: translate(100px, -50px) scaleX(1); }
     99% { transform: translate(0, 0) scaleX(1); }
     100% { transform: translate(0, 0) scaleX(-1); }
 }
 .circling-hm {
-    animation: circleWalkHm 7s linear infinite !important; 
-}
-
-/* (기존 호수공원 로직과 호환되게 통합 클래스 추가) */
-.circling {
-    animation: circleWalkJina 7s linear infinite !important; 
+    animation: circleWalkHm 7s linear infinite both !important; 
 }
 
 /* 10. 고전 게임 스타일 대화창 */
@@ -174,7 +167,6 @@ body, html {
 .chat-msg { background-color: white; padding: 8px 12px; border-radius: 12px; border-top-left-radius: 2px; font-family: 'Galmuri11', sans-serif; font-size: 14px; color: black; max-width: 80%; align-self: flex-start; box-shadow: 1px 1px 3px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); animation: popIn 0.3s forwards; }
 @keyframes popIn { to { opacity: 1; transform: translateY(0); } }
 
-/* 내가 보낸 카톡 메시지 (노란색, 오른쪽 정렬) */
 .chat-msg.sent {
     background-color: #fee500 !important; 
     align-self: flex-end !important; 
