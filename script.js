@@ -304,7 +304,6 @@ const story = [
         id: "jina_reply_scene", 
         bg: 'hm_room.png', 
         type: 'messenger',
-        hmEmotion: 'hm_soju.png',
         title: '25년 겨울',
         chatName: "진아", 
         skipToSubStep: 4, // <-- 이 설정 덕분에 4번째(인덱스 3)부터 애니메이션이 동작함
