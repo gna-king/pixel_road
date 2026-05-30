@@ -448,24 +448,26 @@ function updateStory() {
         }
     }
 
-// ▼ 기존의 if (current.isCircling) { ... } else { ... } 전체를 이걸로 덮어쓰기 ▼
+// ▼ 기존의 if (current.isCircling) { ... } 전체를 이걸로 덮어쓰기 ▼
     if (current.isCircling) {
         if (!keepCircling) { 
             char.style.transform = ""; 
-            char.style.left = "15%"; 
+            char.style.left = "30px"; // 메인 캐릭터 위치
             char.classList.add('circling');
             
             if (charHyungmin) {
                 charHyungmin.style.display = 'block';
                 charHyungmin.style.right = 'auto'; 
-                charHyungmin.style.left = '15%'; 
+                charHyungmin.style.left = '130px'; // ⭐️ 딱 손잡고 걷는 정도의 간격 (100px 차이)
                 charHyungmin.style.transform = ""; 
                 charHyungmin.classList.add('circling');
-                charHyungmin.style.setProperty('animation-delay', '-3.5s', 'important');
+                
+                // ⭐️ 딜레이를 0초로 줘서 똑같은 타이밍에 움직이게 만듦!
+                charHyungmin.style.setProperty('animation-delay', '0s', 'important');
             }
         }
     } else {
-        char.style.left = "10%"; 
+        char.style.left = "10%"; // 원상복구
         if (charHyungmin) {
             charHyungmin.style.right = '10%'; 
             charHyungmin.style.left = 'auto';
