@@ -90,7 +90,7 @@ const story = [
     { bg:  'dongtan_lake.png', text: "진아: (벌써 호수만 5바퀴째야, 이 오빠 고백할건가?)" , showHyungmin: true, isCircling: true, faceRight: true},
     { bg:  'dongtan_lake.png', text: "진아: 오빠 뭐 할 말 있어?" , showHyungmin: true, isCircling: true, faceRight: true},
     { bg:  'dongtan_lake.png', text: "한참을 뜸을 들인다." , showHyungmin: true, isCircling: true, faceRight: true},
-    { bg:  'dongtan_lake.png', text: "형민: 우리 3개월만 만나볼래?" , showHyungmin: true, isCircling: false}, 
+    { bg:  'dongtan_lake.png', text: "형민: 우리 3개월만 만나볼래?" , showHyungmin: true, isCircling: true}, 
 
     {
         bg: 'dongtan_lake.png',
@@ -241,7 +241,7 @@ const story = [
         ]
     },
     
-    {  id: "go_baek",bg:  'dongtan_lake.png', text: "형민: 우리 3개월만 만나볼래?" , showHyungmin: true, isCircling: false}, 
+    {  id: "go_baek",bg:  'dongtan_lake.png', text: "형민: 우리 3개월만 만나볼래?" , showHyungmin: true, isCircling: true}, 
     { bg:  'dongtan_lake.png', text: "(3개월이라도 만나줘!!)" , showHyungmin: true},
 
     { bg: 'dongtan_lake.png', text: "진아: 이게 말이야 방구야! 다시 고백해!!!" , showHyungmin: true},
@@ -405,21 +405,27 @@ function updateStory() {
     if (dayCounter) dayCounter.style.display = 'none';
     if (phonePopup) phonePopup.style.display = 'none';
     
-    // ⭐️ J1, H3 버그 수정: 장면 변경 시 이전 화면의 margin 리셋으로 인해 날아오는 버그 방지 (강제로 transition 끄기)
-    if (char) {
-        char.classList.remove('walking', 'circling', 'walk-off', 'walk-off-left');
-        char.style.transition = 'none';
-        char.style.marginLeft = "0px"; 
-        void char.offsetWidth; // Reflow 강제 실행
-        char.style.transition = '';
+// ▼ 여기서부터 기존 초기화(if (char) { ... } ) 코드를 지우고 이 코드를 덮어쓰기 ▼
+    const wasCircling = char.classList.contains('circling');
+    const keepCircling = wasCircling && current.isCircling;
+
+    if (!keepCircling) {
+        if (char) {
+            char.classList.remove('walking', 'circling', 'walk-off', 'walk-off-left');
+            char.style.transition = 'none';
+            char.style.marginLeft = "0px"; 
+            void char.offsetWidth; 
+            char.style.transition = '';
+        }
+        if (charHyungmin) {
+            charHyungmin.classList.remove('walking', 'circling', 'walk-off', 'walk-off-left');
+            charHyungmin.style.transition = 'none';
+            charHyungmin.style.marginLeft = "0px"; 
+            void charHyungmin.offsetWidth;
+            charHyungmin.style.transition = '';
+        }
     }
-    if (charHyungmin) {
-        charHyungmin.classList.remove('walking', 'circling', 'walk-off', 'walk-off-left');
-        charHyungmin.style.transition = 'none';
-        charHyungmin.style.marginLeft = "0px"; 
-        void charHyungmin.offsetWidth;
-        charHyungmin.style.transition = '';
-    }
+    // ▲ 여기까지 덮어쓰기 ▲
     isDdayRunning = false;
     
     nextBtn.classList.remove('hidden');
@@ -442,28 +448,31 @@ function updateStory() {
         }
     }
 
-    // ⭐️ 3. 호수공원 동그라미 (J2, H1 버그 수정: 같은 위치에서 딜레이를 음수로 줘서 완벽히 떨어져서 돌게 만듦)
+// ▼ 기존의 if (current.isCircling) { ... } else { ... } 전체를 이걸로 덮어쓰기 ▼
     if (current.isCircling) {
-        char.style.transform = ""; 
-        char.style.left = "15%"; // 중심점 통일
-        char.classList.add('circling');
-        
-        if (charHyungmin) {
-            charHyungmin.style.display = 'block';
-            charHyungmin.style.right = 'auto'; 
-            charHyungmin.style.left = '15%'; // 중심점 통일
-            charHyungmin.style.transform = ""; 
-            charHyungmin.classList.add('circling');
-            charHyungmin.style.animationDelay = "-3.5s"; // ⭐️ 7초짜리 애니메이션을 절반 앞당겨서 정확히 반대편에서 돌게 함!
+        if (!keepCircling) { 
+            char.style.transform = ""; 
+            char.style.left = "15%"; 
+            char.classList.add('circling');
+            
+            if (charHyungmin) {
+                charHyungmin.style.display = 'block';
+                charHyungmin.style.right = 'auto'; 
+                charHyungmin.style.left = '15%'; 
+                charHyungmin.style.transform = ""; 
+                charHyungmin.classList.add('circling');
+                charHyungmin.style.setProperty('animation-delay', '-3.5s', 'important');
+            }
         }
     } else {
-        char.style.left = "10%"; // 원상복구
+        char.style.left = "10%"; 
         if (charHyungmin) {
             charHyungmin.style.right = '10%'; 
             charHyungmin.style.left = 'auto';
-            charHyungmin.style.animationDelay = "0s";
+            charHyungmin.style.removeProperty('animation-delay'); 
         }
     }
+    // ▲ 여기까지 덮어쓰기 ▲
 
     if (current.type === 'montage') {
         if (dayCounter) dayCounter.style.display = 'block';
