@@ -106,11 +106,11 @@ const story = [
     { bg: 'dongtan_lake', text: "진아: 다시 고백해!!!" , showHyungmin: true},
     { bg:  'dongtan_lake', text: "한참을 뜸을 들인다." , showHyungmin: true},
     { bg: 'dongtan_lake', text: "형민: 우리 만나보자" , showHyungmin: true},
-    { bg: 'dongtan_lake', text: "진아: 좋아!" , nextId: 'dating', showHyungmin: true},
+    { bg: 'dongtan_lake', text: "진아: 좋아!" , nextId: 'dating', showHyungmin: true,gnEmotion: 'gn_smile.png',hmEmotion: 'hm_smile.png'},
 
     { id: "dog_sound2", bg: 'dongtan_lake', text: "진아: 뭐라고?" , nextId: 'show_your_mind2', showHyungmin: true} ,
 
-    { id: "dating", bg: 'dongtan_lake', text: "그렇게 우리는 사귀게 되었다.", showHyungmin: true },
+    { id: "dating", bg: 'dongtan_lake', text: "그렇게 우리는 사귀게 되었다.", showHyungmin: true  ,gnEmotion: 'gn_smile.png',hmEmotion: 'hm_smile.png'},
 
     { 
         id: "season_montage",
@@ -130,8 +130,8 @@ const story = [
     { bg: '여울', title: '25년 봄과 여름 사이', text: "진아: 나 그럼 결혼하러 갈게..!", walkOff: true, showHyungmin: true},
     
     {id: "sad_time",bg : "rainy_day", text: "하 ,, 오빠 없으니 삶이 너무 무료하다."},
-    {bg : "rainy_day", text: "난 결혼이 하고 싶었던게 아니라 오빠랑 함께이고 싶었던거구나 .."},
-    {bg : "rainy_day", text: "(나쁜 오빠)", nextId: "messenger_part",walkOff: true},
+    {bg : "rainy_day", text: "난 결혼이 하고 싶었던게 아니라 오빠랑 함께이고 싶었던거구나 ..", gnEmotion: 'gn_sad.png'},
+    {bg : "rainy_day", text: "(나쁜 오빠)", nextId: "messenger_part",walkOff: true, gnEmotion: 'gn_sad.png'},
 
     {
         id: "messenger_part",
@@ -170,7 +170,7 @@ const story = [
     { bg:  'izakaya.png', title: '25년 겨울',text: "형민: 잘 할게 (잘 하자?)" , showHyungmin: true},
 
     { bg:  'proposal.png', text: "형민: 진아야 결혼하자!" , showHyungmin: true},
-    { bg:  'proposal.png', text: "진아: 좋아!" , showHyungmin: true, nextId: 'final_quiz_start' },
+    { bg:  'proposal.png', text: "진아: 좋아!" , showHyungmin: true, nextId: 'final_quiz_start' , gnEmotion: 'gn_smile.png'},
 
 
     // =========================================================
@@ -219,7 +219,7 @@ const story = [
     {  id: "ask_jina", bg: 'fishzip.png', text: "형민: 너 나 좋아하냐? " , showHyungmin: true},
     { bg: 'fishzip.png', text: "진아: ..?(당황한 표정) ) " , showHyungmin: true},
     { bg: 'fishzip.png', text: "형민: 난 여자랑 1:1로 안논다. 관심없으면 " , showHyungmin: true},
-    { bg: 'fishzip.png', text: "진아: 나도 오빠 좋아! " , nextId: 'some_ing2', showHyungmin: true},
+    { bg: 'fishzip.png', text: "진아: 나도 오빠 좋아! " , nextId: 'some_ing2', showHyungmin: true, gnEmotion: 'gn_smile.png' , hmEmotion: 'hm_smile.png'},
 
     { id: "drink_more", bg: 'fishzip.png', text: "(그래도 너무 궁금한데?) "  , nextId: 'ask_jina', showHyungmin: true},
 
@@ -246,11 +246,11 @@ const story = [
 
     { bg: 'dongtan_lake.png', text: "진아: 이게 말이야 방구야! 다시 고백해!!!" , showHyungmin: true},
     { bg: 'dongtan_lake.png', text: "형민: 우리 만나보자" , showHyungmin: true},
-    { bg: 'dongtan_lake.png', text: "진아: 좋아!" , nextId: 'dating2', showHyungmin: true},
+    { bg: 'dongtan_lake.png', text: "진아: 좋아!" , nextId: 'dating2', showHyungmin: true, gnEmotion: 'gn_smile.png' , hmEmotion: 'hm_smile.png'},
 
     { id: "mian", bg: 'dongtan_lake.png', text: "형민: (그래도 남자가 가오가 있지.)" , nextId: 'go_baek', showHyungmin: true} ,
 
-    { id: "dating2", bg: 'dongtan_lake.png', text: "그렇게 우리는 사귀게 되었다.", showHyungmin: true },
+    { id: "dating2", bg: 'dongtan_lake.png', text: "그렇게 우리는 사귀게 되었다.", showHyungmin: true , gnEmotion: 'gn_smile.png' , hmEmotion: 'hm_smile.png' },
 
     { 
         id: "season_montage2",
@@ -280,13 +280,14 @@ const story = [
     { bg: '여울.png', text: "진아: 나 그럼 결혼하러 갈게..!", walkOffPartnerLeft: true, showHyungmin: true},
     
     {bg : "rainy_day.png", text: "혼자면 편할 줄 알았는데, 힘이 안나..", hmEmotion: 'hm_crying.png', faceRight: true, hidePartner: true},
-    {bg : "rainy_day.png", text: "진아가 내게 큰 안식처였구나", hmEmotion: 'hm_crying.png', faceRight: true, hidePartner: true},
-    {bg : "rainy_day.png", text: "(보고 싶어)", hmEmotion: 'hm_crying.png', faceRight: true, hidePartner: true, nextId: "messenger_part_hm", walkOff: true},
+    {bg : "rainy_day.png", text: "진아가 내게 큰 안식처였구나", hmEmotion: 'hm_soju.png', faceRight: true, hidePartner: true},
+    {bg : "rainy_day.png", text: "(보고 싶어)", hmEmotion: 'hm_soju.png', faceRight: true, hidePartner: true, nextId: "messenger_part_hm", walkOff: true},
     
     {
         id: "messenger_part_hm",
         bg: 'rainy_day.png',
         type: 'messenger',
+        hmEmotion: 'hm_soju.png'
         title: '25년 겨울',
         chatName: "진아", // ⭐️ H5 수정: 수신인이 진아로 표기됨
         messages: [
@@ -303,6 +304,7 @@ const story = [
         id: "jina_reply_scene", 
         bg: 'hm_room.png', 
         type: 'messenger',
+        hmEmotion: 'hm_soju.png'
         title: '25년 겨울',
         chatName: "진아", 
         skipToSubStep: 4, // <-- 이 설정 덕분에 4번째(인덱스 3)부터 애니메이션이 동작함
@@ -336,7 +338,7 @@ const story = [
     { bg:  'izakaya.png', title: '25년 겨울',text: "형민: 잘 할게 (잘 하자?)" , showHyungmin: true},
 
     { bg:  'proposal.png', text: "형민: 진아야 결혼하자!" , showHyungmin: true},
-    { bg:  'proposal.png', text: "진아: 좋아!" , showHyungmin: true, nextId: 'final_quiz_start' },
+    { bg:  'proposal.png', text: "진아: 좋아!" , showHyungmin: true, nextId: 'final_quiz_start' , gnEmotion: 'gn_smile.png' , hmEmotion: 'hm_smile.png' },
 
     // =========================================================
     // 💍 [마지막 공통 퀴즈]
@@ -401,7 +403,15 @@ function updateStory() {
             if (charHyungmin) charHyungmin.style.backgroundImage = `url('${current.hmEmotion}')`;
         }
     }
-
+// ▼▼▼ 여기에 진아 감정(gnEmotion) 로직을 새로 추가! ▼▼▼
+    if (current.gnEmotion) {
+        if (chosenRoute === 'jina_start') {
+            char.style.backgroundImage = `url('${current.gnEmotion}')`;
+        } else {
+            if (charHyungmin) charHyungmin.style.backgroundImage = `url('${current.gnEmotion}')`;
+        }
+    }
+    // ▲▲▲ 여기까지 추가 ▲▲▲
     if (dayCounter) dayCounter.style.display = 'none';
     if (phonePopup) phonePopup.style.display = 'none';
     
