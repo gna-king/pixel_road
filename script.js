@@ -22,7 +22,7 @@ let isDdayRunning = false;
 
 let historyStack = [];
 let currentSubStep = 0; 
-const dDayScenes = ['autumn2.png', 'winter.png', 'spring.png', 'summer.png'];
+const dDayScenes = ['autumn.png', 'winter.png', 'spring.png', 'summer.png'];
 
 // === 대본 (Story) ===
 const story = [
@@ -31,19 +31,19 @@ const story = [
     // =========================================================
     // ⭐️ J1 버그 수정: 첫 장면에 있던 walkOff: true 제거 (날아오지 않음)
     { id: 'jina_start', bg: 'dsr.png', title: "2019년도", text: "때는 2019, 진아는 갓 입사한 신입사원이다."},
-    { bg: 'Gn.png', title: "모바일 그룹", text: "진아: 안녕하십니까!"},
-    { bg: 'hm.png', title: "모바일 그룹", text: "1년 뒤, 2020 형민이가 입사한다.", noFade: true},
-    { bg: 'hm.png', title: "모바일 그룹", text: "진아: 저 잘생긴 오빠 뭐지? 흥미가 생긴다.", showHyungmin: true},
-    { bg: 'hm.png', title: "모바일 그룹", text: "실제로 20년도의 형민이는 잘생겼었다.", showHyungmin: true},
+    { bg: 'gn_office.png', title: "모바일 그룹", text: "진아: 안녕하십니까!"},
+    { bg: 'hm_office.png', title: "모바일 그룹", text: "1년 뒤, 2020 형민이가 입사한다.", noFade: true},
+    { bg: 'hm_office.png', title: "모바일 그룹", text: "진아: 저 잘생긴 오빠 뭐지? 흥미가 생긴다.", showHyungmin: true},
+    { bg: 'hm_office.png', title: "모바일 그룹", text: "실제로 20년도의 형민이는 잘생겼었다.", showHyungmin: true},
     
-    { bg: 'hm.png', title: "모바일 그룹", text: "형민: 안녕 선배?", showHyungmin: true},
-    { bg: 'hm.png', title: "모바일 그룹", text: "진아: 어.. 안녕?", showHyungmin: true},
+    { bg: 'hm_office.png', title: "모바일 그룹", text: "형민: 안녕 선배?", showHyungmin: true},
+    { bg: 'hm_office.png', title: "모바일 그룹", text: "진아: 어.. 안녕?", showHyungmin: true},
 
-    { bg: 'room1.png', title: "21년 봄과 여름 사이", text: "진아가 방에 누워있다." }, 
-    { bg: 'room1.png', title: "21년 봄과 여름 사이", text: "진아 : 심심한데 형민오빠 뭐하고 있지? " },
+    { bg: 'gna_room1.png', title: "21년 봄과 여름 사이", text: "진아가 방에 누워있다." }, 
+    { bg: 'gna_room1.png', title: "21년 봄과 여름 사이", text: "진아 : 심심한데 형민오빠 뭐하고 있지? " },
 
     {
-        bg: 'room1.png',
+        bg: 'gna_room1.png',
         type: 'choice',
         question: "어떻게 할까?",
         options: [
@@ -52,12 +52,12 @@ const story = [
         ]
     },
 
-    { id: 'call_oppa', title: "21년 봄과 여름 사이", bg: 'room1.png', text: "뚜루루루... 오빠 바빠?" },
-    { bg: 'room1.png', title: "21년 봄과 여름 사이", text: "형민: 아니, 왜?" },
-    { bg: 'room1.png', title: "21년 봄과 여름 사이", text: "진아: 나랑 놀래? (두근두근)"},
-    { bg: 'room1.png', title: "21년 봄과 여름 사이", text: "형민: 좋아!" , nextId: 'go_to_watch_movie' },
+    { id: 'call_oppa', title: "21년 봄과 여름 사이", bg: 'gna_room1.png', text: "뚜루루루... 오빠 바빠?" },
+    { bg: 'gna_room1.png', title: "21년 봄과 여름 사이", text: "형민: 아니, 왜?" },
+    { bg: 'gna_room1.png', title: "21년 봄과 여름 사이", text: "진아: 나랑 놀래? (두근두근)"},
+    { bg: 'gna_room1.png', title: "21년 봄과 여름 사이", text: "형민: 좋아!" , nextId: 'go_to_watch_movie' },
 
-    { id: 'sleep_again', title: "21년 봄과 여름 사이", bg: 'room1.png', text: "진아: 흠.. 아무래도 심심한데 전화 해봐야겠어.", nextId: 'call_oppa' },
+    { id: 'sleep_again', title: "21년 봄과 여름 사이", bg: 'gna_room1.png', text: "진아: 흠.. 아무래도 심심한데 전화 해봐야겠어.", nextId: 'call_oppa' },
 
     // ⭐️ 여기서 퇴장
     { id: 'go_to_watch_movie', title: "동탄 북광장 메가박스", bg: 'mega.png', text: "어색어색", walkOff: true, showHyungmin: true},
@@ -135,7 +135,7 @@ const story = [
 
     {
         id: "messenger_part",
-        bg: 'room2.png',
+        bg: 'gna_gna_room2.png',
         type: 'messenger',
         title: '25년 겨울',
         chatName: "형민오빠", 
@@ -145,11 +145,11 @@ const story = [
             { text: "잘 자", sender: "other" }
         ]
     },
-    { bg: 'room2.png', title: '25년 겨울',text: "진아: 이 오빠 술 마셨네"},
-    { bg: 'room2.png', title: '25년 겨울',text: "진아: 흠.. 근데 왜 연락했지?"},
+    { bg: 'gna_gna_room2.png', title: '25년 겨울',text: "진아: 이 오빠 술 마셨네"},
+    { bg: 'gna_gna_room2.png', title: '25년 겨울',text: "진아: 흠.. 근데 왜 연락했지?"},
 
     {
-        bg: 'room2.png',
+        bg: 'gna_gna_room2.png',
         type: 'choice',
         question: "어떻게 할까?",
         options: [
@@ -158,11 +158,11 @@ const story = [
         ]
     },
 
-    { id: "call_him", title: '25년 겨울',bg: 'room2.png', text: " (타닥타닥) 왜 연락했어? " },
-    { bg: 'room2.png', title: '25년 겨울',text: "형민: (문자) 만나서 얘기하자 " , nextId: 'izakaya'},
+    { id: "call_him", title: '25년 겨울',bg: 'gna_gna_room2.png', text: " (타닥타닥) 왜 연락했어? " },
+    { bg: 'gna_gna_room2.png', title: '25년 겨울',text: "형민: (문자) 만나서 얘기하자 " , nextId: 'izakaya'},
     
-    { id: "blocking", title: '25년 겨울',bg: 'room2.png', text: "진아: 차단하자."} ,
-    { bg: 'room2.png', title: '25년 겨울',text: "진아: 흠.. 그래도 왜 연락했는지 물어나 볼까.." , nextId: 'call_him'},
+    { id: "blocking", title: '25년 겨울',bg: 'gna_gna_room2.png', text: "진아: 차단하자."} ,
+    { bg: 'gna_gna_room2.png', title: '25년 겨울',text: "진아: 흠.. 그래도 왜 연락했는지 물어나 볼까.." , nextId: 'call_him'},
 
     { id: "izakaya", bg: 'izakaya.png', title: '25년 겨울',text: "영천동 어딘가 이자카야" , showHyungmin: true},
     { bg:  'izakaya.png', title: '25년 겨울',text: "형민: 너가 없는 시간이 힘들었어." , showHyungmin: true},
@@ -177,8 +177,8 @@ const story = [
     // 👦🏻 [루트 B] 형민의 이야기 시작
     // =========================================================
     { id: 'hm_start', bg: 'dsr.png', text: "때는 2020년, 형민이는 설레는 마음으로 입사했다." },
-    { bg: 'hm.png', title: "모바일 그룹", text: "형민: 안녕하십니까! 기형민 입니다!", showHyungmin: true},
-    { bg: 'hm.png', title: "모바일 그룹", text: "형민: (우와... 저 선배 예쁘다.)", showHyungmin: true, nextId: 'hm_suwon' }, 
+    { bg: 'hm_office.png', title: "모바일 그룹", text: "형민: 안녕하십니까! 기형민 입니다!", showHyungmin: true},
+    { bg: 'hm_office.png', title: "모바일 그룹", text: "형민: (우와... 저 선배 예쁘다.)", showHyungmin: true, nextId: 'hm_suwon' }, 
     
     { id: 'hm_suwon', bg: 'suwon.png', title: "21년 봄과 여름 사이", text: "본가를 다녀온 형민이는 수원역이다." },
     { bg: 'suwon.png', title: "21년 봄과 여름 사이",text: "띠리리링, 발신인 : [김진아] " },
@@ -296,12 +296,12 @@ const story = [
         ],
         nextId: "regret_time"
     },
-    { id: "regret_time", bg: 'room3.png', title: '25년 겨울',text: " 형민: zzZ "}, 
+    { id: "regret_time", bg: 'hm_room.png', title: '25년 겨울',text: " 형민: zzZ "}, 
     
     // ⭐️ H6 수정: skipToSubStep: 4 추가해서 이전 메시지는 팝업 애니메이션 없이 렌더링되도록 함
     { 
         id: "jina_reply_scene", 
-        bg: 'room3.png', 
+        bg: 'hm_room.png', 
         type: 'messenger',
         title: '25년 겨울',
         chatName: "진아", 
@@ -315,10 +315,10 @@ const story = [
         nextId: "hm_react"
     },
 
-    { id: "hm_react", title: '25년 겨울',bg: 'room3.png', text: " 형민: 헉 연락이 왔다. " }, 
-    { bg: 'room3.png', title: '25년 겨울',text: " 형민: 헉 내가 어제 무슨 짓을,, " }, 
+    { id: "hm_react", title: '25년 겨울',bg: 'hm_room.png', text: " 형민: 헉 연락이 왔다. " }, 
+    { bg: 'hm_room.png', title: '25년 겨울',text: " 형민: 헉 내가 어제 무슨 짓을,, " }, 
     {
-        bg: 'room3.png',
+        bg: 'hm_room.png',
         type: 'choice',
         question: "어떻게 할까?",
         options: [
@@ -327,8 +327,8 @@ const story = [
         ]
     },
     
-    { id: "not_sorry", bg: 'room3.png', text: "형민: 아니? 아무리 취했어도 그게 내 진심이었어. 진아 잘 사는지도 궁금하고,, ", nextId:"call_jina"},
-    { id: "call_jina",bg: 'room3.png', text: "형민: (타닥타닥) 만나서 얘기하자 " , nextId: 'izakaya2'},
+    { id: "not_sorry", bg: 'hm_room.png', text: "형민: 아니? 아무리 취했어도 그게 내 진심이었어. 진아 잘 사는지도 궁금하고,, ", nextId:"call_jina"},
+    { id: "call_jina",bg: 'hm_room.png', text: "형민: (타닥타닥) 만나서 얘기하자 " , nextId: 'izakaya2'},
     
     { id: "izakaya2", bg: 'izakaya.png', title: '25년 겨울',text: "영천동 어딘가 이자카야" , showHyungmin: true},
     { bg:  'izakaya.png', title: '25년 겨울',text: "형민: 너가 없는 시간이 힘들었어." , showHyungmin: true},
@@ -373,17 +373,17 @@ function updateStory() {
 
     // ⭐️ 1. 캐릭터 기본 방향 및 스왑
     if (chosenRoute === 'hm_start') {
-        char.style.backgroundImage = "url('char_hm.png')";
+        char.style.backgroundImage = "url('char_hm_office.png')";
         char.style.transform = "scaleX(1)"; // 형민 베이스: 기본적으로 서로 마주보게(오른쪽)
         if (charHyungmin) {
-            charHyungmin.style.backgroundImage = "url('gn.png')";
+            charHyungmin.style.backgroundImage = "url('gn_office.png')";
             charHyungmin.style.transform = "scaleX(-1)"; // 진아: 왼쪽 봄
         }
     } else {
-        char.style.backgroundImage = "url('gn.png')";
+        char.style.backgroundImage = "url('gn_office.png')";
         char.style.transform = "scaleX(1)"; // 진아 베이스: 서로 마주보게(오른쪽)
         if (charHyungmin) {
-            charHyungmin.style.backgroundImage = "url('char_hm.png')";
+            charHyungmin.style.backgroundImage = "url('char_hm_office.png')";
             charHyungmin.style.transform = "scaleX(-1)"; // 형민: 왼쪽 봄
         }
     }
@@ -812,10 +812,10 @@ if (gameContainer) {
 }
 
 const imagesToPreload = [
-    'dsr.png', 'gn.png', 'Gn.png', 'hm.png', 'room1.png', 'mega.png', 'fishzip.png', 
-    'dongtan_lake.png', '여울.png', 'room2.png', 'char_hm.png', 
-    'rainy_day.png', 'izakaya.png', 'proposal.png', 'autumn2.png', 
-    'winter.png', 'spring.png', 'summer.png', 'suwon.png', 'room3.png', 
+    'dsr.png', 'gn_office.png', 'gn_office.png', 'hm_office.png', 'gna_room1.png', 'mega.png', 'fishzip.png', 
+    'dongtan_lake.png', '여울.png', 'gna_gna_room2.png', 'char_hm_office.png', 
+    'rainy_day.png', 'izakaya.png', 'proposal.png', 'autumn.png', 
+    'winter.png', 'spring.png', 'summer.png', 'suwon.png', 'hm_room.png', 
     'wedding.png', 'hm_crying.png' 
 ];
 
