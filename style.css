@@ -89,6 +89,7 @@ body, html {
     transform: scaleX(-1); 
 }
 
+
 /* ⭐️ 8. 캐릭터 퇴장 애니메이션 */
 .walk-off {
     margin-left: 150vw !important; 
@@ -96,10 +97,10 @@ body, html {
 }
 
 .walk-off-left {
-    margin-left: -150vw !important; 
-    transition: margin-left 3s linear !important;
+    /* ⭐️ margin-left를 margin-right로 변경! (오른쪽에서 밀어내기) */
+    margin-right: 150vw !important; 
+    transition: margin-right 3s linear !important;
 }
-
 /* ⭐️ 9. 호수공원 둥글게 도는 애니메이션 */
 @keyframes circleWalkJina {
     0% { transform: translate(0, 0) scaleX(1); }
