@@ -167,7 +167,7 @@ const story = [
     { id: "izakaya", bg: 'izakaya.png', title: '25년 겨울', text: "영천동 어딘가 이자카야" , showHyungmin: true},
     { bg:  'izakaya.png', title: '25년 겨울', text: "형민: 네가 없는 시간이 힘들었어." , showHyungmin: true},
     { bg:  'izakaya.png', title: '25년 겨울', text: "진아: 나도 오빠 없으니 인생이 너무 재미가 없었어." , showHyungmin: true},
-    { bg:  'izakaya.png', title: '25년 겨울', text: "형민: 잘할게. 잘하자." , showHyungmin: true},
+    { bg:  'izakaya.png', title: '25년 겨울', text: "형민: 잘할게. (잘하자?)" , showHyungmin: true},
 
     { bg:  'proposal.png', text: "형민: 진아야, 결혼하자!" , showHyungmin: true},
     { bg:  'proposal.png', text: "진아: 좋아!" , showHyungmin: true, nextId: 'final_quiz_start' , gnEmotion: 'gn_smile.png'},
@@ -334,7 +334,7 @@ const story = [
     { id: "izakaya2", bg: 'izakaya.png', title: '25년 겨울', text: "영천동 어딘가 이자카야" , showHyungmin: true},
     { bg:  'izakaya.png', title: '25년 겨울', text: "형민: 네가 없는 시간이 힘들었어." , showHyungmin: true},
     { bg:  'izakaya.png', title: '25년 겨울', text: "진아: 나도 오빠 없으니 인생이 너무 재미가 없었어." , showHyungmin: true},
-    { bg:  'izakaya.png', title: '25년 겨울', text: "형민: 잘할게. 잘하자." , showHyungmin: true},
+    { bg:  'izakaya.png', title: '25년 겨울', text: "형민: 잘할게. (잘하자?)" , showHyungmin: true},
 
     { bg:  'proposal.png', text: "형민: 진아야, 결혼하자!" , showHyungmin: true},
     { bg:  'proposal.png', text: "진아: 좋아!" , showHyungmin: true, nextId: 'final_quiz_start' , gnEmotion: 'gn_smile.png' , hmEmotion: 'hm_smile.png' },
