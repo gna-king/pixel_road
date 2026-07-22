@@ -192,10 +192,12 @@ const story = [
         question: "어떻게 할까?",
         options: [
             { text: "좋아!", target: "jina_call" },
-            { text: "아니, 나 바빠", target: "jina_call" }
+            { text: "아니, 나 바빠", target: "jina_call2" }
         ]
     },
 
+    { id: 'jina_call2', title: "21년 봄과 여름 사이", bg: 'suwon.png', text: "형민: 흠.. (좀 바쁘긴 한데,, 근데 누구랑 노는거지?)" , nextId: 'jina_call'},
+    
     { id: 'jina_call', title: "21년 봄과 여름 사이", bg: 'suwon.png', text: "형민: 그래! 근데 누구랑?" },
     { bg: 'suwon.png', title: "21년 봄과 여름 사이", text: "진아: 나랑 둘이!" },
     { bg: 'suwon.png', title: "21년 봄과 여름 사이", text: "형민: ...좋아! (꽤나 당돌하군. 두근두근.)"},
